@@ -1,0 +1,54 @@
+peringatan: 1 bracket tanpa bc.npz, dilewati: [293]
+overfit ids (2): [631, 30]
+n_nodes: [18136, 21906]
+  epoch    1  loss_n=0.72963  MAE_disp=0.22480  MAE_stress=102.42
+  epoch   20  loss_n=0.45382  MAE_disp=0.10217  MAE_stress=91.18
+  epoch   40  loss_n=0.40861  MAE_disp=0.08629  MAE_stress=84.88
+  epoch   60  loss_n=0.30408  MAE_disp=0.05078  MAE_stress=81.03
+  epoch   80  loss_n=0.25714  MAE_disp=0.04125  MAE_stress=75.92
+  epoch  100  loss_n=0.26704  MAE_disp=0.03898  MAE_stress=73.19
+  epoch  120  loss_n=0.23742  MAE_disp=0.03701  MAE_stress=68.34
+  epoch  140  loss_n=0.22968  MAE_disp=0.03410  MAE_stress=65.06
+  epoch  160  loss_n=0.21626  MAE_disp=0.03239  MAE_stress=58.80
+  epoch  180  loss_n=0.21503  MAE_disp=0.03689  MAE_stress=63.30
+  epoch  200  loss_n=0.20532  MAE_disp=0.03144  MAE_stress=55.37
+  epoch  220  loss_n=0.19701  MAE_disp=0.02944  MAE_stress=52.76
+  epoch  240  loss_n=0.20594  MAE_disp=0.03401  MAE_stress=54.73
+  epoch  260  loss_n=0.18898  MAE_disp=0.02948  MAE_stress=51.46
+  epoch  280  loss_n=0.18147  MAE_disp=0.02869  MAE_stress=49.42
+  epoch  300  loss_n=0.18973  MAE_disp=0.02947  MAE_stress=50.70
+  epoch  320  loss_n=0.19874  MAE_disp=0.03071  MAE_stress=50.22
+  epoch  340  loss_n=0.17569  MAE_disp=0.02820  MAE_stress=46.25
+  epoch  360  loss_n=0.16957  MAE_disp=0.02587  MAE_stress=42.83
+  epoch  380  loss_n=0.16755  MAE_disp=0.02572  MAE_stress=42.72
+  epoch  400  loss_n=0.16223  MAE_disp=0.02536  MAE_stress=41.47
+  epoch  420  loss_n=0.15498  MAE_disp=0.02469  MAE_stress=40.28
+  epoch  440  loss_n=0.16036  MAE_disp=0.02411  MAE_stress=39.61
+  epoch  460  loss_n=0.15244  MAE_disp=0.02394  MAE_stress=38.53
+  epoch  480  loss_n=0.15677  MAE_disp=0.02489  MAE_stress=42.22
+  epoch  500  loss_n=0.14891  MAE_disp=0.02237  MAE_stress=35.61
+
+MAE akhir overfit:
+  ver_disp_x     0.02466
+  ver_disp_y     0.01680
+  ver_disp_z     0.01780
+  ver_disp_mag   0.02196
+  ver_stress     37.80684
+  hor_disp_x     0.02148
+  hor_disp_y     0.02406
+  hor_disp_z     0.02010
+  hor_disp_mag   0.02605
+  hor_stress     38.53948
+  dia_disp_x     0.01401
+  dia_disp_y     0.02602
+  dia_disp_z     0.01577
+  dia_disp_mag   0.02726
+  dia_stress     25.13673
+  tor_disp_x     0.02502
+  tor_disp_y     0.01045
+  tor_disp_z     0.03028
+  tor_disp_mag   0.03618
+  tor_stress     40.97167
+
+overfit sanity: FAIL
+overfit sanity: PASS (disp=0.022 stress=35.6; kriteria realistis utk singularitas)

@@ -1,0 +1,66 @@
+{
+  "source": "/home/daffa/Documents/jazari/data/raw/ur5e/UR7e.step",
+  "index": 18,
+  "name": "1006923_Solid_B/NAUO3::solid1",
+  "before": {
+    "volume_mm3": 4870412.824174858,
+    "bbox_mm": {
+      "min": [
+        -79.22963237893241,
+        85.541704331076,
+        12.807609456434486
+      ],
+      "max": [
+        79.22963237893936,
+        650.319301643367,
+        272.59864041645227
+      ],
+      "size": [
+        158.45926475787178,
+        564.7775973122909,
+        259.7910309600178
+      ]
+    },
+    "n_mesh_vertices": 38725,
+    "n_mesh_faces": 46158,
+    "watertight": false,
+    "is_volume": false,
+    "euler_number": 1470,
+    "issues": [
+      "not_watertight"
+    ],
+    "deflection_mm": 0.5
+  },
+  "after": {
+    "volume_mm3": 4870412.824174858,
+    "bbox_mm": {
+      "min": [
+        -61.057535706809574,
+        101.43964735356698,
+        73.43964720135119
+      ],
+      "max": [
+        61.057535706881374,
+        648.5603526464337,
+        210.80205863071018
+      ],
+      "size": [
+        122.11507141369094,
+        547.1207052928667,
+        137.36241142935899
+      ]
+    },
+    "n_mesh_vertices": 111464,
+    "n_mesh_faces": 171008,
+    "watertight": false,
+    "is_volume": false,
+    "euler_number": 1470,
+    "issues": [
+      "not_watertight"
+    ],
+    "deflection_mm": 0.05
+  },
+  "delta_euler": 0,
+  "verdict": "little_help_need_explicit_heal",
+  "note": "Euler number untuk bola topologis \u2248 2. Watertight true + euler\u22482 menandakan mesh volume siap; kalau deflection halus tidak mendekati, perlu heal eksplisit (trimesh.repair / MeshLab)."
+}

@@ -1,0 +1,15 @@
+name: simjeb
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - meshio
+  - trimesh
+  - pyvista
+  - requests
+  - tqdm
+  - pip
+  - pip:
+      - remotezip

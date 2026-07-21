@@ -1,0 +1,78 @@
+peringatan: 1 bracket tanpa bc.npz, dilewati: [293]
+split_0: fit=273 val=30 test=77 (test hanya di eval akhir)
+filter train n_nodes<=150000: 273 -> 251
+hitung mean/std target dari train_fit...
+device=cuda H=48 L=6 huber_n=3.6014280319213867
+epoch   1/40  loss_n=0.7820  val_disp=0.0887  val_stress=63.15  (330s)
+  -> best ckpt (mgn_split0_best.pt)
+epoch   2/40  loss_n=0.7286  val_disp=0.0810  val_stress=64.14  (342s)
+  -> best ckpt (mgn_split0_best.pt)
+epoch   3/40  loss_n=0.6936  val_disp=0.0796  val_stress=74.10  (350s)
+epoch   4/40  loss_n=0.6780  val_disp=0.0796  val_stress=66.80  (318s)
+epoch   5/40  loss_n=0.6689  val_disp=0.0726  val_stress=59.53  (256s)
+  -> best ckpt (mgn_split0_best.pt)
+epoch   6/40  loss_n=0.6617  val_disp=0.0768  val_stress=63.20  (325s)
+epoch   7/40  loss_n=0.6615  val_disp=0.0732  val_stress=60.39  (348s)
+epoch   8/40  loss_n=0.6484  val_disp=0.0726  val_stress=56.69  (348s)
+  -> best ckpt (mgn_split0_best.pt)
+epoch   9/40  loss_n=0.6501  val_disp=0.0724  val_stress=57.93  (347s)
+epoch  10/40  loss_n=0.6436  val_disp=0.0749  val_stress=61.25  (347s)
+epoch  11/40  loss_n=0.6442  val_disp=0.0731  val_stress=65.52  (347s)
+epoch  12/40  loss_n=0.6521  val_disp=0.0752  val_stress=61.83  (347s)
+epoch  13/40  loss_n=0.6409  val_disp=0.0743  val_stress=60.21  (348s)
+epoch  14/40  loss_n=0.6392  val_disp=0.0738  val_stress=59.22  (348s)
+epoch  15/40  loss_n=0.6388  val_disp=0.0715  val_stress=55.81  (347s)
+  -> best ckpt (mgn_split0_best.pt)
+epoch  16/40  loss_n=0.6369  val_disp=0.0714  val_stress=54.73  (303s)
+  -> best ckpt (mgn_split0_best.pt)
+epoch  17/40  loss_n=0.6343  val_disp=0.0728  val_stress=56.17  (256s)
+epoch  18/40  loss_n=0.6339  val_disp=0.0710  val_stress=57.43  (255s)
+epoch  19/40  loss_n=0.6332  val_disp=0.0711  val_stress=55.43  (255s)
+epoch  20/40  loss_n=0.6300  val_disp=0.0715  val_stress=61.03  (255s)
+epoch  21/40  loss_n=0.6286  val_disp=0.0717  val_stress=55.26  (255s)
+epoch  22/40  loss_n=0.6271  val_disp=0.0724  val_stress=58.88  (255s)
+epoch  23/40  loss_n=0.6285  val_disp=0.0712  val_stress=57.24  (255s)
+epoch  24/40  loss_n=0.6258  val_disp=0.0716  val_stress=60.20  (255s)
+epoch  25/40  loss_n=0.6272  val_disp=0.0721  val_stress=56.22  (255s)
+epoch  26/40  loss_n=0.6242  val_disp=0.0713  val_stress=58.52  (255s)
+epoch  27/40  loss_n=0.6236  val_disp=0.0714  val_stress=56.97  (255s)
+epoch  28/40  loss_n=0.6221  val_disp=0.0708  val_stress=55.62  (255s)
+epoch  29/40  loss_n=0.6216  val_disp=0.0707  val_stress=55.63  (255s)
+epoch  30/40  loss_n=0.6209  val_disp=0.0717  val_stress=58.42  (255s)
+epoch  31/40  loss_n=0.6206  val_disp=0.0716  val_stress=57.02  (255s)
+epoch  32/40  loss_n=0.6205  val_disp=0.0712  val_stress=56.92  (256s)
+epoch  33/40  loss_n=0.6183  val_disp=0.0712  val_stress=56.09  (256s)
+epoch  34/40  loss_n=0.6177  val_disp=0.0711  val_stress=55.61  (255s)
+epoch  35/40  loss_n=0.6178  val_disp=0.0710  val_stress=56.06  (255s)
+epoch  36/40  loss_n=0.6171  val_disp=0.0711  val_stress=56.55  (256s)
+epoch  37/40  loss_n=0.6169  val_disp=0.0710  val_stress=56.26  (255s)
+epoch  38/40  loss_n=0.6165  val_disp=0.0709  val_stress=56.25  (255s)
+epoch  39/40  loss_n=0.6161  val_disp=0.0710  val_stress=56.20  (255s)
+epoch  40/40  loss_n=0.6160  val_disp=0.0710  val_stress=56.21  (256s)
+  (eval skip OOM: [281])
+
+=== TEST MAE (split resmi) vs naive Fase 2 / paper* ===
+target               MGN     naive    paper* vs_naive
+ver_disp_x        0.0925    0.1272     0.127     0.73
+ver_disp_y        0.0345    0.0487    0.0487     0.71
+ver_disp_z        0.1551    0.2375     0.237     0.65
+ver_disp_mag      0.1870    0.2868     0.287     0.65
+ver_stress       69.1893   84.3785      84.4     0.82
+hor_disp_x        0.1134    0.1623     0.162     0.70
+hor_disp_y        0.0188    0.0197    0.0197     0.95
+hor_disp_z        0.1142    0.1623     0.162     0.70
+hor_disp_mag      0.1684    0.2510     0.251     0.67
+hor_stress       74.2289   89.2510      89.3     0.83
+dia_disp_x        0.0455    0.0627    0.0627     0.72
+dia_disp_y        0.0291    0.0417    0.0417     0.70
+dia_disp_z        0.0897    0.1460     0.146     0.61
+dia_disp_mag      0.1021    0.1693     0.169     0.60
+dia_stress       51.4242   60.0829      60.1     0.86
+tor_disp_x        0.0222    0.0317    0.0317     0.70
+tor_disp_y        0.0161    0.0166    0.0166     0.97
+tor_disp_z        0.0227    0.0280     0.028     0.81
+tor_disp_mag      0.0362    0.0421    0.0421     0.86
+tor_stress       33.8982   36.0542      36.1     0.94
+
+tersimpan: /home/daffa/Documents/jazari/reports/mgn_split0_test_mae.csv
+mengalahkan naive di 20/20 target

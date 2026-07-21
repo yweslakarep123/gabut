@@ -1,0 +1,7 @@
+{
+  "split_idx": 1,
+  "n_test_official": 77,
+  "n_eval_mgn": 77,
+  "mgn_skip_oom": [],
+  "wins_vs_naive_matched": 20
+}

@@ -1,0 +1,82 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+.env.*
+
+# --- IDE / Cursor ---
+.cursor/
+.vscode/
+*.swp
+*~
+
+# --- Dataset & FEA (sangat besar; unduh/build lokal) ---
+# SimJEB raw + processed bisa puluhan GB
+data/raw/
+data/processed/
+data/**/*.zip
+data/**/*.vtk
+data/**/*.obj
+data/**/*.csv
+data/**/*.fem
+data/**/*.npz
+
+# Keep data/ layout placeholders if any (uncomment if needed):
+# !data/.gitkeep
+# !data/raw/.gitkeep
+# !data/processed/.gitkeep
+
+# --- Model checkpoints ---
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# --- CAD / mesh binaries ---
+*.stl
+*.step
+*.stp
+*.brep
+*.iges
+*.igs
+*.msh
+*.mesh
+*.vtk
+*.vtu
+*.obj
+*.ply
+*.off
+
+# Volume / geometry dumps
+*.npz
+*.npz.gz
+*.h5
+*.hdf5
+
+# --- Reports: artefak berat; biarkan ringkasan kecil ikut commit ---
+reports/**/*.stl
+reports/**/*.step
+reports/**/*.stp
+reports/**/*.msh
+reports/**/*.png
+reports/**/*.npz
+reports/ur5e_renders/
+reports/ur5e_nauo3_mesh/
+reports/ur5e_nauo3_heal/
+reports/ur5e_nauo3_volume/
+reports/**/*.log
+
+# Opsional: kalau mau commit ringkasan JSON/CSV hasil eksperimen,
+# file di reports/*.json dan reports/*.csv TIDAK di-ignore.
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db

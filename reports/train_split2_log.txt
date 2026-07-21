@@ -1,0 +1,81 @@
+peringatan: 1 bracket tanpa bc.npz, dilewati: [293]
+split_2: fit=273 val=30 test=77 (test hanya di eval akhir)
+filter train n_nodes<=150000: 273 -> 250
+hitung mean/std target dari train_fit...
+device=cuda H=48 L=6 huber_n=3.71065616607666
+epoch   1/40  loss_n=0.7922  val_disp=0.1146  val_stress=74.09  (228s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch   2/40  loss_n=0.7396  val_disp=0.0915  val_stress=66.76  (231s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch   3/40  loss_n=0.7046  val_disp=0.0859  val_stress=72.97  (232s)
+epoch   4/40  loss_n=0.6868  val_disp=0.0796  val_stress=64.28  (232s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch   5/40  loss_n=0.6698  val_disp=0.0776  val_stress=67.53  (232s)
+epoch   6/40  loss_n=0.6632  val_disp=0.0753  val_stress=60.01  (232s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch   7/40  loss_n=0.6543  val_disp=0.0768  val_stress=63.74  (233s)
+epoch   8/40  loss_n=0.6508  val_disp=0.0760  val_stress=60.20  (233s)
+epoch   9/40  loss_n=0.6487  val_disp=0.0762  val_stress=66.36  (233s)
+epoch  10/40  loss_n=0.6443  val_disp=0.0741  val_stress=63.09  (233s)
+epoch  11/40  loss_n=0.6412  val_disp=0.0736  val_stress=60.19  (233s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch  12/40  loss_n=0.6385  val_disp=0.0730  val_stress=54.99  (233s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch  13/40  loss_n=0.6386  val_disp=0.0745  val_stress=58.73  (233s)
+epoch  14/40  loss_n=0.6380  val_disp=0.0749  val_stress=61.50  (233s)
+epoch  15/40  loss_n=0.6345  val_disp=0.0730  val_stress=54.68  (233s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch  16/40  loss_n=0.6368  val_disp=0.0731  val_stress=55.45  (233s)
+epoch  17/40  loss_n=0.6325  val_disp=0.0745  val_stress=61.00  (233s)
+epoch  18/40  loss_n=0.6305  val_disp=0.0738  val_stress=56.88  (233s)
+epoch  19/40  loss_n=0.6290  val_disp=0.0746  val_stress=58.81  (233s)
+epoch  20/40  loss_n=0.6290  val_disp=0.0733  val_stress=54.88  (233s)
+epoch  21/40  loss_n=0.6275  val_disp=0.0747  val_stress=60.02  (233s)
+epoch  22/40  loss_n=0.6270  val_disp=0.0739  val_stress=58.82  (233s)
+epoch  23/40  loss_n=0.6255  val_disp=0.0727  val_stress=57.75  (233s)
+epoch  24/40  loss_n=0.6227  val_disp=0.0731  val_stress=56.89  (233s)
+epoch  25/40  loss_n=0.6227  val_disp=0.0734  val_stress=55.77  (233s)
+epoch  26/40  loss_n=0.6222  val_disp=0.0734  val_stress=56.43  (233s)
+epoch  27/40  loss_n=0.6207  val_disp=0.0736  val_stress=55.89  (233s)
+epoch  28/40  loss_n=0.6189  val_disp=0.0735  val_stress=55.84  (233s)
+epoch  29/40  loss_n=0.6177  val_disp=0.0731  val_stress=56.09  (233s)
+epoch  30/40  loss_n=0.6172  val_disp=0.0725  val_stress=53.31  (233s)
+  -> best ckpt (mgn_split2_best.pt)
+epoch  31/40  loss_n=0.6162  val_disp=0.0734  val_stress=56.42  (233s)
+epoch  32/40  loss_n=0.6139  val_disp=0.0735  val_stress=57.04  (233s)
+epoch  33/40  loss_n=0.6128  val_disp=0.0731  val_stress=55.71  (233s)
+epoch  34/40  loss_n=0.6133  val_disp=0.0729  val_stress=55.88  (233s)
+epoch  35/40  loss_n=0.6111  val_disp=0.0726  val_stress=54.19  (233s)
+epoch  36/40  loss_n=0.6108  val_disp=0.0730  val_stress=55.95  (233s)
+epoch  37/40  loss_n=0.6094  val_disp=0.0729  val_stress=55.98  (233s)
+epoch  38/40  loss_n=0.6088  val_disp=0.0728  val_stress=55.27  (233s)
+epoch  39/40  loss_n=0.6083  val_disp=0.0728  val_stress=55.21  (233s)
+epoch  40/40  loss_n=0.6082  val_disp=0.0728  val_stress=55.19  (233s)
+
+hitung naive matched (test 77 -> eval 77, skip OOM=[])...
+fit:   0%|          | 0/304 [00:00<?, ?bracket/s]fit:   1%|▏         | 4/304 [00:00<00:08, 35.88bracket/s]fit:   3%|▎         | 8/304 [00:00<00:08, 33.19bracket/s]fit:   4%|▍         | 13/304 [00:00<00:07, 38.28bracket/s]fit:   6%|▌         | 18/304 [00:00<00:08, 32.97bracket/s]fit:   7%|▋         | 22/304 [00:00<00:08, 32.98bracket/s]fit:   9%|▉         | 28/304 [00:00<00:07, 39.29bracket/s]fit:  11%|█         | 34/304 [00:00<00:06, 44.47bracket/s]fit:  13%|█▎        | 39/304 [00:01<00:06, 41.18bracket/s]fit:  14%|█▍        | 44/304 [00:01<00:07, 34.32bracket/s]fit:  16%|█▌        | 48/304 [00:01<00:07, 35.06bracket/s]fit:  17%|█▋        | 52/304 [00:01<00:08, 28.03bracket/s]fit:  19%|█▉        | 58/304 [00:01<00:07, 32.71bracket/s]fit:  20%|██        | 62/304 [00:01<00:08, 28.81bracket/s]fit:  22%|██▏       | 67/304 [00:01<00:07, 33.06bracket/s]fit:  23%|██▎       | 71/304 [00:02<00:07, 29.61bracket/s]fit:  25%|██▍       | 75/304 [00:02<00:09, 23.20bracket/s]fit:  26%|██▌       | 79/304 [00:02<00:08, 25.78bracket/s]fit:  27%|██▋       | 83/304 [00:02<00:07, 28.32bracket/s]fit:  29%|██▊       | 87/304 [00:02<00:07, 29.28bracket/s]fit:  30%|██▉       | 91/304 [00:02<00:06, 30.78bracket/s]fit:  31%|███▏      | 95/304 [00:02<00:06, 30.87bracket/s]fit:  33%|███▎      | 99/304 [00:03<00:06, 31.86bracket/s]fit:  34%|███▍      | 103/304 [00:03<00:06, 31.22bracket/s]fit:  36%|███▌      | 109/304 [00:03<00:05, 35.34bracket/s]fit:  37%|███▋      | 113/304 [00:03<00:05, 36.28bracket/s]fit:  38%|███▊      | 117/304 [00:03<00:05, 36.09bracket/s]fit:  40%|███▉      | 121/304 [00:03<00:05, 34.92bracket/s]fit:  41%|████      | 125/304 [00:03<00:05, 33.87bracket/s]fit:  42%|████▏     | 129/304 [00:03<00:05, 32.40bracket/s]fit:  44%|████▍     | 134/304 [00:04<00:04, 35.40bracket/s]fit:  45%|████▌     | 138/304 [00:04<00:05, 30.56bracket/s]fit:  47%|████▋     | 143/304 [00:04<00:05, 31.78bracket/s]fit:  48%|████▊     | 147/304 [00:04<00:07, 21.70bracket/s]fit:  50%|████▉     | 151/304 [00:04<00:06, 24.25bracket/s]fit:  51%|█████     | 155/304 [00:04<00:05, 27.01bracket/s]fit:  52%|█████▏    | 159/304 [00:05<00:05, 28.96bracket/s]fit:  54%|█████▎    | 163/304 [00:05<00:04, 29.32bracket/s]fit:  55%|█████▌    | 168/304 [00:05<00:04, 33.63bracket/s]fit:  57%|█████▋    | 172/304 [00:05<00:04, 30.99bracket/s]fit:  58%|█████▊    | 176/304 [00:05<00:03, 32.71bracket/s]fit:  60%|█████▉    | 181/304 [00:05<00:03, 35.51bracket/s]fit:  61%|██████    | 185/304 [00:05<00:03, 34.25bracket/s]fit:  62%|██████▏   | 189/304 [00:05<00:03, 32.63bracket/s]fit:  63%|██████▎   | 193/304 [00:06<00:03, 29.83bracket/s]fit:  65%|██████▍   | 197/304 [00:06<00:03, 27.91bracket/s]fit:  66%|██████▌   | 201/304 [00:06<00:03, 30.47bracket/s]fit:  68%|██████▊   | 206/304 [00:06<00:02, 34.34bracket/s]fit:  69%|██████▉   | 210/304 [00:06<00:02, 35.68bracket/s]fit:  70%|███████   | 214/304 [00:06<00:03, 29.32bracket/s]fit:  72%|███████▏  | 218/304 [00:06<00:02, 31.73bracket/s]fit:  74%|███████▎  | 224/304 [00:07<00:02, 35.67bracket/s]fit:  75%|███████▌  | 228/304 [00:07<00:02, 31.87bracket/s]fit:  76%|███████▋  | 232/304 [00:07<00:02, 31.73bracket/s]fit:  78%|███████▊  | 237/304 [00:07<00:01, 35.35bracket/s]fit:  79%|███████▉  | 241/304 [00:07<00:01, 35.43bracket/s]fit:  81%|████████  | 245/304 [00:07<00:01, 32.00bracket/s]fit:  82%|████████▏ | 250/304 [00:07<00:01, 35.32bracket/s]fit:  84%|████████▍ | 255/304 [00:07<00:01, 36.66bracket/s]fit:  86%|████████▌ | 260/304 [00:08<00:01, 39.20bracket/s]fit:  87%|████████▋ | 265/304 [00:08<00:01, 26.70bracket/s]fit:  88%|████████▊ | 269/304 [00:08<00:01, 28.70bracket/s]fit:  90%|████████▉ | 273/304 [00:08<00:01, 28.32bracket/s]fit:  92%|█████████▏| 279/304 [00:08<00:00, 33.51bracket/s]fit:  93%|█████████▎| 284/304 [00:08<00:00, 35.57bracket/s]fit:  95%|█████████▍| 288/304 [00:09<00:00, 31.62bracket/s]fit:  96%|█████████▋| 293/304 [00:09<00:00, 30.87bracket/s]fit:  98%|█████████▊| 298/304 [00:09<00:00, 31.63bracket/s]fit: 100%|██████████| 304/304 [00:09<00:00, 34.90bracket/s]                                                           eval:   0%|          | 0/77 [00:00<?, ?bracket/s]eval:   4%|▍         | 3/77 [00:00<00:02, 26.87bracket/s]eval:   9%|▉         | 7/77 [00:00<00:02, 32.37bracket/s]eval:  14%|█▍        | 11/77 [00:00<00:02, 22.51bracket/s]eval:  18%|█▊        | 14/77 [00:00<00:02, 22.87bracket/s]eval:  22%|██▏       | 17/77 [00:00<00:02, 21.53bracket/s]eval:  27%|██▋       | 21/77 [00:00<00:02, 24.69bracket/s]eval:  31%|███       | 24/77 [00:01<00:02, 19.91bracket/s]eval:  35%|███▌      | 27/77 [00:01<00:02, 22.06bracket/s]eval:  39%|███▉      | 30/77 [00:01<00:02, 19.79bracket/s]eval:  43%|████▎     | 33/77 [00:01<00:02, 20.12bracket/s]eval:  47%|████▋     | 36/77 [00:01<00:02, 17.58bracket/s]eval:  49%|████▉     | 38/77 [00:01<00:02, 15.62bracket/s]eval:  55%|█████▍    | 42/77 [00:02<00:01, 20.44bracket/s]eval:  58%|█████▊    | 45/77 [00:02<00:02, 15.56bracket/s]eval:  61%|██████    | 47/77 [00:02<00:01, 15.42bracket/s]eval:  66%|██████▌   | 51/77 [00:02<00:01, 19.65bracket/s]eval:  71%|███████▏  | 55/77 [00:02<00:00, 22.50bracket/s]eval:  75%|███████▌  | 58/77 [00:02<00:00, 22.34bracket/s]eval:  81%|████████  | 62/77 [00:02<00:00, 26.24bracket/s]eval:  84%|████████▍ | 65/77 [00:03<00:00, 24.25bracket/s]eval:  88%|████████▊ | 68/77 [00:03<00:00, 22.46bracket/s]eval:  92%|█████████▏| 71/77 [00:03<00:00, 22.76bracket/s]eval:  96%|█████████▌| 74/77 [00:03<00:00, 19.39bracket/s]eval: 100%|██████████| 77/77 [00:03<00:00, 20.97bracket/s]                                                          eval:   0%|          | 0/77 [00:00<?, ?bracket/s]eval:   4%|▍         | 3/77 [00:00<00:03, 23.70bracket/s]eval:   9%|▉         | 7/77 [00:00<00:02, 30.56bracket/s]eval:  14%|█▍        | 11/77 [00:00<00:02, 22.07bracket/s]eval:  18%|█▊        | 14/77 [00:00<00:02, 22.90bracket/s]eval:  22%|██▏       | 17/77 [00:00<00:02, 21.55bracket/s]eval:  27%|██▋       | 21/77 [00:00<00:02, 24.69bracket/s]eval:  31%|███       | 24/77 [00:01<00:02, 19.83bracket/s]eval:  35%|███▌      | 27/77 [00:01<00:02, 21.89bracket/s]eval:  39%|███▉      | 30/77 [00:01<00:02, 19.64bracket/s]eval:  43%|████▎     | 33/77 [00:01<00:02, 19.94bracket/s]eval:  47%|████▋     | 36/77 [00:01<00:02, 17.43bracket/s]eval:  49%|████▉     | 38/77 [00:01<00:02, 15.54bracket/s]eval:  56%|█████▌    | 43/77 [00:02<00:01, 18.71bracket/s]eval:  58%|█████▊    | 45/77 [00:02<00:02, 15.75bracket/s]eval:  61%|██████    | 47/77 [00:02<00:01, 15.53bracket/s]eval:  66%|██████▌   | 51/77 [00:02<00:01, 19.83bracket/s]eval:  71%|███████▏  | 55/77 [00:02<00:00, 22.71bracket/s]eval:  75%|███████▌  | 58/77 [00:02<00:00, 22.45bracket/s]eval:  81%|████████  | 62/77 [00:02<00:00, 26.35bracket/s]eval:  84%|████████▍ | 65/77 [00:03<00:00, 24.26bracket/s]eval:  88%|████████▊ | 68/77 [00:03<00:00, 22.43bracket/s]eval:  92%|█████████▏| 71/77 [00:03<00:00, 22.74bracket/s]eval:  96%|█████████▌| 74/77 [00:03<00:00, 19.51bracket/s]eval: 100%|██████████| 77/77 [00:03<00:00, 21.11bracket/s]                                                          
+=== TEST MAE split_2 (MGN n=77/77) vs naive matched ===
+target               MGN    n_full   n_match    paper* vs_match
+ver_disp_x        0.1330    0.1538    0.1538     0.127     0.86
+ver_disp_y        0.0478    0.0585    0.0585    0.0487     0.82
+ver_disp_z        0.2260    0.2842    0.2842     0.237     0.80
+ver_disp_mag      0.2735    0.3447    0.3447     0.287     0.79
+ver_stress       74.0008   87.8731   87.8731      84.4     0.84
+hor_disp_x        0.1517    0.1877    0.1877     0.162     0.81
+hor_disp_y        0.0216    0.0233    0.0233    0.0197     0.93
+hor_disp_z        0.1571    0.1909    0.1909     0.162     0.82
+hor_disp_mag      0.2292    0.2924    0.2924     0.251     0.78
+hor_stress       76.4147   91.4709   91.4709      89.3     0.84
+dia_disp_x        0.0580    0.0679    0.0679    0.0627     0.85
+dia_disp_y        0.0413    0.0495    0.0495    0.0417     0.83
+dia_disp_z        0.1310    0.1719    0.1719     0.146     0.76
+dia_disp_mag      0.1497    0.1988    0.1988     0.169     0.75
+dia_stress       51.2045   60.0455   60.0455      60.1     0.85
+tor_disp_x        0.0223    0.0323    0.0323    0.0317     0.69
+tor_disp_y        0.0132    0.0157    0.0157    0.0166     0.84
+tor_disp_z        0.0219    0.0297    0.0297     0.028     0.74
+tor_disp_mag      0.0340    0.0416    0.0416    0.0421     0.82
+tor_stress       30.2476   36.3023   36.3023      36.1     0.83
+
+tersimpan: /home/daffa/Documents/jazari/reports/mgn_split2_test_mae.csv
+mengalahkan naive_matched di 20/20 target (eval 77/77)

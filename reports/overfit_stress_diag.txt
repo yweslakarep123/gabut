@@ -1,0 +1,71 @@
+y_std stress: [173.93361 160.39055  98.55766 127.71437]
+y_std disp mean: 0.29928556084632874
+  [H64] ep=   1 loss_n=0.7222 disp=0.2191 stress=103.49
+  [H64] ep= 100 loss_n=0.2406 disp=0.0400 stress=69.50
+  [H64] ep= 250 loss_n=0.1910 disp=0.0297 stress=52.01
+  [H64] ep= 500 loss_n=0.1588 disp=0.0237 stress=36.41
+
+=== MAE per channel (akhir H64/500) ===
+  ver_disp_x     0.02600
+  ver_disp_y     0.01779
+  ver_disp_z     0.02138
+  ver_disp_mag   0.02419
+  ver_stress     38.34057
+  hor_disp_x     0.02225
+  hor_disp_y     0.02459
+  hor_disp_z     0.02261
+  hor_disp_mag   0.02632
+  hor_stress     40.44395
+  dia_disp_x     0.01443
+  dia_disp_y     0.02758
+  dia_disp_z     0.01761
+  dia_disp_mag   0.02884
+  dia_stress     26.47746
+  tor_disp_x     0.02512
+  tor_disp_y     0.01122
+  tor_disp_z     0.03211
+  tor_disp_mag   0.03702
+  tor_stress     40.39123
+
+=== Residual stress vs kuantil GT ===
+
+ver:
+  p0-50        n= 20021  MAE=  25.87  GT_mean=   73.3  contrib%= 33.7
+  p50-90       n= 16016  MAE=  43.13  GT_mean=  256.7  contrib%= 45.0
+  p90-99       n=  3604  MAE=  72.56  GT_mean=  522.9  contrib%= 17.0
+  p99-99.9     n=   360  MAE= 144.92  GT_mean=  983.1  contrib%=  3.4
+  p99.9-100    n=    41  MAE= 311.80  GT_mean= 1571.7  contrib%=  0.8
+
+hor:
+  p0-50        n= 20021  MAE=  33.24  GT_mean=   98.5  contrib%= 41.1
+  p50-90       n= 16016  MAE=  41.26  GT_mean=  285.7  contrib%= 40.8
+  p90-99       n=  3604  MAE=  66.92  GT_mean=  531.0  contrib%= 14.9
+  p99-99.9     n=   360  MAE= 119.18  GT_mean=  844.4  contrib%=  2.6
+  p99.9-100    n=    41  MAE= 217.70  GT_mean= 1140.9  contrib%=  0.6
+
+dia:
+  p0-50        n= 20021  MAE=  20.19  GT_mean=   57.5  contrib%= 38.1
+  p50-90       n= 16016  MAE=  26.44  GT_mean=  152.9  contrib%= 39.9
+  p90-99       n=  3604  MAE=  55.08  GT_mean=  328.4  contrib%= 18.7
+  p99-99.9     n=   360  MAE=  82.61  GT_mean=  555.4  contrib%=  2.8
+  p99.9-100    n=    41  MAE= 104.88  GT_mean=  683.7  contrib%=  0.4
+
+tor:
+  p0-50        n= 20021  MAE=  28.85  GT_mean=   66.4  contrib%= 35.7
+  p50-90       n= 16016  MAE=  41.44  GT_mean=  194.9  contrib%= 41.0
+  p90-99       n=  3604  MAE=  86.07  GT_mean=  409.4  contrib%= 19.2
+  p99-99.9     n=   360  MAE= 144.39  GT_mean=  732.2  contrib%=  3.2
+  p99.9-100    n=    41  MAE= 336.88  GT_mean=  963.9  contrib%=  0.9
+
+channel-mean MAE disp=0.2251 stress=104.04
+model        MAE disp=0.0237 stress=36.41
+MAE ternormalisasi: disp=0.1098 stress=0.2644
+
+=== capacity bump H=96 L=10, 800 epoch, L1 ===
+  [H96] ep=   1 loss_n=0.7239 disp=0.2195 stress=101.52
+  [H96] ep= 200 loss_n=0.2083 disp=0.0307 stress=53.03
+  [H96] ep= 400 loss_n=0.1454 disp=0.0230 stress=36.43
+  [H96] ep= 600 loss_n=0.1080 disp=0.0161 stress=28.34
+  [H96] ep= 800 loss_n=0.0602 disp=0.0081 stress=19.95
+
+FINAL H96: disp=0.00813 stress=19.95
