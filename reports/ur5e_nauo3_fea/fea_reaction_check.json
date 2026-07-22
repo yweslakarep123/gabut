@@ -1,0 +1,63 @@
+{
+  "step1_com_urdf": {
+    "urdf_inertial_origin_upper_arm_m": {
+      "x": -0.2125,
+      "y": 0.0,
+      "z": 0.11336
+    },
+    "source": "reports/ur5e_urdf/ur5e_physical_parameters_ros2.yaml \u2192 center_of_mass.upper_arm_cog (= URDF <inertial><origin>)",
+    "x_self_old_L_over_2_m": 0.2125,
+    "x_self_new_com_m": 0.2125,
+    "M_total_prev_Nm": 106.519,
+    "M_total_new_Nm": 106.519,
+    "delta_M_total_Nm": 9.2e-05,
+    "note": "CoM URDF |x|=0.2125 m sama dengan L/2; z=0.11336 lateral tidak masuk M=m*g*x. Delta vs 106.52 \u2248 0."
+  },
+  "distal_load": {
+    "F_N": 106.7062,
+    "m_distal_kg": 10.881,
+    "M_about_distal_face_Nm": 44.377,
+    "note": "F=(forearm+w1+w2+w3+payload)*g; M dari lever (x_i - x_elbow)"
+  },
+  "mesh_setup": {
+    "inp": "/home/daffa/Documents/jazari/reports/ur5e_nauo3_fea/nauo3_cantilever.inp",
+    "L_prox_dist_mm": 424.74,
+    "n_prox_nodes": 634,
+    "n_dist_faces": 917,
+    "coupling": "*COUPLING + *DISTRIBUTING (RBE3-like) on distal SURFACE",
+    "spc": "*BOUNDARY Nprox, 1,3",
+    "gravity": "*DLOAD GRAV density*g on Eall",
+    "density_kg_m3": 1662.3
+  },
+  "expected_Nm": {
+    "analytic_step1": 106.519,
+    "fea_equilibrium_pred": 106.478
+  },
+  "fea_reaction": {
+    "RF_N": [
+      0.000396,
+      -0.354831,
+      185.214637
+    ],
+    "RF_norm_N": 185.215,
+    "RF_expect_N": 185.728,
+    "M_Nm": [
+      106.4778,
+      -0.1817,
+      -0.000577
+    ],
+    "M_norm_Nm": 106.478
+  },
+  "validation": {
+    "pass": true,
+    "err_vs_analytic_pct": -0.0385,
+    "err_vs_fea_pred_pct": 0.0,
+    "gate": "reaction |M| within 10% of analytic before trusting stress",
+    "conclusion": "PASS \u2014 |M_reaction|=106.478 vs analytic 106.519 (\u03b4=-0.04%). Setup SPC/RBE/gravity konsisten; lanjut stress OK."
+  },
+  "ccx": {
+    "version": "2.23",
+    "returncode": 0,
+    "wall_s": 17.85
+  }
+}

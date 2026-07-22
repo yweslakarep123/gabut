@@ -1,0 +1,62 @@
+{
+  "hotspot_von_mises_s110_by_falloff": [
+    {
+      "trial": "cosine_C1_L40",
+      "source": "FRD_legacy",
+      "sigma_hot_MPa": 1.4863671823810825,
+      "y_mm": 222.70000652879136
+    },
+    {
+      "trial": "smootherstep_C2_L40",
+      "source": "run_stdout_recorded",
+      "sigma_hot_MPa": 1.4743018097681035,
+      "y_mm": 222.7
+    },
+    {
+      "trial": "smootherstep_C2_L55",
+      "source": "run_stdout_and_batch_summary",
+      "sigma_hot_MPa": 1.3938509413398608,
+      "y_mm": 310.43
+    },
+    {
+      "trial": "bump_Cinf_L65",
+      "source": "run_stdout_and_batch_summary",
+      "sigma_hot_MPa": 1.3928689716295473,
+      "y_mm": 322.66
+    },
+    {
+      "trial": "gaussian_cut_s22_L66",
+      "source": "FRD_current",
+      "sigma_hot_MPa": 1.3587587961081045,
+      "y_mm": 314.9270736420356
+    },
+    {
+      "trial": "gaussian_nocut_s35",
+      "source": "FRD_reparsed",
+      "sigma_hot_MPa": 1.2625510125269102,
+      "y_mm": 322.6584889162332
+    }
+  ],
+  "stats_all_trials": {
+    "n": 6,
+    "min": 1.2625510125269102,
+    "max": 1.4863671823810825,
+    "mean": 1.3947831189589348,
+    "std": 0.08185166777083945,
+    "range": 0.2238161698541723,
+    "range_over_mean_pct": 16.046664661472857,
+    "baseline_undeformed_sigma_max_MPa": 1.645735221879838
+  },
+  "note_sources": {
+    "FRD_available": [
+      "cosine_C1_L40",
+      "gaussian_cut_s22_L66",
+      "gaussian_nocut_s35"
+    ],
+    "FRD_overwritten_use_contemporaneous_stdout": [
+      "smootherstep_C2_L40",
+      "smootherstep_C2_L55",
+      "bump_Cinf_L65"
+    ]
+  }
+}

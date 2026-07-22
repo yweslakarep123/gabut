@@ -175,4 +175,108 @@ dari mesh ini akan cenderung **lebih kaku/kuat** daripada link fisik
 sungguhan (yang berongga untuk kabel). Ini pendekatan awal PoC — **bukan**
 replikasi mekanik persis UR5e asli.
 
+### Baseline volume mesh NAUO3 & pass optimize Gmsh
+
+Artefak: `reports/ur5e_nauo3_volume/geometry.npz` (+ `mesh_report.json`).
+`radius_ratio` memakai rumus yang sudah dikoreksi (`R = ||O−p0||`).
+
+Pass optimize yang aman secara geometri = **Gmsh default** (edge-swap /
+relocate interior) pada mesh yang sudah ada — file
+`reports/ur5e_nauo3_volume/_opt_default.msh`. Relocate3D / Netgen
+**tidak** dipakai sebagai baseline: Relocate3D menggeser surface
+(~22 mm, ΔV ≈ −6.5%, tet inverted); Netgen segfault di SwapImprove
+(gmsh 4.15.2).
+
+Keputusan apply default → `geometry.npz` final:
+jalankan `scripts/apply_default_optimize_if_better.py` (lihat command di
+chat). Kriteria: `radius_ratio` p50 **atau** p95 lebih baik, yang lain
+tidak memburuk; `|ΔV| < 0.5%`; 0 inverted; hitungan dihedral tajam tidak
+naik. Hasil tertulis di
+`reports/ur5e_nauo3_volume/optimize_radius_ratio_decision.json`.
+
+Jika skrip memutuskan **keep_pre_optimize**: baseline pra-optimasi tetap
+dipakai karena default tidak memperbaiki distribusi `radius_ratio`
+(median/p95) meski ΔV ≈ 0 — bukan karena volume/geometri rusak.
+
+### Mapping NAUO (STEP) ↔ link URDF UR5e + massa
+
+Sumber: [artikel DH/dynamics resmi UR](https://www.universal-robots.com/articles/ur/application-installation/dh-parameters-for-calculations-of-kinematics-and-dynamics/)
+(tabel **UR5e/UR7e**), disalin ke
+`Universal_Robots_ROS2_Description` dan (sejak 2025-03) juga
+`ros-industrial/universal_robot`.
+
+#### Kenapa sempat ada dua set massa?
+
+| Set | Asal | Σ 6 link bergerak | Σ + `base_mass=4.0` |
+|-----|------|-------------------:|--------------------:|
+| **Final (pakai ini)** | Tabel UR5e/UR7e resmi; ROS2 `#187` / ros-industrial `#689` | **17.70 kg** | 21.70 kg |
+| Legacy (jangan pakai) | Hampir identik tabel **UR5 CB-series** (bukan e-Series), sempat tertanam di yaml UR5e lama | 16.99 kg | 20.99 kg |
+
+Commit ROS2 `#187` (*Fix masses of robot links*, 2024-09, Felix Exner / UR):
+*"this should match the actual specifications"* → link ke artikel DH di atas.
+Ros-industrial `#689` (2025-03) menyalin revisi yang sama.
+**Bukan** safety factor: angka “ROS2” = spek UR5e; angka “ros-industrial lama”
+yang kita unduh sebelumnya = **massa UR5 non-e yang salah tempel**.
+
+Pola vs datasheet lengan 20,6 kg: total legacy lebih dekat (±1,9%) karena
+kebetulan; total spek (+`base_mass` 4,0 yang dikomentari *might be incorrect*)
++5,3%. Σ **hanya Link 1–6 dari artikel UR = 17,70 kg** — `base_mass` di URDF
+terpisah dan tidak ada di tabel UR5e artikel itu. Untuk lentur NAUO3, base
+tidak masuk beban distal → pakai spek link, bukan mengejar total 20,6 kg.
+
+| NAUO | URDF link | mass final (kg) | catatan |
+|------|-----------|----------------:|---------|
+| NAUO2 | `shoulder_link` | 3.761 | = Link 1 artikel UR |
+| **NAUO3** | **`upper_arm_link`** | **8.058** | = Link 2 |
+| NAUO4 | `forearm_link` | 2.846 | = Link 3 |
+| NAUO5 | `wrist_1_link` | 1.37 | = Link 4; STEP punya 2 solid |
+| NAUO6 | `wrist_2_link` | 1.3 | = Link 5 |
+| NAUO7 | `wrist_3_link` | 0.365 | = Link 6 |
+| (base) | `base_link_inertia` | 4.0 | tidak di tabel UR5e; flag “might be incorrect” |
+
+**NAUO3 lentur — angka final:** `m_self = 8.058 kg`; massa distal link
+`forearm+wrist_1/2/3 = 5.881 kg`; **`m_payload = 5 kg` terpisah di tool
+tip** (bukan digabung ke m_distal). Detail FK + momen per-komponen:
+`reports/ur5e_urdf/nauo3_bending_moment_horizontal.json`
+(`M_total ≈ 106.5 N·m` @ pose horizontal kanonik; CoM URDF
+`|x|=0.2125` = L/2). FEA reaction-check pertama (CalculiX):
+`reports/ur5e_nauo3_fea/fea_reaction_check.json` — `|M|=106.48` vs
+analytic 106.52 (**δ ≈ −0.04%**, PASS).
+
+#### Material STEP & von Mises (load case cantilever)
+
+- **Material di STEP: kosong.** Baik `nauo3_healed.step` (OCCT export)
+  maupun `UR7e.step` asli (SolidWorks AP214) **tidak** memuat
+  `MATERIAL_DESIGNATION` / `MATERIAL_PROPERTY` / nama alloy. Tidak ada
+  yang bisa dipakai sebagai yield resmi dari CAD.
+- **Lokasi σ_vm max:** node di **badan link**, **bukan** di 634 node SPC
+  proksimal maupun permukaan coupling distal
+  (`dist_SPC ≈ 92 mm`, `dist_distal ≈ 315 mm`) →
+  klasifikasi `IN_BODY_AWAY_FROM_BC` (bukan artefak RBE/SPC ala bracket 175).
+- **Percentile σ_vm (MPa, nodal):** p50≈0.14, p95≈0.89, p99≈1.20,
+  **max≈1.65**. Detail: `reports/ur5e_nauo3_fea/stress_vonmises_report.json`.
+- **Safety factor (ASUMSI, belum terkonfirmasi UR):** yield aluminium cor
+  ~**185 MPa** → SF ≈ **112** @ σ_max. Angka ini **hanya untuk riset
+  internal**; jangan dipakai keputusan desain/produk sebelum material UR
+  diverifikasi. Stress rendah juga karena model Graphical Docs = **solid
+  penuh** (tanpa rongga kabel) → lebih kaku/kuat dari link fisik.
+
+#### Offset joint (lengan momen) dari URDF yang sama
+
+`reports/ur5e_urdf/joint_origins_chain.json` — `<joint>/<origin xyz>` (m):
+
+| joint | parent → child | xyz (m) | peran DH |
+|-------|----------------|---------|----------|
+| `shoulder_pan_joint` | base_inertia → shoulder | `(0, 0, 0.1625)` | d1 |
+| `shoulder_lift_joint` | shoulder → upper_arm | `(0, 0, 0)` | hanya RPY |
+| `elbow_joint` | upper_arm → forearm | `(-0.425, 0, 0)` | **a2 = panjang NAUO3** |
+| `wrist_1_joint` | forearm → wrist_1 | `(-0.3922, 0, 0.1333)` | a3 + d4 |
+| `wrist_2_joint` | wrist_1 → wrist_2 | `(0, -0.0997, ≈0)` | d5 |
+| `wrist_3_joint` | wrist_2 → wrist_3 | `(0, 0.0996, ≈0)` | d6 |
+
+Untuk momen di root/shoulder-lift NAUO3, lengan utama ke elbow = **0,425 m**;
+beban distal digeser lagi sepanjang forearm+wrist sesuai pose.
+
+Ringkasan: `reports/ur5e_urdf/inertial_summary.json`.
+
 # gabut

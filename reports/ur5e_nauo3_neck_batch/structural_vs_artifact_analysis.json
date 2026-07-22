@@ -1,0 +1,173 @@
+{
+  "s110_falloff_hotspot_sigmas": {
+    "hotspot_von_mises_s110_by_falloff": [
+      {
+        "trial": "cosine_C1_L40",
+        "source": "FRD_legacy",
+        "sigma_hot_MPa": 1.4863671823810825,
+        "y_mm": 222.70000652879136
+      },
+      {
+        "trial": "smootherstep_C2_L40",
+        "source": "run_stdout_recorded",
+        "sigma_hot_MPa": 1.4743018097681035,
+        "y_mm": 222.7
+      },
+      {
+        "trial": "smootherstep_C2_L55",
+        "source": "run_stdout_and_batch_summary",
+        "sigma_hot_MPa": 1.3938509413398608,
+        "y_mm": 310.43
+      },
+      {
+        "trial": "bump_Cinf_L65",
+        "source": "run_stdout_and_batch_summary",
+        "sigma_hot_MPa": 1.3928689716295473,
+        "y_mm": 322.66
+      },
+      {
+        "trial": "gaussian_cut_s22_L66",
+        "source": "FRD_current",
+        "sigma_hot_MPa": 1.3587587961081045,
+        "y_mm": 314.9270736420356
+      },
+      {
+        "trial": "gaussian_nocut_s35",
+        "source": "FRD_reparsed",
+        "sigma_hot_MPa": 1.2625510125269102,
+        "y_mm": 322.6584889162332
+      }
+    ],
+    "stats_all_trials": {
+      "n": 6,
+      "min": 1.2625510125269102,
+      "max": 1.4863671823810825,
+      "mean": 1.3947831189589348,
+      "std": 0.08185166777083945,
+      "range": 0.2238161698541723,
+      "range_over_mean_pct": 16.046664661472857,
+      "baseline_undeformed_sigma_max_MPa": 1.645735221879838
+    },
+    "note_sources": {
+      "FRD_available": [
+        "cosine_C1_L40",
+        "gaussian_cut_s22_L66",
+        "gaussian_nocut_s35"
+      ],
+      "FRD_overwritten_use_contemporaneous_stdout": [
+        "smootherstep_C2_L40",
+        "smootherstep_C2_L55",
+        "bump_Cinf_L65"
+      ]
+    }
+  },
+  "s103_cosine_scaling": {
+    "probe_table": {
+      "s1.00_undeformed_baseline": {
+        "global_max_MPa": 1.645735221879838,
+        "global_max_y": 262.443359375,
+        "center_max_MPa": 1.645735221879838,
+        "center_y": 262.443359375,
+        "prox_edge_band_max_MPa": 1.2076315155435247,
+        "prox_edge_y": 222.6999969482422,
+        "dist_edge_band_max_MPa": 1.3592227268557615,
+        "dist_edge_y": 301.4211730957031
+      },
+      "s1.03_cosine_L40": {
+        "global_max_MPa": 1.5006569862549934,
+        "global_max_y": 262.4410680266021,
+        "center_max_MPa": 1.5006569862549934,
+        "center_y": 262.4410680266021,
+        "prox_edge_band_max_MPa": 1.2911375178982718,
+        "prox_edge_y": 222.69999982240694,
+        "dist_edge_band_max_MPa": 1.3692986936461449,
+        "dist_edge_y": 301.4211720232993
+      },
+      "s1.10_cosine_L40": {
+        "global_max_MPa": 1.4863671823810825,
+        "global_max_y": 222.70000652879136,
+        "center_max_MPa": 1.217048344400942,
+        "center_y": 262.4357215470071,
+        "prox_edge_band_max_MPa": 1.4863671823810825,
+        "prox_edge_y": 222.70000652879136,
+        "dist_edge_band_max_MPa": 1.399645051231297,
+        "dist_edge_y": 303.186767578125
+      }
+    },
+    "delta_s_minus_1": {
+      "s1.03": 0.03,
+      "s1.10": 0.1,
+      "ratio_expected": 0.3
+    },
+    "prox_edge_delta_from_baseline": {
+      "s1.03": 0.08350600235474714,
+      "s1.10": 0.2787356668375578
+    },
+    "center_delta_from_baseline": {
+      "s1.03": -0.14507823562484456,
+      "s1.10": -0.4286868774788961
+    },
+    "prox_edge_delta_ratio_03_over_10": 0.2995885072842614,
+    "center_delta_ratio_03_over_10": 0.33842471800874435,
+    "shoulder_minus_center": {
+      "s1.00": -0.43810370633631335,
+      "s1.03": -0.20951946835672164,
+      "s1.10": 0.26931883798014056
+    },
+    "which_wins": {
+      "s1.00": "center",
+      "s1.03": "center",
+      "s1.10": "prox_edge"
+    },
+    "verdict_seed": "At s=1.03 hotspot stays BAND_CENTER (no edge takeover). Edge takeover at s=1.10 is thresholded in |s-1|, not a fixed mesh artifact. Probe deltas at prox edge vs baseline: compare ratio to 0.30."
+  },
+  "s103_sample": {
+    "s": 1.03,
+    "falloff": "cosine_C1",
+    "L_mm": 40.0,
+    "mesh_gate": {
+      "pass": true,
+      "fail_reasons": [],
+      "V0_mm3": 4847396.4758005375,
+      "V_mm3": 4863081.471264638,
+      "dV_frac": 0.0032357566669869225,
+      "n_inverted_or_neg": 0,
+      "n_tets": 192060,
+      "n_nodes": 38811
+    },
+    "tet_flip": {
+      "n_flipped": 0,
+      "n_still_nonpos": 0,
+      "min_vol_before": 1.1025192521839483e-05,
+      "min_vol_after": 1.1025192521839483e-05
+    },
+    "reaction_M_Nm": 106.50267263121944,
+    "hotspot": {
+      "von_mises_MPa": 1.5006569862549934,
+      "y_mm": 262.4410680266021,
+      "xyz_mm": [
+        -1.5878094409732293,
+        262.4410680266021,
+        181.23397897435837
+      ],
+      "band_position": "BAND_CENTER",
+      "dy_over_L": 0.011026700665053114,
+      "bc_classification": "IN_BODY_AWAY_FROM_BC"
+    },
+    "sigma_max_band_center_MPa": 1.5006569862549934,
+    "scaling_vs_s110_cosine": {
+      "s110_hotspot_MPa": 1.4863671823810825,
+      "s110_band_center_MPa": 1.217048344400942,
+      "s103_hotspot_MPa": 1.5006569862549934,
+      "s103_band_center_MPa": 1.5006569862549934,
+      "baseline_undeformed_max_MPa": 1.645735221879838,
+      "raw_ratio_hot_s103_over_s110": 1.0096139123921046,
+      "abs_dev_from_baseline_ratio_s103_over_s110": 0.9103345694729301,
+      "shoulder_excess_over_center_s110": 0.26931883798014056,
+      "shoulder_excess_over_center_s103": 0.0,
+      "shoulder_excess_ratio_s103_over_s110": 0.0,
+      "expected_if_linear_in_s_minus_1": 0.3,
+      "interpretation_guide": "If structural and linear in (s-1): shoulder_excess_ratio \u2248 0.30; raw hotspot ratio not expected to be 0.30 because absolute stress includes baseline bending field."
+    }
+  }
+}

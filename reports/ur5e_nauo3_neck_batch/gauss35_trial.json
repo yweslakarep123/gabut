@@ -1,0 +1,122 @@
+[
+  {
+    "s": 0.9,
+    "status": "ok",
+    "hotspot_L40": {
+      "bc_classification": "IN_BODY_AWAY_FROM_BC",
+      "band_position": "BAND_CENTER",
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.385961939307923,
+        262.450998905773,
+        176.1689340793246
+      ],
+      "y_mm": 262.450998905773,
+      "dy_from_y0_mm": 0.4509989057730195,
+      "dy_over_L": 0.011274972644325486,
+      "von_mises_MPa": 2.225149882315686,
+      "global_max_MPa": 2.225149882315686,
+      "global_max_node": 3279,
+      "dist_to_SPC_mm": 93.57935085415023,
+      "dist_to_distal_mm": 315.65887766768213,
+      "percentiles_all": {
+        "p50": 0.14655049998297243,
+        "p95": 0.9516300157587234,
+        "p99": 1.4111950215595541,
+        "p100": 2.225149882315686
+      },
+      "percentiles_exclude_2mm_BC": {
+        "p50": 0.14737269074343454,
+        "p95": 0.9601483469325912,
+        "p99": 1.420380138342661,
+        "p100": 2.225149882315686
+      },
+      "thresholds": {
+        "center_if_dy_over_L_le": 0.35,
+        "edge_if_dy_over_L_ge": 0.7,
+        "L_mm": 40.0,
+        "y0_mm": 262.0
+      }
+    },
+    "sigma_max_band_center_L40": 2.225149882315686,
+    "w_at_hotspot": 0.9999169830326263,
+    "meta": {
+      "s": 0.9,
+      "sigma": 35.0,
+      "falloff_kind": "gaussian_nocut",
+      "w_max": 0.9999999590780961,
+      "s_eff_max": 1.0,
+      "s_eff_min": 0.9000000040921904
+    },
+    "gate": {
+      "pass": true,
+      "fail_reasons": [],
+      "V0_mm3": 4847396.4758005375,
+      "V_mm3": 4721538.997040309,
+      "dV_frac": -0.02596393329667621,
+      "n_inverted_or_neg": 0,
+      "n_tets": 192060,
+      "n_nodes": 38811
+    }
+  },
+  {
+    "s": 1.1,
+    "status": "hotspot_BAND_EDGE",
+    "hotspot_L40": {
+      "bc_classification": "IN_BODY_AWAY_FROM_BC",
+      "band_position": "BAND_EDGE",
+      "node_0based": 5852,
+      "xyz_mm": [
+        0.5519207695841136,
+        322.6584889162332,
+        94.51539655318278
+      ],
+      "y_mm": 322.6584889162332,
+      "dy_from_y0_mm": 60.65848891623318,
+      "dy_over_L": 1.5164622229058295,
+      "von_mises_MPa": 1.2625510125269102,
+      "global_max_MPa": 1.6280487947112303,
+      "global_max_node": 6879,
+      "dist_to_SPC_mm": 150.8911436896815,
+      "dist_to_distal_mm": 255.46011154593415,
+      "percentiles_all": {
+        "p50": 0.12848814740731282,
+        "p95": 0.8348890409752712,
+        "p99": 1.089016292843505,
+        "p100": 1.6280487947112303
+      },
+      "percentiles_exclude_2mm_BC": {
+        "p50": 0.12818239793095618,
+        "p95": 0.843796159822619,
+        "p99": 1.0907184846655296,
+        "p100": 1.2625510125269102
+      },
+      "thresholds": {
+        "center_if_dy_over_L_le": 0.35,
+        "edge_if_dy_over_L_ge": 0.7,
+        "L_mm": 40.0,
+        "y0_mm": 262.0
+      }
+    },
+    "sigma_max_band_center_L40": 1.2523762024173557,
+    "w_at_hotspot": 0.22272504370128732,
+    "meta": {
+      "s": 1.1,
+      "sigma": 35.0,
+      "falloff_kind": "gaussian_nocut",
+      "w_max": 0.9999999590780961,
+      "s_eff_max": 1.0999999959078097,
+      "s_eff_min": 1.0
+    },
+    "gate": {
+      "pass": true,
+      "fail_reasons": [],
+      "V0_mm3": 4847396.4758005375,
+      "V_mm3": 4981959.165372206,
+      "dV_frac": 0.02775978615395714,
+      "n_inverted_or_neg": 0,
+      "n_tets": 192060,
+      "n_nodes": 38811
+    }
+  }
+]

@@ -1,0 +1,128 @@
+{
+  "s": 1.1,
+  "tag": "s_1.10",
+  "status": "hotspot_band_edge_artifact",
+  "deform": {
+    "s": 1.1,
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "band_y_mm": [
+      222.0,
+      302.0
+    ],
+    "n_nodes_w_gt_0": 5592,
+    "n_nodes_w_gt_0_5": 1740,
+    "w_max": 0.9999998453885428,
+    "s_eff_min": 1.0,
+    "s_eff_max": 1.0999999845388544,
+    "axis_point_mm": [
+      -0.11319510477358953,
+      373.33987826861113,
+      141.31061544843166
+    ],
+    "axis_u": [
+      -0.0011264660859389756,
+      0.9999975304394124,
+      0.0019157737950791132
+    ]
+  },
+  "mesh_gate": {
+    "pass": true,
+    "fail_reasons": [],
+    "V0_mm3": 4847396.4758005375,
+    "V_mm3": 4900970.2605404565,
+    "dV_frac": 0.011052074037552583,
+    "n_inverted_or_neg": 0,
+    "n_tets": 192060,
+    "n_nodes": 38811
+  },
+  "fail_reasons": [
+    "hotspot_at_band_edge y=222.70 dy/L=0.982"
+  ],
+  "spc_clearance": {
+    "n_prox": 634,
+    "n_dist": 624,
+    "prox_y_mm": {
+      "min": 151.4163970947266,
+      "max": 173.5870513916016,
+      "mean": 162.63681181898627
+    },
+    "dist_y_mm": {
+      "min": 576.5487060546875,
+      "max": 598.78759765625,
+      "mean": 587.3619235112117
+    },
+    "band_y_mm": [
+      222.0,
+      302.0
+    ],
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+    "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+    "n_SPC_nodes_in_band": 0,
+    "safe_clearance": true
+  },
+  "ccx_returncode": 0,
+  "ccx_reused": true,
+  "reaction": {
+    "M_fe_Nm": 106.56062764512222,
+    "RF_N": [
+      0.0003945449999724609,
+      -0.36897371000000334,
+      186.0879703699999
+    ],
+    "M_analytic_Nm": 106.519091897925,
+    "M_fea_pred_Nm": 106.5607950835956,
+    "err_vs_analytic_pct": 0.038993711321753284,
+    "err_vs_fea_pred_pct": 0.00015712952708134498,
+    "pass": true,
+    "n_prox_with_rf": 634,
+    "m_self_eff_kg": 8.147057612594597,
+    "L_mm": 424.7278155392506,
+    "x_com_from_prox_m": 0.21106260227192675
+  },
+  "hotspot": {
+    "bc_classification": "IN_BODY_AWAY_FROM_BC",
+    "band_position": "BAND_EDGE",
+    "node_0based": 13229,
+    "xyz_mm": [
+      10.612823615729452,
+      222.70000652879136,
+      81.02613816949426
+    ],
+    "y_mm": 222.70000652879136,
+    "dy_from_y0_mm": 39.29999347120864,
+    "dy_over_L": 0.9824998367802159,
+    "von_mises_MPa": 1.4863671823810825,
+    "global_max_MPa": 1.4863671823810825,
+    "global_max_node": 13229,
+    "dist_to_SPC_mm": 50.710671829473135,
+    "dist_to_distal_mm": 354.1155725472879,
+    "percentiles_all": {
+      "p50": 0.13291849220299673,
+      "p95": 0.8615562766736709,
+      "p99": 1.1403905727732164,
+      "p100": 1.4863671823810825
+    },
+    "percentiles_exclude_2mm_BC": {
+      "p50": 0.13291849220299673,
+      "p95": 0.8690776201182498,
+      "p99": 1.14444319986873,
+      "p100": 1.4863671823810825
+    },
+    "thresholds": {
+      "center_if_dy_over_L_le": 0.35,
+      "edge_if_dy_over_L_ge": 0.7,
+      "L_mm": 40.0,
+      "y0_mm": 262.0
+    }
+  },
+  "sigma_max_MPa": 1.4863671823810825,
+  "vs_old_baseline_MPa": {
+    "old_baseline": 1.645735221879838,
+    "delta_MPa": -0.15936803949875555,
+    "rel_pct": -9.683698652126903
+  },
+  "hotspot_edge_artifact": true
+}

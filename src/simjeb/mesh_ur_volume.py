@@ -25,30 +25,6 @@ from pathlib import Path
 
 import numpy as np
 
-# #region agent log
-_DEBUG_LOG = Path("/home/daffa/Documents/jazari/.cursor/debug-ee4192.log")
-
-
-def _dlog(hypothesis_id: str, location: str, message: str, data: dict, run_id: str = "mesh-fix") -> None:
-    payload = {
-        "sessionId": "ee4192",
-        "runId": run_id,
-        "hypothesisId": hypothesis_id,
-        "location": location,
-        "message": message,
-        "data": data,
-        "timestamp": int(time.time() * 1000),
-    }
-    try:
-        _DEBUG_LOG.parent.mkdir(parents=True, exist_ok=True)
-        with _DEBUG_LOG.open("a", encoding="utf-8") as f:
-            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
-
-
-# #endregion
-
 
 def _tet_quality(points: np.ndarray, tets: np.ndarray) -> dict:
     """Statistik kualitas tet dasar (tanpa Gmsh plugin).
@@ -83,7 +59,7 @@ def _tet_quality(points: np.ndarray, tets: np.ndarray) -> dict:
     vol = vol6 / 6.0
     abs_vol = np.abs(vol)
 
-    # inradius r = 3V / sum(face areas); circumradius via Cayley-Menger-ish
+    # inradius r = 3V / A_total (tetra: V = r A / 3)
     def face_areas(a, b, c):
         return 0.5 * np.linalg.norm(np.cross(b - a, c - a), axis=1)
 
@@ -94,46 +70,14 @@ def _tet_quality(points: np.ndarray, tets: np.ndarray) -> dict:
     area_sum = np.maximum(a0 + a1 + a2 + a3, 1e-30)
     inradius = 3.0 * abs_vol / area_sum
 
-    # circumradius: |a||b||c| / (2 |a·(b×c)|) for edges from one vertex... 
-    # R = |ABC| / (2 |scalar triple|) for tetra using opposite edges formula:
-    # R = |OA| |OB| |OC| / (2 |OA·(OB×OC)|) when O is one vertex — only if
-    # faces from that vertex; general: R = ||a|| ||b|| ||c|| / (2 |[a,b,c]|)
-    # with a,b,c from vertex 0 — correct for circumradius of tet.
-    denom = np.maximum(np.abs(vol6), 1e-30)
-    circum_r = (
-        np.linalg.norm(ab, axis=1)
-        * np.linalg.norm(ac, axis=1)
-        * np.linalg.norm(ad, axis=1)
-        / (2.0 * denom)
-    )
-    # Fix: that formula is wrong for general tet. Use edge-length formula:
-    # 288 V^2 R^2 = |...| Cayley-Menger. Simpler reliable:
-    # R = |d| / (2 |scalar triple|) where d involves edge products.
-    # From Wikipedia:  R = |a| |b| |c| / (2 |[a,b,c]|) only when a,b,c are
-    # edge vectors of a triangle's circumradius. For tet:
-    #  R = ||u|| / (2 sin angle) ... use:
-    #  288 V^2 R^2 = det(M) with edge lengths — implement Cayley-Menger lite.
-    e01, e02, e03 = elen[:, 0], elen[:, 1], elen[:, 2]
-    e12, e13, el23 = elen[:, 3], elen[:, 4], elen[:, 5]
-    # alpha_i = edge lengths squared opposite-ish
-    a, b, c = e01**2, e02**2, e03**2
-    d, e, f = el23**2, e13**2, e12**2  # opposite to a,b,c respectively
-    # Cayley-Menger: 288 V^2 R^2 = determinant expression
-    # From https://en.wikipedia.org/wiki/Tetrahedron#Circumradius
-    #  R = |a| |b| |c| ... alternative:
-    #  R = sqrt(|Ω|) / (288 V^2) with Ω Cayley-Menger det — skip if fragile.
-    # Use: R = ||AB|| ||AC|| ||AD|| / |6V * 2| is incorrect.
-    # Practical: gamma-style radius ratio via circumcenter solve.
-    # Solve ||x-p0||=||x-p1||=||x-p2||=||x-p3|| → linear 3x3.
+    # Circumcenter relatif ke p0: 2 (p_i - p0) · c = ||p_i - p0||^2
+    # (bukan ||p_i||^2 - ||p0||^2 — itu rumus untuk O absolut; ||O|| ≠ R).
     A = 2.0 * (p[:, 1:] - p[:, 0:1])  # (Nt, 3, 3)
-    rhs = np.sum(p[:, 1:] ** 2, axis=2) - np.sum(p[:, 0:1] ** 2, axis=2)
-    # A @ center_rel = rhs  → center = p0 + center_rel
+    rhs = np.sum((p[:, 1:] - p[:, 0:1]) ** 2, axis=2)
     try:
-        # batched solve
         center_rel = np.linalg.solve(A, rhs[..., None])[..., 0]
         circum_r = np.linalg.norm(center_rel, axis=1)
     except np.linalg.LinAlgError:
-        # fallback per-tet
         circum_r = np.empty(len(tets))
         for i in range(len(tets)):
             try:
@@ -142,6 +86,7 @@ def _tet_quality(points: np.ndarray, tets: np.ndarray) -> dict:
             except np.linalg.LinAlgError:
                 circum_r[i] = np.nan
 
+    # Ideal regular tet: R = 3r ⇒ R/(3r) = 1
     radius_ratio = circum_r / np.maximum(3.0 * inradius, 1e-30)
 
     # dihedral angles via face normals
@@ -284,15 +229,6 @@ def mesh_discrete_stl_to_tets(
     if mesh_size_min is None:
         mesh_size_min = mesh_size * 0.5
 
-    # #region agent log
-    _dlog(
-        "I",
-        "mesh_ur_volume.py:mesh_discrete_stl_to_tets",
-        "start_discrete_volume",
-        {"stl": str(stl_path), "mesh_size": mesh_size},
-    )
-    # #endregion
-
     gmsh.initialize()
     gmsh.option.setNumber("General.Terminal", 1)
     gmsh.model.add("ur_discrete")
@@ -333,27 +269,127 @@ def mesh_discrete_stl_to_tets(
             "elapsed_s": round(time.time() - t0, 3),
             "gmsh_version": gmsh.GMSH_API_VERSION,
         }
-        # #region agent log
-        _dlog(
-            "I",
-            "mesh_ur_volume.py:discrete_done",
-            "discrete_mesh_success",
-            {"n_nodes": info["n_nodes"], "n_tets": info["n_tets"], "elapsed_s": info["elapsed_s"]},
-        )
-        # #endregion
         return points, tets, info
-    except Exception as e:
-        # #region agent log
-        _dlog(
-            "I",
-            "mesh_ur_volume.py:discrete_fail",
-            "discrete_mesh_failed",
-            {"error": str(e), "elapsed_s": round(time.time() - t0, 3)},
-        )
-        # #endregion
-        raise
     finally:
         gmsh.finalize()
+
+
+def _iso_remesh_and_clear_self_intersections(
+    stl_in: Path,
+    stl_out: Path,
+    *,
+    mesh_size: float,
+    max_iters: int = 10,
+) -> dict:
+    """Remesh isotropik + hapus self-intersect hingga PLC-aman.
+
+    Urutan penting: (1) hapus self + close holes + re-iso agar tetap watertight;
+    (2) baru dilate-clean residual tanpa re-iso. Dilate terlalu awal menyobek mesh.
+    """
+    import pymeshlab as ml
+    import trimesh
+
+    from .heal_ur_solid import _weld
+
+    ms = ml.MeshSet()
+    ms.load_new_mesh(str(stl_in))
+    ms.meshing_isotropic_explicit_remeshing(
+        iterations=5,
+        targetlen=ml.PureValue(mesh_size),
+        checksurfdist=False,
+    )
+
+    # --- Fase R1: kurangi self-intersect + jaga manifold via re-iso ---
+    history_r1: list[dict] = []
+    for i in range(max_iters):
+        ms.compute_selection_by_self_intersections_per_face()
+        n_self = int(ms.current_mesh().selected_face_number())
+        history_r1.append({"iter": i, "self": n_self})
+        # stuck / selesai
+        if n_self == 0 or (i >= 3 and len(history_r1) >= 2 and history_r1[-1]["self"] == history_r1[-2]["self"]):
+            if n_self == 0:
+                break
+            # self residual — lanjut ke fase dilate setelah ambil komponen utama
+            break
+        ms.meshing_remove_selected_faces()
+        try:
+            ms.meshing_repair_non_manifold_edges(method="Remove Faces")
+        except Exception:
+            pass
+        try:
+            ms.meshing_close_holes(maxholesize=50000)
+        except Exception:
+            pass
+        try:
+            ms.meshing_isotropic_explicit_remeshing(
+                iterations=2,
+                targetlen=ml.PureValue(mesh_size),
+                checksurfdist=False,
+            )
+        except Exception:
+            pass
+
+    # Ambil komponen terbesar (bukti R1: 21 comps → body utama watertight)
+    tmp = stl_out.with_name(stl_out.stem + "_r1.stl")
+    ms.save_current_mesh(str(tmp))
+    mesh = _weld(trimesh.load(str(tmp), force="mesh", process=False))
+    comps = mesh.split(only_watertight=False)
+    mesh = max(comps, key=lambda c: len(c.faces))
+    mesh = _weld(mesh)
+    mesh.export(tmp)
+
+    # --- Fase S2: dilate-clean residual self-intersect (tanpa re-iso) ---
+    ms2 = ml.MeshSet()
+    ms2.load_new_mesh(str(tmp))
+    history_s2: list[dict] = []
+    for i in range(max_iters):
+        ms2.compute_selection_by_self_intersections_per_face()
+        n_self = int(ms2.current_mesh().selected_face_number())
+        for _ in range(2):
+            try:
+                ms2.apply_selection_dilatation()
+            except Exception:
+                break
+        n_dilated = int(ms2.current_mesh().selected_face_number())
+        history_s2.append({"iter": i, "self": n_self, "dilated": n_dilated})
+        if n_self == 0:
+            break
+        ms2.meshing_remove_selected_faces()
+        try:
+            ms2.meshing_repair_non_manifold_edges(method="Remove Faces")
+        except Exception:
+            pass
+        try:
+            ms2.meshing_close_holes(maxholesize=50000)
+        except Exception:
+            pass
+
+    ms2.save_current_mesh(str(stl_out))
+    mesh = _weld(trimesh.load(str(stl_out), force="mesh", process=False))
+    comps2 = mesh.split(only_watertight=False)
+    mesh = max(comps2, key=lambda c: len(c.faces))
+    mesh = _weld(mesh)
+    mesh.export(stl_out)
+
+    ms3 = ml.MeshSet()
+    ms3.load_new_mesh(str(stl_out))
+    ms3.compute_selection_by_self_intersections_per_face()
+    n_final = int(ms3.current_mesh().selected_face_number())
+    try:
+        tmp.unlink(missing_ok=True)
+    except Exception:
+        pass
+    return {
+        "history_r1": history_r1,
+        "history_s2": history_s2,
+        "n_self_final": n_final,
+        "n_faces": int(len(mesh.faces)),
+        "watertight": bool(mesh.is_watertight),
+        "euler": int(mesh.euler_number),
+        "n_components_r1": int(len(comps)),
+        "n_components_s2": int(len(comps2)),
+        "surface_stl": str(stl_out),
+    }
 
 
 def mesh_watertight_surface_to_tets(
@@ -367,7 +403,8 @@ def mesh_watertight_surface_to_tets(
 
     Bukti: STEP re-tess deflection=2.5 → euler=-10 (tidak watertight).
     STL heal ``02_shapefix.stl`` setelah ``_weld`` → watertight euler=2.
-    Fine STL + MeshOnlyEmpty gagal PLC; jadi remesh surface ke mesh_size dulu.
+    Fine STL punya self-intersect → PLC/overlapping facets; perbaikan:
+    iso-remesh + dilate-clean, lalu Gmsh MeshOnlyEmpty (tanpa createGeometry).
     """
     import gmsh
     import trimesh
@@ -380,30 +417,8 @@ def mesh_watertight_surface_to_tets(
     if mesh_size_min is None:
         mesh_size_min = mesh_size * 0.5
 
-    # #region agent log
-    _dlog(
-        "K",
-        "mesh_ur_volume.py:mesh_watertight_surface_to_tets",
-        "start_heal_stl_path",
-        {"stl": str(stl_path), "mesh_size": mesh_size},
-    )
-    # #endregion
-
     raw = trimesh.load(str(stl_path), force="mesh", process=False)
     mesh = _weld(raw)
-    # #region agent log
-    _dlog(
-        "K",
-        "mesh_ur_volume.py:after_weld",
-        "heal_stl_weld_stats",
-        {
-            "watertight": bool(mesh.is_watertight),
-            "euler": int(mesh.euler_number),
-            "n_faces": int(len(mesh.faces)),
-            "n_vertices": int(len(mesh.vertices)),
-        },
-    )
-    # #endregion
     print(
         f"  weld STL: faces={len(mesh.faces)} watertight={mesh.is_watertight} "
         f"euler={mesh.euler_number}"
@@ -416,7 +431,7 @@ def mesh_watertight_surface_to_tets(
     welded_stl = out_dir / "_heal_welded.stl"
     mesh.export(welded_stl)
 
-    # --- coba tetgen (andal untuk surface watertight) ---
+    # --- coba tetgen pada surface mentah (sering gagal karena self-intersect) ---
     try:
         import tetgen  # type: ignore
     except ImportError:
@@ -445,47 +460,46 @@ def mesh_watertight_surface_to_tets(
                 "elapsed_s": round(time.time() - t0, 3),
                 "surface_stl": str(welded_stl),
             }
-            # #region agent log
-            _dlog("K", "mesh_ur_volume.py:tetgen_done", "tetgen_success", info)
-            # #endregion
             return points, tets, info
         except Exception as e:
-            # #region agent log
-            _dlog(
-                "K",
-                "mesh_ur_volume.py:tetgen_fail",
-                "tetgen_failed_try_gmsh",
-                {"error": str(e)},
-            )
-            # #endregion
-            print(f"  tetgen gagal ({e}); fallback Gmsh remesh...")
+            print(f"  tetgen gagal ({e}); repair surface lalu MeshOnlyEmpty...")
 
-    # --- Gmsh: remesh surface ke mesh_size lalu volume ---
+    # --- Repair: iso-remesh + clear self-intersections ---
+    clean_stl = out_dir / "_heal_iso_clean.stl"
+    print("  iso-remesh + clear self-intersections ...")
+    t_repair = time.time()
+    repair_info = _iso_remesh_and_clear_self_intersections(
+        welded_stl, clean_stl, mesh_size=mesh_size
+    )
+    repair_info["elapsed_s"] = round(time.time() - t_repair, 3)
+    print(
+        f"  clean surface: faces={repair_info['n_faces']} "
+        f"watertight={repair_info['watertight']} euler={repair_info['euler']} "
+        f"self={repair_info['n_self_final']}"
+    )
+    if not repair_info["watertight"]:
+        raise RuntimeError(
+            f"Surface setelah iso-clean tidak watertight "
+            f"(euler={repair_info['euler']}, self={repair_info['n_self_final']})"
+        )
+
+    # --- Gmsh MeshOnlyEmpty pada surface bersih (tanpa createGeometry) ---
     gmsh.initialize()
     gmsh.option.setNumber("General.Terminal", 1)
-    gmsh.model.add("ur_remesh")
+    gmsh.model.add("ur_volume")
     t0 = time.time()
     try:
-        gmsh.merge(str(welded_stl))
+        gmsh.merge(str(clean_stl))
         try:
             gmsh.option.setNumber("Mesh.AngleToleranceFacetOverlap", 0.0)
         except Exception:
             pass
-        try:
-            gmsh.option.setNumber("Mesh.MaxRetries", 3)
-        except Exception:
-            pass
-        try:
-            gmsh.option.setNumber("Mesh.IgnorePeriodicity", 1)
-        except Exception:
-            pass
 
-        # Remesh permukaan (reparam) ke ukuran target — beda dari MeshOnlyEmpty fine STL
-        gmsh.model.mesh.classifySurfaces(math.pi, True, True, math.pi)
-        gmsh.model.mesh.createGeometry()
+        gmsh.model.mesh.classifySurfaces(math.pi, True, False)
+        gmsh.model.mesh.createTopology()
         surfs = [s[1] for s in gmsh.model.getEntities(2)]
         if not surfs:
-            raise RuntimeError("Gmsh: tidak ada surface setelah createGeometry")
+            raise RuntimeError("Gmsh: tidak ada surface setelah createTopology")
         if not gmsh.model.getEntities(3):
             sl = gmsh.model.geo.addSurfaceLoop(surfs)
             gmsh.model.geo.addVolume([sl])
@@ -493,37 +507,27 @@ def mesh_watertight_surface_to_tets(
 
         gmsh.option.setNumber("Mesh.MeshSizeMin", mesh_size_min)
         gmsh.option.setNumber("Mesh.MeshSizeMax", mesh_size)
-        gmsh.option.setNumber("Mesh.Algorithm", 6)
+        gmsh.option.setNumber("Mesh.MeshOnlyEmpty", 1)
         gmsh.option.setNumber("Mesh.Algorithm3D", 1)
         gmsh.option.setNumber("Mesh.Optimize", 1)
 
-        print("  generate(3) Gmsh remesh surface+volume ...")
+        print("  generate(3) MeshOnlyEmpty (surface bersih) ...")
         gmsh.model.mesh.generate(3)
         points, tets = _extract_tets_from_gmsh(gmsh)
+        if len(tets) == 0:
+            raise RuntimeError("Gmsh MeshOnlyEmpty menghasilkan 0 tetrahedra")
         info = {
-            "source": "heal_stl_gmsh_remesh",
+            "source": "heal_stl_iso_clean_meshonly",
             "mesh_size_mm": mesh_size,
             "mesh_size_min_mm": mesh_size_min,
             "n_nodes": int(len(points)),
             "n_tets": int(len(tets)),
             "elapsed_s": round(time.time() - t0, 3),
-            "surface_stl": str(welded_stl),
+            "surface_stl": str(clean_stl),
+            "repair": repair_info,
             "gmsh_version": gmsh.GMSH_API_VERSION,
         }
-        # #region agent log
-        _dlog("K", "mesh_ur_volume.py:gmsh_remesh_done", "gmsh_remesh_success", info)
-        # #endregion
         return points, tets, info
-    except Exception as e:
-        # #region agent log
-        _dlog(
-            "K",
-            "mesh_ur_volume.py:gmsh_remesh_fail",
-            "gmsh_remesh_failed",
-            {"error": str(e), "elapsed_s": round(time.time() - t0, 3)},
-        )
-        # #endregion
-        raise
     finally:
         gmsh.finalize()
 
@@ -553,18 +557,6 @@ def mesh_step_via_tessellation(
     candidates.append(out_dir / "02_shapefix_clean.stl")
 
     stl = next((p for p in candidates if p.exists()), None)
-    # #region agent log
-    _dlog(
-        "L",
-        "mesh_ur_volume.py:mesh_step_via_tessellation",
-        "choose_surface_source",
-        {
-            "step": str(step_path),
-            "chosen_stl": str(stl) if stl else None,
-            "candidates": [str(p) for p in candidates],
-        },
-    )
-    # #endregion
 
     if stl is None:
         raise RuntimeError(
@@ -614,15 +606,6 @@ def mesh_step_to_tets(
     if mesh_size_min is None:
         mesh_size_min = mesh_size * 0.5
 
-    # #region agent log
-    _dlog(
-        "C",
-        "mesh_ur_volume.py:mesh_step_to_tets",
-        "start_step_mesh_occ",
-        {"step": str(step_path), "mesh_size": mesh_size, "max_retries": max_retries},
-    )
-    # #endregion
-
     gmsh.initialize()
     gmsh.option.setNumber("General.Terminal", 1)
     gmsh.model.add("ur_link")
@@ -644,7 +627,6 @@ def mesh_step_to_tets(
             gmsh.option.setNumber("Mesh.AngleToleranceFacetOverlap", 0.0)
         except Exception:
             pass
-        # Hipotesis J: periodic cylinder 1274 — abaikan periodicity
         try:
             gmsh.option.setNumber("Mesh.IgnorePeriodicity", 1)
         except Exception:
@@ -668,14 +650,6 @@ def mesh_step_to_tets(
                 gmsh.model.mesh.setSize(boundary, local)
                 small.append({"tag": int(tag), "area_mm2": area, "diag": diag, "local": local})
 
-        # #region agent log
-        _dlog(
-            "F",
-            "mesh_ur_volume.py:local_size_occ",
-            "small_faces_resized_strict",
-            {"n_small": len(small), "includes_1091": any(s["tag"] == 1091 for s in small)},
-        )
-        # #endregion
         print(f"  [occ] local size pada {len(small)} face mikro ketat")
         print("  [occ] generate(3) ...")
         gmsh.model.mesh.generate(3)
@@ -688,20 +662,7 @@ def mesh_step_to_tets(
             "elapsed_s": round(time.time() - t0, 3),
             "gmsh_version": gmsh.GMSH_API_VERSION,
         }
-        # #region agent log
-        _dlog("H", "mesh_ur_volume.py:generate_done", "step_mesh_success", info)
-        # #endregion
         return points, tets, info
-    except Exception as e:
-        # #region agent log
-        _dlog(
-            "J",
-            "mesh_ur_volume.py:generate_fail",
-            "step_mesh_failed",
-            {"error": str(e), "elapsed_s": round(time.time() - t0, 3)},
-        )
-        # #endregion
-        raise
     finally:
         gmsh.finalize()
 

@@ -1,0 +1,554 @@
+{
+  "approach": "a_mesh_deform_neck_radial",
+  "falloff_kind": "gaussian_cut",
+  "y0_mm": 262.0,
+  "L_mm_contract": 40.0,
+  "L_mm_expand": 66.0,
+  "spc_band_clearance": {
+    "contract_L": {
+      "n_prox": 634,
+      "n_dist": 623,
+      "prox_y_mm": {
+        "min": 151.4163970947266,
+        "max": 173.5870513916016,
+        "mean": 162.63681181898627
+      },
+      "dist_y_mm": {
+        "min": 576.5487060546875,
+        "max": 598.78759765625,
+        "mean": 587.378980902952
+      },
+      "band_y_mm": [
+        222.0,
+        302.0
+      ],
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+      "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+      "n_SPC_nodes_in_band": 0,
+      "safe_clearance": true
+    },
+    "expand_L": {
+      "n_prox": 634,
+      "n_dist": 623,
+      "prox_y_mm": {
+        "min": 151.4163970947266,
+        "max": 173.5870513916016,
+        "mean": 162.63681181898627
+      },
+      "dist_y_mm": {
+        "min": 576.5487060546875,
+        "max": 598.78759765625,
+        "mean": 587.378980902952
+      },
+      "band_y_mm": [
+        196.0,
+        328.0
+      ],
+      "y0_mm": 262.0,
+      "L_mm": 66.0,
+      "gap_prox_max_y_to_band_lo_mm": 22.41294860839841,
+      "gap_band_hi_to_dist_min_y_mm": 248.5487060546875,
+      "n_SPC_nodes_in_band": 0,
+      "safe_clearance": true
+    },
+    "safe_clearance": true
+  },
+  "density_policy": "fixed_from_baseline_s1_undeformed",
+  "samples_requested": [
+    0.9,
+    1.1
+  ],
+  "n_ok": 1,
+  "n_fail": 1,
+  "failures": [
+    {
+      "s": 1.1,
+      "status": "hotspot_band_edge_artifact",
+      "fail_reasons": [
+        "hotspot_at_band_edge y=314.93 dy/L=0.802"
+      ]
+    }
+  ],
+  "sigma_max_band_center_by_s": {
+    "1.10_cosine_L40": {
+      "s": 1.1,
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm_used_for_definition": 40.0,
+      "sigma_max_MPa": 1.217048344400942,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.6964779214157895,
+        262.4357215470071,
+        183.96084320391583
+      ],
+      "y_mm": 262.4357215470071,
+      "dy_over_L": 0.01089303867517799
+    },
+    "0.90_latest": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 2.281755081463788,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.3860090875974014,
+        262.4509965860813,
+        176.17011719133222
+      ],
+      "y_mm": 262.4509965860813,
+      "dy_over_L": 0.01127491465203292
+    },
+    "1.10_latest": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 66.0,
+      "sigma_max_MPa": 1.2345208013842928,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.6964934589180745,
+        262.4357207825634,
+        183.9612330930449
+      ],
+      "y_mm": 262.4357207825634,
+      "dy_over_L": 0.006601830038839511
+    }
+  },
+  "results": [
+    {
+      "s": 0.9,
+      "tag": "s_0.90",
+      "status": "ok",
+      "deform": {
+        "s": 0.9,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": 16.0,
+        "falloff_kind": "gaussian_cut",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.04393693362340742,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1615,
+        "n_frozen": 1257,
+        "w_max": 0.999999804182311,
+        "s_eff_min": 0.9000000195817689,
+        "s_eff_max": 1.0,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4797574.029740056,
+        "dV_frac": -0.010278186715117708,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.3997499873796,
+        "RF_N": [
+          0.0004005589999594968,
+          -0.3401329999999836,
+          184.40241194399985
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.3999279091203,
+        "err_vs_analytic_pct": 0.11203804728241963,
+        "err_vs_fea_pred_pct": 0.00016721979440859687,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 7.975178371449581,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.2135316151876542
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.3860090875974014,
+          262.4509965860813,
+          176.17011719133222
+        ],
+        "y_mm": 262.4509965860813,
+        "dy_from_y0_mm": 0.45099658608131676,
+        "dy_over_L": 0.01127491465203292,
+        "von_mises_MPa": 2.281755081463788,
+        "global_max_MPa": 2.281755081463788,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 93.5789978774839,
+        "dist_to_distal_mm": 315.65877588987036,
+        "percentiles_all": {
+          "p50": 0.14067167752120502,
+          "p95": 0.9179281621893423,
+          "p99": 1.2695910814091351,
+          "p100": 2.281755081463788
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.14118783089768144,
+          "p95": 0.9280867168128111,
+          "p99": 1.273778069891639,
+          "p100": 2.281755081463788
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 2.281755081463788,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 2.281755081463788,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.3860090875974014,
+          262.4509965860813,
+          176.17011719133222
+        ],
+        "y_mm": 262.4509965860813,
+        "dy_over_L": 0.01127491465203292
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": 0.6360198595839501,
+        "rel_pct": 38.646548431858776
+      },
+      "hotspot_edge_artifact": false
+    },
+    {
+      "s": 1.1,
+      "tag": "s_1.10",
+      "status": "hotspot_band_edge_artifact",
+      "deform": {
+        "s": 1.1,
+        "y0_mm": 262.0,
+        "L_mm": 66.0,
+        "sigma_mm": 22.0,
+        "falloff_kind": "gaussian_cut",
+        "band_y_mm": [
+          196.0,
+          328.0
+        ],
+        "w_at_cutoff": 0.011108996538242306,
+        "n_nodes_w_gt_0": 9247,
+        "n_nodes_w_gt_0_5": 2463,
+        "n_frozen": 1257,
+        "w_max": 0.9999998964270027,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0999999896427004,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4925525.392811694,
+        "dV_frac": 0.016117707185949515,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [
+        "hotspot_at_band_edge y=314.93 dy/L=0.802"
+      ],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          196.0,
+          328.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 66.0,
+        "gap_prox_max_y_to_band_lo_mm": 22.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 248.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.5980618128344,
+        "RF_N": [
+          0.0004505720000184659,
+          -0.3686934400005519,
+          186.4882713000003
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.59825424480925,
+        "err_vs_analytic_pct": 0.07413686457736876,
+        "err_vs_fea_pred_pct": 0.00018052075638180098,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.18787648450438,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.2104546130272792
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_EDGE",
+        "node_0based": 7345,
+        "xyz_mm": [
+          -2.616231795554377,
+          314.9270736420356,
+          95.28024401573546
+        ],
+        "y_mm": 314.9270736420356,
+        "dy_from_y0_mm": 52.92707364203562,
+        "dy_over_L": 0.801925358212661,
+        "von_mises_MPa": 1.3587587961081045,
+        "global_max_MPa": 1.3849394277960319,
+        "global_max_node": 7250,
+        "dist_to_SPC_mm": 143.4149938099851,
+        "dist_to_distal_mm": 263.4495766933344,
+        "percentiles_all": {
+          "p50": 0.1313833497039328,
+          "p95": 0.8521541507833229,
+          "p99": 1.1217879628807497,
+          "p100": 1.3849394277960319
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13118362618847107,
+          "p95": 0.8608115919243245,
+          "p99": 1.125586006373317,
+          "p100": 1.3587587961081045
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 66.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.3587587961081045,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 66.0,
+        "sigma_max_MPa": 1.2345208013842928,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.6964934589180745,
+          262.4357207825634,
+          183.9612330930449
+        ],
+        "y_mm": 262.4357207825634,
+        "dy_over_L": 0.006601830038839511
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": -0.28697642577173355,
+        "rel_pct": -17.437581814888503
+      },
+      "hotspot_edge_artifact": true
+    }
+  ],
+  "pilot_extremes_clean": false,
+  "next_action": "STOP \u2014 jangan lanjut 9 sampel. Perlu morph lain untuk s>1 (mis. harmonic displacement / parameterisasi tanpa bulb shoulder), atau batasi batch pertama ke s<=1.0 dulu.",
+  "sigma_max_band_center_s_1_10_cosine_L40_legacy": {
+    "s": 1.1,
+    "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+    "dy_over_L_threshold": 0.35,
+    "L_mm_used_for_definition": 40.0,
+    "sigma_max_MPa": 1.217048344400942,
+    "node_0based": 3279,
+    "xyz_mm": [
+      -1.6964779214157895,
+      262.4357215470071,
+      183.96084320391583
+    ],
+    "y_mm": 262.4357215470071,
+    "dy_over_L": 0.01089303867517799
+  },
+  "radius_kink_diagnostic_ref": "reports/ur5e_nauo3_neck_batch/radius_profile_s110_diagnostic.json",
+  "sigma_max_band_center_s_1_10": {
+    "s": 1.1,
+    "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+    "dy_over_L_threshold": 0.35,
+    "L_mm_used_for_definition": 40.0,
+    "sigma_max_MPa": 1.217048344400942,
+    "node_0based": 3279,
+    "xyz_mm": [
+      -1.6964779214157895,
+      262.4357215470071,
+      183.96084320391583
+    ],
+    "y_mm": 262.4357215470071,
+    "dy_over_L": 0.01089303867517799
+  },
+  "sigma_max_band_center_s_1_10_note": "Nilai 1.217 MPa dari FEA cosine L=40 s=1.10 (folder _cosine_L40_legacy). Definisi: max von_mises pada node |y-262|/L<=0.35.",
+  "radius_kink_diagnostic": {
+    "confirmed": true,
+    "continuity_class_cosine": "C1_not_C2",
+    "conclusion": "CONFIRMED: cosine falloff is C1 but NOT C2 at band edges. Analytical d\u00b2w/dy\u00b2 jumps by 0.5*(\u03c0/L)^2 at y=y0\u00b1L while outside=0. Node-matched rho=r/r0 tracks s_eff exactly; mesh d\u00b2\u03c1/dy\u00b2 spikes at the same edges. This curvature kink (not merely stress location) is the mechanism.",
+    "theoretical_second_deriv_jump": {
+      "formula": "0.5*(pi/L)^2",
+      "L_mm": 40.0,
+      "jump_magnitude": 0.003084251375340424,
+      "proximal_edge": {
+        "d2_just_inside_max": 0.003084140395937313,
+        "d2_just_outside_max": 0.0003855309264719146,
+        "theoretical_d2_jump_at_edge": 0.003084251375340424,
+        "y_edge": 222.0
+      },
+      "distal_edge": {
+        "d2_just_inside_max": 0.003084140395939067,
+        "d2_just_outside_max": 0.0003855309264720242,
+        "theoretical_d2_jump_at_edge": 0.003084251375340424
+      }
+    },
+    "plot": "reports/ur5e_nauo3_neck_batch/radius_profile_s110_diagnostic.png",
+    "json": "reports/ur5e_nauo3_neck_batch/radius_profile_s110_diagnostic.json",
+    "key_numbers": {
+      "d2w_jump_at_edge": 0.003084251375340424,
+      "d2_just_inside_max": 0.003084140395937313,
+      "d2_just_outside_max": 0.0003855309264719146,
+      "rho_tracks_seff_max_abs_err": 1e-13
+    }
+  },
+  "falloff_softening_attempts": [
+    {
+      "kind": "cosine_C1",
+      "L_expand": 40,
+      "s110_band": "BAND_EDGE",
+      "y": 222.7,
+      "sigma_max": 1.486,
+      "sigma_center": 1.217,
+      "ratio_edge_center": 1.221035332785538
+    },
+    {
+      "kind": "smootherstep_C2",
+      "L_expand": 40,
+      "s110_band": "BAND_EDGE",
+      "y": 222.7,
+      "note": "C2 saja, L sama \u2014 hotspot tetap tepi proximal"
+    },
+    {
+      "kind": "smootherstep_C2",
+      "L_expand": 55,
+      "s110_band": "BAND_EDGE",
+      "y": 310.43,
+      "sigma_max": 1.394,
+      "sigma_center": 1.245,
+      "ratio_edge_center": 1.1196787148594376,
+      "note": "artefak pindah ke tepi distal (kejar tepi band)"
+    },
+    {
+      "kind": "bump_Cinf",
+      "L_expand": 65,
+      "s110_band": "BAND_EDGE",
+      "y": 322.66,
+      "sigma_max": 1.393,
+      "sigma_center": 1.26,
+      "ratio_edge_center": 1.1055555555555556
+    },
+    {
+      "kind": "gaussian_cut",
+      "sigma": 22,
+      "L": 66,
+      "s110_band": "BAND_EDGE",
+      "y": 314.93
+    },
+    {
+      "kind": "gaussian_nocut",
+      "sigma": 35,
+      "freeze_SPC_distal": true,
+      "s090_band": "BAND_CENTER",
+      "s110_band": "BAND_EDGE",
+      "y": 322.66,
+      "w_at_hotspot": 0.223,
+      "sigma_center_L40": 1.252,
+      "note": "Hotspot di w\u22480.22 (bukan cutoff) \u2192 bahu bulb struktural, bukan kink C2 sisa"
+    }
+  ],
+  "interpretation_s_gt_1": "Setelah menghilangkan diskontinuitas kurvatura (C2/C\u221e/gaussian), hotspot s=1.10 tetap di bahu transisi penebalan (~y=310\u2013323), dan bergeser ikut support falloff. Ini perilaku struktural bulb under bending, bukan artefak C1-cosine saja. s=0.90 (penipisan) konsisten BAND_CENTER.",
+  "gauss35_trial_ref": "reports/ur5e_nauo3_neck_batch/gauss35_trial.json",
+  "legacy_cosine_ref": "reports/ur5e_nauo3_neck_batch/_cosine_L40_legacy/",
+  "structural_vs_artifact_analysis_ref": "reports/ur5e_nauo3_neck_batch/structural_vs_artifact_analysis.json",
+  "s110_hotspot_sigma_comparison_ref": "reports/ur5e_nauo3_neck_batch/s110_hotspot_sigma_comparison.json",
+  "s103_cosine_scaling_verdict": {
+    "prox_edge_delta_ratio_03_over_10": 0.2995885072842614,
+    "center_delta_ratio_03_over_10": 0.33842471800874435,
+    "expected_if_linear_in_ds": 0.3,
+    "s103_hotspot_band": "BAND_CENTER",
+    "s110_hotspot_band": "BAND_EDGE",
+    "conclusion": "\u0394\u03c3 at prox-edge and at center both scale \u22480.30 when |s-1| shrinks 0.10\u21920.03. s>1 shoulder is structural (taper/fillet response), not mesh artifact. Prefer keep as legitimate global max; not opsi2-avoid and not opsi3-ignore-shoulder."
+  }
+}

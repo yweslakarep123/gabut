@@ -1,0 +1,67 @@
+{
+  "decision": "use_ur5e_official_link_masses",
+  "mass_set_final_kg": {
+    "shoulder_link": 3.761,
+    "upper_arm_link": 8.058,
+    "forearm_link": 2.846,
+    "wrist_1_link": 1.37,
+    "wrist_2_link": 1.3,
+    "wrist_3_link": 0.365,
+    "base_link_inertia": 4.0
+  },
+  "nauo3_bending": {
+    "m_self_kg": 8.058,
+    "m_distal_links_kg": 5.881,
+    "m_payload_kg": 5.0,
+    "upper_arm_length_a2_m": 0.425,
+    "pose": "q = [0, 0, 0, -90°, 0, 0] (horizontal extended)",
+    "M_total_Nm": 106.519,
+    "detail": "reports/ur5e_urdf/nauo3_bending_moment_horizontal.json",
+    "note": "base_mass tidak dipakai; payload di tip terpisah dari m_distal"
+  },
+
+  "investigation": {
+    "ur_article": "https://www.universal-robots.com/articles/ur/application-installation/dh-parameters-for-calculations-of-kinematics-and-dynamics/",
+    "ur5e_table_matches_final": true,
+    "ros2_commits": [
+      {
+        "hash": "aa2db08",
+        "pr": 187,
+        "date": "2024-09-06",
+        "message": "Fix masses of robot links — should match the actual specifications (UR DH article)"
+      },
+      {
+        "hash": "60e6974",
+        "pr": 195,
+        "date": "2024-09-20",
+        "message": "Update dynamic properties — mass/cog + full inertia matrix"
+      },
+      {
+        "hash": "5f5f600",
+        "pr": 256,
+        "date": "2025-04-02",
+        "message": "Update inertia matrix for UR3e and UR5e from measurements"
+      }
+    ],
+    "ros_industrial_commits": [
+      {
+        "hash": "8515eb3",
+        "pr": 689,
+        "date": "2025-03-24",
+        "message": "Fix masses of robot links — same values as ROS2 #187"
+      }
+    ],
+    "legacy_vs_final": {
+      "legacy_was": "UR5 CB-series masses mistakenly used for UR5e yaml (e.g. upper_arm 8.393, wrist_3 0.1879)",
+      "final_is": "UR5e/UR7e table from UR article (upper_arm 8.058, wrist_3 0.365)",
+      "not_safety_factor": true,
+      "datasheet_20_6_kg": "Marketing robot weight; Σ Link1–6 official = 17.70 kg; URDF base_mass=4.0 flagged incorrect. Do not prefer legacy just because 20.99 closer to 20.6."
+    }
+  },
+  "joint_origins": "reports/ur5e_urdf/joint_origins_chain.json",
+  "local_files": {
+    "ros2_yaml": "reports/ur5e_urdf/ur5e_physical_parameters_ros2.yaml",
+    "ros1_yaml_snapshot_may_be_legacy": "reports/ur5e_urdf/ur5e_physical_parameters_ros1.yaml",
+    "expanded_urdf_kinematics_ok_masses_legacy": "reports/ur5e_urdf/ur5e_ros_industrial_expanded.urdf"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "source_urdf": "reports/ur5e_urdf/ur5e_ros_industrial_expanded.urdf",
+  "note": "Offset <joint>/<origin xyz> sepanjang rantai; satuan meter. Cocok dengan default_kinematics.yaml UR5e (d1=0.1625, a2=-0.425, a3=-0.3922, …) dan tabel DH resmi UR5e/UR7e.",
+  "joints": [
+    {
+      "name": "shoulder_pan_joint",
+      "parent": "base_link_inertia",
+      "child": "shoulder_link",
+      "xyz_m": [0.0, 0.0, 0.1625],
+      "rpy_rad": [0.0, 0.0, 0.0],
+      "dh_role": "d1"
+    },
+    {
+      "name": "shoulder_lift_joint",
+      "parent": "shoulder_link",
+      "child": "upper_arm_link",
+      "xyz_m": [0.0, 0.0, 0.0],
+      "rpy_rad": [1.570796327, 0.0, 0.0],
+      "dh_role": "orientasi sumbu (tanpa translasi)"
+    },
+    {
+      "name": "elbow_joint",
+      "parent": "upper_arm_link",
+      "child": "forearm_link",
+      "xyz_m": [-0.425, 0.0, 0.0],
+      "rpy_rad": [0.0, 0.0, 0.0],
+      "dh_role": "a2 — panjang upper arm (NAUO3), lengan momen utama ke beban distal"
+    },
+    {
+      "name": "wrist_1_joint",
+      "parent": "forearm_link",
+      "child": "wrist_1_link",
+      "xyz_m": [-0.3922, 0.0, 0.1333],
+      "rpy_rad": [0.0, 0.0, 0.0],
+      "dh_role": "a3 + offset d4"
+    },
+    {
+      "name": "wrist_2_joint",
+      "parent": "wrist_1_link",
+      "child": "wrist_2_link",
+      "xyz_m": [0.0, -0.0997, -2.044881182297852e-11],
+      "rpy_rad": [1.570796327, 0.0, 0.0],
+      "dh_role": "d5"
+    },
+    {
+      "name": "wrist_3_joint",
+      "parent": "wrist_2_link",
+      "child": "wrist_3_link",
+      "xyz_m": [0.0, 0.0996, -2.042830148012698e-11],
+      "rpy_rad": [1.570796326589793, 3.141592653589793, 3.141592653589793],
+      "dh_role": "d6"
+    }
+  ]
+}

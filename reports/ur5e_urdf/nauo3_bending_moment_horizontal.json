@@ -1,0 +1,155 @@
+{
+  "g_m_s2": 9.80665,
+  "pose": {
+    "name": "fully_extended_horizontal_canonical",
+    "q_rad": [
+      0.0,
+      0.0,
+      0.0,
+      -1.5707963267948966,
+      0.0,
+      0.0
+    ],
+    "q_deg": [
+      0.0,
+      0.0,
+      0.0,
+      -90.0,
+      0.0,
+      0.0
+    ],
+    "notes": [
+      "shoulder_lift=0\u00b0, elbow=0\u00b0 \u2192 NAUO3+forearm horizontal colinear (sumbu -X).",
+      "wrist_1=-90\u00b0 \u2192 d5 melanjutkan sumbu lengan; d6 lateral (tidak menambah x).",
+      "Jangan pakai shoulder_lift=-90\u00b0 (itu NAUO3 vertikal).",
+      "x = jarak sepanjang sumbu shoulder\u2192elbow (= moment arm gravitasi untuk cantilever horizontal)."
+    ]
+  },
+  "dh_m": {
+    "a2": 0.425,
+    "a3": 0.3922,
+    "d4": 0.1333,
+    "d5": 0.0997,
+    "d6": 0.0996
+  },
+  "positions_x_m": {
+    "elbow": 0.425,
+    "wrist1": 0.8171999999999999,
+    "wrist2": 0.9168999999999999,
+    "wrist3": 0.9168999999999999,
+    "tool_tip": 0.9168999999999999
+  },
+  "positions_detail": {
+    "elbow": {
+      "delta_xyz_m": [
+        -0.425,
+        0.0,
+        0.0
+      ],
+      "x_m": 0.425
+    },
+    "wrist1": {
+      "delta_xyz_m": [
+        -0.8171999999999999,
+        -0.1333,
+        0.0
+      ],
+      "x_m": 0.8171999999999999
+    },
+    "wrist2": {
+      "delta_xyz_m": [
+        -0.9168999999999999,
+        -0.1333,
+        0.0
+      ],
+      "x_m": 0.9168999999999999
+    },
+    "wrist3": {
+      "delta_xyz_m": [
+        -0.9168999999999999,
+        -0.2329,
+        0.0
+      ],
+      "x_m": 0.9168999999999999
+    },
+    "tool_tip": {
+      "delta_xyz_m": [
+        -0.9168999999999999,
+        -0.2329,
+        0.0
+      ],
+      "x_m": 0.9168999999999999
+    }
+  },
+  "masses_kg": {
+    "self": 8.058,
+    "forearm": 2.846,
+    "w1": 1.37,
+    "w2": 1.3,
+    "w3": 0.365,
+    "payload": 5.0,
+    "note": "payload terpisah di tool tip"
+  },
+  "moment_terms_Nm": [
+    {
+      "component": "self_upper_arm",
+      "mass_kg": 8.058,
+      "x_m": 0.2125,
+      "M_Nm": 16.79217196125,
+      "formula": "m_self * g * (L/2)"
+    },
+    {
+      "component": "forearm",
+      "mass_kg": 2.846,
+      "x_m": 0.6672,
+      "M_Nm": 18.62136912048,
+      "formula": "m_forearm * g * x_CoM"
+    },
+    {
+      "component": "wrist_1",
+      "mass_kg": 1.37,
+      "x_m": 0.83354,
+      "M_Nm": 11.19870200617,
+      "formula": "m_wrist1 * g * x_CoM"
+    },
+    {
+      "component": "wrist_2",
+      "mass_kg": 1.3,
+      "x_m": 0.9150999999999999,
+      "M_Nm": 11.666285039499998,
+      "formula": "m_wrist2 * g * x_CoM"
+    },
+    {
+      "component": "wrist_3",
+      "mass_kg": 0.365,
+      "x_m": 0.9168999999999999,
+      "M_Nm": 3.2819768455249996,
+      "formula": "m_wrist3 * g * x_CoM"
+    },
+    {
+      "component": "payload",
+      "mass_kg": 5.0,
+      "x_m": 0.9168999999999999,
+      "M_Nm": 44.95858692499999,
+      "formula": "m_payload * g * x_tool_tip"
+    }
+  ],
+  "M_total_Nm": 106.519,
+  "M_self_Nm": 16.79217196125,
+  "M_distal_links_Nm": 44.768333011675,
+  "M_payload_Nm": 44.95858692499999,
+  "com_urdf_update": {
+    "urdf_inertial_origin_upper_arm_m": {
+      "x": -0.2125,
+      "y": 0.0,
+      "z": 0.11336
+    },
+    "source": "reports/ur5e_urdf/ur5e_physical_parameters_ros2.yaml \u2192 center_of_mass.upper_arm_cog (= URDF <inertial><origin>)",
+    "x_self_old_L_over_2_m": 0.2125,
+    "x_self_new_com_m": 0.2125,
+    "M_total_prev_Nm": 106.519,
+    "M_total_new_Nm": 106.519,
+    "delta_M_total_Nm": 9.2e-05,
+    "note": "CoM URDF |x|=0.2125 m sama dengan L/2; z=0.11336 lateral tidak masuk M=m*g*x. Delta vs 106.52 \u2248 0."
+  }
+}

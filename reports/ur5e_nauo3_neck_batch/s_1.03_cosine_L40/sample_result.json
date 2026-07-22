@@ -1,0 +1,49 @@
+{
+  "s": 1.03,
+  "falloff": "cosine_C1",
+  "L_mm": 40.0,
+  "mesh_gate": {
+    "pass": true,
+    "fail_reasons": [],
+    "V0_mm3": 4847396.4758005375,
+    "V_mm3": 4863081.471264638,
+    "dV_frac": 0.0032357566669869225,
+    "n_inverted_or_neg": 0,
+    "n_tets": 192060,
+    "n_nodes": 38811
+  },
+  "tet_flip": {
+    "n_flipped": 0,
+    "n_still_nonpos": 0,
+    "min_vol_before": 1.1025192521839483e-05,
+    "min_vol_after": 1.1025192521839483e-05
+  },
+  "reaction_M_Nm": 106.50267263121944,
+  "hotspot": {
+    "von_mises_MPa": 1.5006569862549934,
+    "y_mm": 262.4410680266021,
+    "xyz_mm": [
+      -1.5878094409732293,
+      262.4410680266021,
+      181.23397897435837
+    ],
+    "band_position": "BAND_CENTER",
+    "dy_over_L": 0.011026700665053114,
+    "bc_classification": "IN_BODY_AWAY_FROM_BC"
+  },
+  "sigma_max_band_center_MPa": 1.5006569862549934,
+  "scaling_vs_s110_cosine": {
+    "s110_hotspot_MPa": 1.4863671823810825,
+    "s110_band_center_MPa": 1.217048344400942,
+    "s103_hotspot_MPa": 1.5006569862549934,
+    "s103_band_center_MPa": 1.5006569862549934,
+    "baseline_undeformed_max_MPa": 1.645735221879838,
+    "raw_ratio_hot_s103_over_s110": 1.0096139123921046,
+    "abs_dev_from_baseline_ratio_s103_over_s110": 0.9103345694729301,
+    "shoulder_excess_over_center_s110": 0.26931883798014056,
+    "shoulder_excess_over_center_s103": 0.0,
+    "shoulder_excess_ratio_s103_over_s110": 0.0,
+    "expected_if_linear_in_s_minus_1": 0.3,
+    "interpretation_guide": "If structural and linear in (s-1): shoulder_excess_ratio \u2248 0.30; raw hotspot ratio not expected to be 0.30 because absolute stress includes baseline bending field."
+  }
+}
