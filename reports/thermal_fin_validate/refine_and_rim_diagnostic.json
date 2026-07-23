@@ -1,0 +1,168 @@
+{
+  "rim_diagnostic_mesh_2mm_legacy_leaky": {
+    "n_film_faces": 1882,
+    "n_film_nodes": 957,
+    "film_x_min_mm": 0.0,
+    "film_x_max_mm": 100.0,
+    "nearest_to_tip": {
+      "node_id0": 0,
+      "xyz_mm": [
+        100.0,
+        1.2246467991473533e-15,
+        5.0
+      ],
+      "r_mm": 5.0,
+      "dist_to_xL_mm": 0.0
+    },
+    "n_film_nodes_exactly_on_tip_plane": 32,
+    "n_film_nodes_dist_lt_0.1mm": 32,
+    "n_film_nodes_dist_lt_1mm": 32,
+    "n_rim_geom_nodes": 16,
+    "n_rim_geom_in_film": 16,
+    "n_rim_geom_in_tip_physical": 0,
+    "n_film_faces_entirely_on_tip_plane": 32,
+    "n_film_faces_touching_tip_nodes": 32,
+    "n_overlap_tip_nodes_and_film": 16,
+    "film_nodes_strict_xmax_mm": 98.60055905535286,
+    "film_nodes_strict_dist_to_L_mm": 1.3994409446471394,
+    "interpretation": "KEBOCORAN BC: ada wajah *FILM* di bidang tip x=L (harusnya adiabatik)."
+  },
+  "legacy_leaky_refinement": {
+    "max_abs_error_2mm_C": 0.30341158413047253,
+    "max_abs_error_1mm_C": 0.1285115841304787,
+    "rel_drop_max_abs_error": 0.5764447013492525,
+    "stations": [
+      {
+        "station": "0",
+        "abs_err_2mm_leaky_C": 0.0,
+        "abs_err_1mm_leaky_C": 0.0,
+        "rel_drop": null,
+        "drop_gt_50pct": false
+      },
+      {
+        "station": "L/4",
+        "abs_err_2mm_leaky_C": 0.11738534516334198,
+        "abs_err_1mm_leaky_C": 0.04120593448317322,
+        "rel_drop": 0.6489686644799223,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "L/2",
+        "abs_err_2mm_leaky_C": 0.19159166196529043,
+        "abs_err_1mm_leaky_C": 0.07287846918708851,
+        "rel_drop": 0.6196156532099425,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "3L/4",
+        "abs_err_2mm_leaky_C": 0.2529666736998024,
+        "abs_err_1mm_leaky_C": 0.1026742560733851,
+        "rel_drop": 0.5941194364786981,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "L",
+        "abs_err_2mm_leaky_C": 0.30341158413047253,
+        "abs_err_1mm_leaky_C": 0.1285115841304787,
+        "rel_drop": 0.5764447013492525,
+        "drop_gt_50pct": true
+      }
+    ],
+    "criterion": "rel_drop_max > 0.5 \u2192 sinyal diskretisasi; else \u2192 kandidat BC rim",
+    "refine_says_discretization": true,
+    "tip_plane_film_faces": 32,
+    "cause_primary": "bc_leakage_and_discretization",
+    "verdict": "KEDUANYA: rim diagnostic menemukan wajah *FILM* di bidang tip (kebocoran BC), DAN max|err| turun 58% (>50%) saat mesh 2\u00d7 lebih halus. Annulus tip yang salah-klasifikasi setebal ~1 elemen sehingga area bocor mengecil dengan h \u2014 refine terlihat seperti 'diskretisasi murni' padahal ada bug klasifikasi. Setelah exclude_end_planes, sisa error = diskretisasi biasa."
+  },
+  "fixed_classifier_refinement": {
+    "max_abs_error_2mm_C": 0.132711584130476,
+    "max_abs_error_1mm_C": 0.030586584130475103,
+    "rel_drop_max_abs_error": 0.7695258908189675,
+    "stations": [
+      {
+        "station": "0",
+        "abs_err_2mm_fixed_C": 0.0,
+        "abs_err_1mm_fixed_C": 0.0,
+        "rel_drop": null,
+        "drop_gt_50pct": false
+      },
+      {
+        "station": "L/4",
+        "abs_err_2mm_fixed_C": 0.0745132176601544,
+        "abs_err_1mm_fixed_C": 0.016729692049196387,
+        "rel_drop": 0.7754802090885613,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "L/2",
+        "abs_err_2mm_fixed_C": 0.10663472899872772,
+        "abs_err_1mm_fixed_C": 0.024073811690797697,
+        "rel_drop": 0.7742404194501687,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "3L/4",
+        "abs_err_2mm_fixed_C": 0.12467600076395513,
+        "abs_err_1mm_fixed_C": 0.028838144797731502,
+        "rel_drop": 0.7686953012526462,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "L",
+        "abs_err_2mm_fixed_C": 0.132711584130476,
+        "abs_err_1mm_fixed_C": 0.030586584130475103,
+        "rel_drop": 0.7695258908189675,
+        "drop_gt_50pct": true
+      }
+    ],
+    "tip_plane_film_faces_2mm": 0,
+    "note": "Setelah exclude wajah di bidang tip/base; rim node di FILM tetap sah."
+  },
+  "fix_vs_leaky_at_2mm": {
+    "stations": [
+      {
+        "station": "0",
+        "abs_err_2mm_leaky_C": 0.0,
+        "abs_err_2mm_fixed_C": 0.0,
+        "rel_drop": null,
+        "drop_gt_50pct": false
+      },
+      {
+        "station": "L/4",
+        "abs_err_2mm_leaky_C": 0.11738534516334198,
+        "abs_err_2mm_fixed_C": 0.0745132176601544,
+        "rel_drop": 0.36522555216352537,
+        "drop_gt_50pct": false
+      },
+      {
+        "station": "L/2",
+        "abs_err_2mm_leaky_C": 0.19159166196529043,
+        "abs_err_2mm_fixed_C": 0.10663472899872772,
+        "rel_drop": 0.44342708912851264,
+        "drop_gt_50pct": false
+      },
+      {
+        "station": "3L/4",
+        "abs_err_2mm_leaky_C": 0.2529666736998024,
+        "abs_err_2mm_fixed_C": 0.12467600076395513,
+        "rel_drop": 0.5071445620069736,
+        "drop_gt_50pct": true
+      },
+      {
+        "station": "L",
+        "abs_err_2mm_leaky_C": 0.30341158413047253,
+        "abs_err_2mm_fixed_C": 0.132711584130476,
+        "rel_drop": 0.5626021184695189,
+        "drop_gt_50pct": true
+      }
+    ],
+    "max_leaky_C": 0.30341158413047253,
+    "max_fixed_C": 0.132711584130476,
+    "error_attributed_to_leak_C": 0.17069999999999652
+  },
+  "conclusion": {
+    "primary_cause_of_0p3C": "bc_leakage_and_discretization",
+    "detail": "Classifier lama (hanya ns\u2286tip_set) bocor: Gmsh tidak memasukkan node rim ke physical tip (rim\u2229tip_physical=0), jadi annulus wajah di x=L ikut *FILM* (32 wajah @2mm). Node FILM terdekat ke ujung: dist_to_xL=0.000e+00 mm (tepat di x=L, r=R). Refine 2\u21921mm (leaky): max|err| 0.303\u21920.129 C (drop 58%) \u2014 lulus ambang >50%, tapi sebagian karena area annulus bocor ~O(h). Perbaikan exclude_end_planes: max|err| @2mm 0.133 C, @1mm 0.031 C; wajah tip-plane di FILM = 0. Solver/unit OK.",
+    "tooling_bound_for_robot_work": "Default: exclude_end_planes=True. Jangan andalkan physical-group tip saja untuk menolak wajah ujung bila rim digabung ke side oleh mesher. Batas resolusi setelah fix: ~0.13 C @2mm, ~0.03 C @1mm pada kasus fin ini (\u0394T=80 C \u2192 relatif <0.2%)."
+  }
+}

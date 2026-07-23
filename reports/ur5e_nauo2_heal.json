@@ -1,0 +1,41 @@
+{
+  "source": "/home/daffa/Documents/jazari/data/raw/ur5e/UR7e.step",
+  "index": 17,
+  "name": "1006923_Solid_B/NAUO2::solid1",
+  "target_euler": 2,
+  "euler_tol": 2,
+  "steps": [
+    {
+      "name": "baseline",
+      "watertight": false,
+      "is_volume": false,
+      "euler_number": 6,
+      "n_faces": 22367,
+      "n_vertices": 11200,
+      "boundary_edges": 25,
+      "winding_consistent": true
+    },
+    {
+      "name": "trimesh_repair",
+      "watertight": false,
+      "is_volume": false,
+      "euler_number": 10,
+      "n_faces": 22375,
+      "n_vertices": 11200,
+      "boundary_edges": 9,
+      "winding_consistent": true
+    },
+    {
+      "name": "shapefix_brep",
+      "watertight": true,
+      "is_volume": true,
+      "euler_number": 2,
+      "n_faces": 22312,
+      "n_vertices": 11158,
+      "boundary_edges": 0,
+      "winding_consistent": true,
+      "brep_volume_mm3": 1606698.0240931907
+    }
+  ],
+  "success_step": "shapefix_brep"
+}

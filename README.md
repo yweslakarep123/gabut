@@ -261,6 +261,25 @@ analytic 106.52 (**δ ≈ −0.04%**, PASS).
   diverifikasi. Stress rendah juga karena model Graphical Docs = **solid
   penuh** (tanpa rongga kabel) → lebih kaku/kuat dari link fisik.
 
+#### Batch variasi leher NAUO3 (parameter terkunci)
+
+Pipeline: deformasi radial lokal di mesh volume → load case cantilever
+yang sama → CalculiX. QoI = **global max** von Mises (termasuk hotspot
+bahu pada s>1 — sinyal struktural, bukan artefak yang dibuang).
+
+| Parameter | Nilai terkunci | Catatan |
+|-----------|----------------|---------|
+| Falloff | **cosine C1** | `w = ½(1+cos(πd/L))` |
+| **L (half-width band)** | **40 mm** | band \|y−262\| < 40 → [222, 302] mm |
+| y₀ leher | 262 mm | lokasi σ_max baseline |
+| Rentang s | 0.90 … 1.10 step 0.02 | N=11; s = skala linear radial (area ~ s²) |
+
+**L=40 mm dikunci sebagai bagian definisi parameter batch** — sisi s>1
+sensitif terhadap pilihan L (posisi/besar stress di bahu fillet). Jangan
+ganti L tanpa redefinisi dataset. Artefak uji falloff lain ada di
+`reports/ur5e_nauo3_neck_batch/` (diagnostik), bukan konfigurasi batch
+final. Ringkasan: `reports/ur5e_nauo3_neck_batch/batch_summary.json`.
+
 #### Offset joint (lengan momen) dari URDF yang sama
 
 `reports/ur5e_urdf/joint_origins_chain.json` — `<joint>/<origin xyz>` (m):
@@ -278,5 +297,75 @@ Untuk momen di root/shoulder-lift NAUO3, lengan utama ke elbow = **0,425 m**;
 beban distal digeser lagi sepanjang forearm+wrist sesuai pose.
 
 Ringkasan: `reports/ur5e_urdf/inertial_summary.json`.
+
+## NAUO2 (shoulder) — Fase 1 geometri (workstream Thermal)
+
+Identitas: `#17 NAUO2::solid1` = `shoulder_link` (3.761 kg). Render:
+`reports/ur5e_renders/17_*NAUO2*/`. Heal sukses di **ShapeFix**
+(`watertight`, `euler=2`); artefak `reports/ur5e_nauo2_heal/02_shapefix.stl`.
+Volume mesh: `reports/ur5e_nauo2_volume/geometry.npz` (~14k node / 67k tet @
+5 mm; V≈99.4% BRep). Path mesh butuh **ekstra dilate-clean** setelah
+iso-clean standar (logo/flange) — lihat
+`scripts/mesh_nauo2_volume.py` dan
+`reports/ur5e_nauo2_phase1.json`. **BC termal belum dipasang** (tunggu
+keputusan heat-source surface).
+
+## Validasi tooling termal (sebelum geometri robot)
+
+Metodologi sama pola SimJEB: **validasi kasus analitik dulu**, baru NAUO3.
+Kasus: batang aluminium D=10 mm, L=100 mm; Tb=100 °C @ x=0; tip adiabatik;
+samping konveksi h=10 W/m²K, T_amb=20 °C; k=200 W/(m·K). Solusi fin
+`T−T_amb=(Tb−T_amb)·cosh(m(L−x))/cosh(mL)`.
+
+Skrip: `scripts/thermal_fin_analytic_validate.py`  
+Artefak: `reports/thermal_fin_validate/`  
+Unit CCX (mm–N–s–K): k=200 N/(s·K); **h=0.01** N/(s·mm·K) (= h_SI/1000).
+
+### Diagnostik error ~0,3 °C (mesh 2 mm, classifier awal)
+
+**1. Rim / permukaan *FILM*** (mesh 2 mm legacy):
+
+| Cek | Hasil |
+|-----|-------|
+| Node FILM terdekat ke x=L | **dist = 0** (tepat di x=100 mm, r=5 mm) |
+| Wajah *FILM* seluruhnya di bidang tip | **32** (kebocoran konveksi ke tip) |
+| rim geometri ∩ physical tip Gmsh | **0** — rim hanya di *side* |
+
+Jadi filter `ns ⊆ tip_nodes` **tidak** menolak annulus tip yang menyentuh rim.
+
+**2. Refine 2 mm → 1 mm** (classifier sama / leaky):
+
+| Stasiun | \|err\| 2 mm | \|err\| 1 mm | drop |
+|---------|-------------:|-------------:|-----:|
+| 0 | 0.000 | 0.000 | — |
+| L/4 | 0.117 | 0.041 | 65% |
+| L/2 | 0.192 | 0.073 | 62% |
+| 3L/4 | 0.253 | 0.103 | 59% |
+| L | 0.303 | 0.129 | 58% |
+
+max\|err\| turun **57,6%** (> ambang 50%) — terlihat seperti diskretisasi murni,
+tetapi annulus tip salah-*FILM* setebal ~1 elemen sehingga **area bocor ~O(h)**
+juga mengecil saat refine.
+
+**3. Setelah perbaikan** (`exclude_end_planes=True`: tolak wajah dengan semua
+node di x≈0 atau x≈L):
+
+| | max\|err\| 2 mm | max\|err\| 1 mm | wajah tip di FILM |
+|--|----------------:|----------------:|------------------:|
+| Legacy leaky | 0.303 °C | 0.129 °C | 32 / 64 |
+| **Fixed** | **0.133 °C** | **0.031 °C** | **0** |
+
+### Kesimpulan (batas tooling untuk geometri robot)
+
+- **Penyebab 0,3 °C:** kombinasi **kebocoran BC di tip** (klasifikasi surface)
+  + **diskretisasi** mesh kasar — **bukan** bug solver / unit.
+- **Jangan** andalkan physical-group tip Gmsh saja untuk menolak wajah ujung
+  bila node rim digabung ke *side*.
+- Default tooling: `exclude_end_planes=True`. Setelah itu sisa error ≈ batas
+  resolusi biasa (~0,13 °C @2 mm, ~0,03 °C @1 mm; ΔT=80 °C).
+- Detail JSON: `reports/thermal_fin_validate/refine_and_rim_diagnostic.json`.
+
+Jalankan ulang studi:  
+`python -u scripts/thermal_fin_analytic_validate.py --refine-study`
 
 # gabut

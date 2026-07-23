@@ -1,51 +1,24 @@
 {
-  "contract_L": {
-    "n_prox": 634,
-    "n_dist": 623,
-    "prox_y_mm": {
-      "min": 151.4163970947266,
-      "max": 173.5870513916016,
-      "mean": 162.63681181898627
-    },
-    "dist_y_mm": {
-      "min": 576.5487060546875,
-      "max": 598.78759765625,
-      "mean": 587.378980902952
-    },
-    "band_y_mm": [
-      222.0,
-      302.0
-    ],
-    "y0_mm": 262.0,
-    "L_mm": 40.0,
-    "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
-    "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
-    "n_SPC_nodes_in_band": 0,
-    "safe_clearance": true
+  "n_prox": 634,
+  "n_dist": 623,
+  "prox_y_mm": {
+    "min": 151.4163970947266,
+    "max": 173.5870513916016,
+    "mean": 162.63681181898627
   },
-  "expand_L": {
-    "n_prox": 634,
-    "n_dist": 623,
-    "prox_y_mm": {
-      "min": 151.4163970947266,
-      "max": 173.5870513916016,
-      "mean": 162.63681181898627
-    },
-    "dist_y_mm": {
-      "min": 576.5487060546875,
-      "max": 598.78759765625,
-      "mean": 587.378980902952
-    },
-    "band_y_mm": [
-      196.0,
-      328.0
-    ],
-    "y0_mm": 262.0,
-    "L_mm": 66.0,
-    "gap_prox_max_y_to_band_lo_mm": 22.41294860839841,
-    "gap_band_hi_to_dist_min_y_mm": 248.5487060546875,
-    "n_SPC_nodes_in_band": 0,
-    "safe_clearance": true
+  "dist_y_mm": {
+    "min": 576.5487060546875,
+    "max": 598.78759765625,
+    "mean": 587.378980902952
   },
+  "band_y_mm": [
+    222.0,
+    302.0
+  ],
+  "y0_mm": 262.0,
+  "L_mm": 40.0,
+  "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+  "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+  "n_SPC_nodes_in_band": 0,
   "safe_clearance": true
 }

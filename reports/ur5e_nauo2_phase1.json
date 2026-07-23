@@ -1,0 +1,78 @@
+{
+  "phase": 1,
+  "part": "NAUO2",
+  "urdf_link": "shoulder_link",
+  "mass_kg_urdf": 3.761,
+  "source_step": "data/raw/ur5e/UR7e.step",
+  "step_instance": {
+    "index": 17,
+    "name": "1003023_Solid_B/NAUO2::solid1",
+    "bbox_mm_from_inspection": {
+      "size": [259.05, 234.44, 137.22],
+      "note": "dari reports/ur5e_step_inspection.json"
+    },
+    "volume_mm3_inspection_raw": 1606701.42
+  },
+  "identity_visual": {
+    "renders": "reports/ur5e_renders/17_1003023_Solid_B_NAUO2__solid1/{iso,front,side,top,iso_back}.png",
+    "copy_for_review": "reports/ur5e_nauo2_heal/_renders_copy/",
+    "confirmed": true,
+    "description": "Shoulder housing: silinder vertikal (sumbu shoulder) + badan bercabang dengan dua muka silinder besar. Logo UR (S-path) pada muka circular; 4 boss/mounting hole di sekeliling logo — indikasi interface motor/cover. Flange/rim pada transisi silinder atas. Tidak ada lubang tembus besar yang jelas dari luar (genus-0 visual).",
+    "heat_source_note": "BC termal BELUM dipasang. Kandidat permukaan heat source (diskusi): muka circular bermotor/logo + kemungkinan bore internal — CAD Graphical Docs padat; permukaan internal spesifik belum jelas. Putuskan sebelum FEA."
+  },
+  "heal": {
+    "script": "python -m simjeb.heal_ur_solid … --match NAUO2",
+    "out_dir": "reports/ur5e_nauo2_heal",
+    "out_json": "reports/ur5e_nauo2_heal.json",
+    "target": "watertight=true, |euler-2|<=2",
+    "steps": [
+      {
+        "name": "baseline",
+        "watertight": false,
+        "euler_number": 6,
+        "n_faces": 22367,
+        "boundary_edges": 25
+      },
+      {
+        "name": "trimesh_repair",
+        "watertight": false,
+        "euler_number": 10,
+        "n_faces": 22375,
+        "boundary_edges": 9,
+        "note": "belum memenuhi target; lanjut ShapeFix"
+      },
+      {
+        "name": "shapefix_brep",
+        "watertight": true,
+        "euler_number": 2,
+        "n_faces": 22312,
+        "boundary_edges": 0,
+        "brep_volume_mm3": 1606698.02,
+        "voids_dropped": 4,
+        "void_volumes_mm3": [0.328, 0.316, 0.110, 0.108]
+      }
+    ],
+    "success_step": "shapefix_brep",
+    "artifact": "reports/ur5e_nauo2_heal/02_shapefix.stl",
+    "vs_nauo3": "Urutan sama; sukses di step ShapeFix seperti NAUO3. Baseline euler NAUO2=6 (NAUO3=10); void mikro 4 (NAUO3=8)."
+  },
+  "volume_mesh": {
+    "script": "scripts/mesh_nauo2_volume.py",
+    "out_dir": "reports/ur5e_nauo2_volume",
+    "geometry_npz": "reports/ur5e_nauo2_volume/geometry.npz",
+    "mesh_report": "reports/ur5e_nauo2_volume/mesh_report.json",
+    "mesh_size_mm": 5.0,
+    "n_nodes": 14089,
+    "n_tets": 67121,
+    "volume_mm3_from_tets": 1596362.84,
+    "volume_ratio_vs_brep": 0.9936,
+    "n_inverted": 0,
+    "path_note": "Default NAUO3 (iso-clean → MeshOnlyEmpty) gagal PLC karena residual self-intersect di logo/flange (self=28 setelah iso-clean). Perlu ekstra dilate-clean hingga self=0. OCC dari STEP healed juga gagal (0 tets / PLC). Remesh kasar ≫5 mm menurunkan volume signifikan — jangan dipakai."
+  },
+  "status": {
+    "geometry_clean": true,
+    "thermal_bc": "not_applied",
+    "ready_for_fea": false,
+    "blocker_before_fea": "Diskusi lokasi heat source (permukaan internal vs muka mounting yang terlihat)."
+  }
+}

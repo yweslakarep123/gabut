@@ -1,0 +1,174 @@
+{
+  "case": {
+    "name": "aluminum_fin_adiabatic_tip",
+    "D_mm": 10.0,
+    "L_mm": 100.0,
+    "Tb_C": 100.0,
+    "T_amb_C": 20.0,
+    "k_W_per_mK": 200.0,
+    "h_W_per_m2K": 10.0,
+    "tip_bc": "adiabatic",
+    "side_bc": "convection (*FILM)",
+    "base_bc": "fixed temperature",
+    "exclude_end_planes": false
+  },
+  "unit_system": {
+    "m_SI_per_m": 4.47213595499958,
+    "m_mm_per_mm": 0.004472135954999579,
+    "m_mm_as_per_m": 4.472135954999579,
+    "mL": 0.447213595499958,
+    "rel_err_m": 1.9860273225978183e-16,
+    "units": {
+      "system": "mm, N, s, K",
+      "k_SI_W_per_mK": 200.0,
+      "h_SI_W_per_m2K": 10.0,
+      "k_ccx_N_per_sK": 200.0,
+      "h_ccx_N_per_s_mmK": 0.01,
+      "note": "Dalam mm\u2013N\u2013s\u2013K: k numerik = k_SI; h = h_SI/1000. Cek: m=sqrt(hP/kA) harus sama di SI dan mm."
+    }
+  },
+  "mesh": {
+    "n_nodes": 7999,
+    "n_tets": 37124,
+    "n_base_nodes": 91,
+    "n_tip_nodes": 91,
+    "n_side_nodes": 3538,
+    "mesh_size_mm": 1.0,
+    "bbox_mm": {
+      "xmin": 0.0,
+      "xmax": 100.0,
+      "ymin": -5.0,
+      "ymax": 5.0,
+      "zmin": -5.0,
+      "zmax": 5.0
+    },
+    "msh": "/home/daffa/Documents/jazari/reports/thermal_fin_validate/mesh_1mm_legacy_leaky/al_fin.msh"
+  },
+  "rim_diagnostic": {
+    "n_film_faces": 7466,
+    "n_film_nodes": 3765,
+    "film_x_min_mm": 0.0,
+    "film_x_max_mm": 100.0,
+    "nearest_to_tip": {
+      "node_id0": 0,
+      "xyz_mm": [
+        100.0,
+        1.2246467991473533e-15,
+        5.0
+      ],
+      "r_mm": 5.0,
+      "dist_to_xL_mm": 0.0
+    },
+    "n_film_nodes_exactly_on_tip_plane": 64,
+    "n_film_nodes_dist_lt_0.1mm": 64,
+    "n_film_nodes_dist_lt_1mm": 95,
+    "n_rim_geom_nodes": 32,
+    "n_rim_geom_in_film": 32,
+    "n_rim_geom_in_tip_physical": 0,
+    "n_film_faces_entirely_on_tip_plane": 64,
+    "n_film_faces_touching_tip_nodes": 64,
+    "n_overlap_tip_nodes_and_film": 32,
+    "film_nodes_strict_xmax_mm": 99.45984851910022,
+    "film_nodes_strict_dist_to_L_mm": 0.5401514808997803,
+    "interpretation": "KEBOCORAN BC: ada wajah *FILM* di bidang tip x=L (harusnya adiabatik)."
+  },
+  "n_side_film_faces": 7466,
+  "analytic": {
+    "formula": "T-Tamb=(Tb-Tamb)*cosh(m(L-x))/cosh(mL)",
+    "m_per_m": 4.47213595499958,
+    "mL": 0.447213595499958
+  },
+  "profile_samples": {
+    "0": {
+      "x_mm": 0.0,
+      "T_num_C": 100.0,
+      "nearest_node_x_mm": 0.0,
+      "nearest_node_T_C": 100.0,
+      "interp": "linear_along_axis"
+    },
+    "L/4": {
+      "x_mm": 25.0,
+      "T_num_C": 96.69842218062062,
+      "nearest_node_x_mm": 24.805661547965055,
+      "nearest_node_T_C": 96.7201,
+      "interp": "linear_along_axis"
+    },
+    "L/2": {
+      "x_mm": 50.0,
+      "T_num_C": 94.36662274279912,
+      "nearest_node_x_mm": 50.21159483431184,
+      "nearest_node_T_C": 94.3508,
+      "interp": "linear_along_axis"
+    },
+    "3L/4": {
+      "x_mm": 75.0,
+      "T_num_C": 92.96816348623408,
+      "nearest_node_x_mm": 75.06009167423086,
+      "nearest_node_T_C": 92.9659,
+      "interp": "linear_along_axis"
+    },
+    "L": {
+      "x_mm": 100.0,
+      "T_num_C": 92.488,
+      "nearest_node_x_mm": 100.0,
+      "nearest_node_T_C": 92.4881,
+      "interp": "linear_along_axis"
+    }
+  },
+  "comparison": {
+    "stations": [
+      {
+        "station": "0",
+        "x_mm": 0.0,
+        "T_analytic_C": 100.0,
+        "T_numeric_C": 100.0,
+        "error_C": 0.0,
+        "abs_error_C": 0.0,
+        "rel_error_vs_deltaT": 0.0
+      },
+      {
+        "station": "L/4",
+        "x_mm": 25.0,
+        "T_analytic_C": 96.7396281151038,
+        "T_numeric_C": 96.69842218062062,
+        "error_C": -0.04120593448317322,
+        "abs_error_C": 0.04120593448317322,
+        "rel_error_vs_deltaT": 0.0005150741810396653
+      },
+      {
+        "station": "L/2",
+        "x_mm": 50.0,
+        "T_analytic_C": 94.43950121198621,
+        "T_numeric_C": 94.36662274279912,
+        "error_C": -0.07287846918708851,
+        "abs_error_C": 0.07287846918708851,
+        "rel_error_vs_deltaT": 0.0009109808648386064
+      },
+      {
+        "station": "3L/4",
+        "x_mm": 75.0,
+        "T_analytic_C": 93.07083774230746,
+        "T_numeric_C": 92.96816348623408,
+        "error_C": -0.1026742560733851,
+        "abs_error_C": 0.1026742560733851,
+        "rel_error_vs_deltaT": 0.0012834282009173137
+      },
+      {
+        "station": "L",
+        "x_mm": 100.0,
+        "T_analytic_C": 92.61651158413048,
+        "T_numeric_C": 92.488,
+        "error_C": -0.1285115841304787,
+        "abs_error_C": 0.1285115841304787,
+        "rel_error_vs_deltaT": 0.0016063948016309837
+      }
+    ],
+    "max_abs_error_C": 0.1285115841304787,
+    "mean_abs_error_C": 0.0690540487748251,
+    "pass_criterion": "max |\u0394T| < 1.0 C (metodologi OK; mesh kasar boleh ~0.1\u20131 C)",
+    "passed": true
+  },
+  "ccx": "/home/daffa/miniforge3/envs/simjeb/bin/ccx",
+  "inp": "/home/daffa/Documents/jazari/reports/thermal_fin_validate/mesh_1mm_legacy_leaky/al_fin_thermal.inp",
+  "frd": "/home/daffa/Documents/jazari/reports/thermal_fin_validate/mesh_1mm_legacy_leaky/al_fin_thermal.frd"
+}

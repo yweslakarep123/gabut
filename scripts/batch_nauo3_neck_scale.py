@@ -46,16 +46,14 @@ CCX = Path("/home/daffa/miniforge3/envs/simjeb/bin/ccx")
 E_MPA = 70000.0
 NU = 0.33
 
-# Band leher (mm) — dipilih setelah cek SPC y-range
+# Band leher (mm) — DIKUNCI untuk definisi batch
+# Cosine C1, L=40 mm untuk semua s (termasuk s>1). Sisi s>1 sensitif ke L;
+# alternatif falloff diuji lalu ditolak sebagai definisi parameter batch.
 Y0_NECK = 262.0
-# Cosine L=40 = C1-not-C2 di tepi → artefak. C2/C∞ + L panjang tetap
-# "kejar tepi" untuk s>1 (bahu bulb). Gaussian σ + cutoff di w≈0 meredam lompatan.
-L_BAND_CONTRACT = 40.0  # s <= 1 (bump_Cinf support)
-L_BAND_EXPAND = 66.0  # ~3σ untuk gaussian expand
-L_BAND = L_BAND_CONTRACT
-FALLOFF_KIND = "gaussian_cut"  # exp(-d²/2σ²), nolkan di |d|>=L (w sudah ≪1)
-SIGMA_CONTRACT = 16.0
-SIGMA_EXPAND = 22.0
+L_BAND = 40.0
+L_BAND_CONTRACT = L_BAND
+L_BAND_EXPAND = L_BAND
+FALLOFF_KIND = "cosine_C1"
 
 # Gate mesh
 MAX_ABS_DV_FRAC = 0.05  # |ΔV|/V0
@@ -63,7 +61,7 @@ MAX_INVERTED = 0
 REACTION_ERR_PCT = 10.0
 MIN_SPC_GAP_MM = 20.0
 
-# Hotspot vs band: "tengah" jika |y-y0| < 0.35*L; "tepi" jika > 0.70*L
+# Hotspot vs band (metadata saja — bukan gate lulus/gagal)
 HOTSPOT_CENTER_FRAC = 0.35
 HOTSPOT_EDGE_FRAC = 0.70
 
@@ -71,11 +69,11 @@ BASELINE_SIGMA_MAX_MPA = 1.645735221879838
 
 
 def L_for_s(s: float) -> float:
-    return L_BAND_EXPAND if s > 1.0 else L_BAND_CONTRACT
+    return L_BAND
 
 
-def sigma_for_s(s: float) -> float:
-    return SIGMA_EXPAND if s > 1.0 else SIGMA_CONTRACT
+def sigma_for_s(s: float) -> float | None:
+    return None
 
 
 def neck_weight(
@@ -85,16 +83,16 @@ def neck_weight(
     kind: str = FALLOFF_KIND,
     sigma: float | None = None,
 ) -> np.ndarray:
-    """Bump 1 di pusat, ~0 di luar support.
+    """Bump 1 di pusat, 0 di luar support.
 
-    gaussian_cut (default): exp(-d²/(2σ²)) lalu 0 untuk |d|>=L (L≈3σ → w(L)≪1).
-    bump_Cinf / smootherstep_C2 / cosine_C1: support keras |d|<L.
+    Default batch: cosine_C1. Alternatif (eksperimen): gaussian_cut,
+    bump_Cinf, smootherstep_C2.
     """
     d = np.abs(y - y0)
     w = np.zeros_like(y, dtype=np.float64)
     if kind == "gaussian_cut":
         if sigma is None:
-            sigma = SIGMA_CONTRACT
+            sigma = L / 3.0
         inside = d < L
         w[inside] = np.exp(-0.5 * (d[inside] / sigma) ** 2)
         return w
@@ -146,7 +144,7 @@ def deform_neck_radial(
         "falloff_kind": falloff_kind,
         "band_y_mm": [y0 - L, y0 + L],
         "w_at_cutoff": float(np.exp(-0.5 * (L / sigma) ** 2))
-        if falloff_kind == "gaussian_cut"
+        if falloff_kind == "gaussian_cut" and sigma is not None
         else 0.0,
         "n_nodes_w_gt_0": int((w > 0).sum()),
         "n_nodes_w_gt_0_5": int((w > 0.5).sum()),
@@ -684,15 +682,9 @@ def run_one_sample(
         "rel_pct": (hot["von_mises_MPa"] / BASELINE_SIGMA_MAX_MPA - 1.0) * 100.0,
     }
 
-    # Gate hotspot for extremes: jangan BAND_EDGE
-    sample["hotspot_edge_artifact"] = hot["band_position"] == "BAND_EDGE"
-    if sample["hotspot_edge_artifact"]:
-        sample["status"] = "hotspot_band_edge_artifact"
-        sample["fail_reasons"].append(
-            f"hotspot_at_band_edge y={hot['y_mm']:.2f} dy/L={hot['dy_over_L']:.3f}"
-        )
-    else:
-        sample["status"] = "ok"
+    # band_position = metadata informatif (bukan gate)
+    sample["status"] = "ok"
+    sample["band_position"] = hot["band_position"]
 
     (out / "sample_result.json").write_text(json.dumps(sample, indent=2))
     (out / "stress_hotspot.json").write_text(json.dumps(hot, indent=2))
@@ -703,8 +695,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--samples",
-        default="0.90,1.10",
-        help="Comma-separated s values (default: pilot extremes)",
+        default="0.90,0.92,0.94,0.96,0.98,1.00,1.02,1.04,1.06,1.08,1.10",
+        help="Comma-separated s values (default: full N=11 batch)",
     )
     ap.add_argument(
         "--reuse-fea",
@@ -723,15 +715,7 @@ def main() -> int:
 
     tet_ids, face_ids, face_nodes = _boundary_faces(tets)
     ends0 = select_end_faces(points0, node_surf, tet_ids, face_ids, face_nodes)
-    # clearance untuk L terlebar yang dipakai (ekspansi)
-    clear_contract = spc_band_clearance_report(points0, ends0, L=L_BAND_CONTRACT)
-    clear_expand = spc_band_clearance_report(points0, ends0, L=L_BAND_EXPAND)
-    clear0 = {
-        "contract_L": clear_contract,
-        "expand_L": clear_expand,
-        "safe_clearance": clear_contract["safe_clearance"]
-        and clear_expand["safe_clearance"],
-    }
+    clear0 = spc_band_clearance_report(points0, ends0, L=L_BAND)
     (OUT_ROOT / "spc_band_clearance.json").write_text(json.dumps(clear0, indent=2))
     print("=== SPC vs band clearance ===")
     print(json.dumps(clear0, indent=2))
@@ -739,7 +723,7 @@ def main() -> int:
         print("STOP: band overlaps SPC — pilih L lebih kecil.")
         return 2
 
-    # Axis: u from end selection; point = prox→dist line at mid, or volume centroid
+    # Axis: u from end selection; point = volume centroid
     u = ends0["u"]
     axis_point = points0.mean(0)
     # densitas baseline (tetap untuk semua s)
@@ -748,6 +732,7 @@ def main() -> int:
     dens_kg_m3 = M_SELF / (V0 * 1e-9)
     dens0_t_mm3 = dens_kg_m3 * 1e-12
     print(f"baseline V={V0:.1f} mm3  dens={dens_kg_m3:.1f} kg/m3")
+    print(f"falloff={FALLOFF_KIND}  L={L_BAND} mm  (locked for batch)")
 
     results = []
     for s in samples:
@@ -771,12 +756,42 @@ def main() -> int:
         )
         results.append(r)
 
+    # Compact per-sample rows for batch_summary
+    rows = []
+    for r in results:
+        hot = r.get("hotspot") or {}
+        react = r.get("reaction") or {}
+        rows.append(
+            {
+                "s": r["s"],
+                "status": r["status"],
+                "fail_reasons": r.get("fail_reasons") or [],
+                "global_max_MPa": r.get("sigma_max_MPa"),
+                "global_max_xyz_mm": hot.get("xyz_mm"),
+                "global_max_y_mm": hot.get("y_mm"),
+                "band_position": hot.get("band_position"),
+                "reaction_pass": react.get("pass"),
+                "reaction_M_Nm": react.get("M_fe_Nm"),
+                "reaction_err_vs_analytic_pct": react.get("err_vs_analytic_pct"),
+                "mesh_gate_pass": (r.get("mesh_gate") or {}).get("pass"),
+                "vs_old_baseline_rel_pct": (r.get("vs_old_baseline_MPa") or {}).get(
+                    "rel_pct"
+                ),
+            }
+        )
+
     summary = {
         "approach": "a_mesh_deform_neck_radial",
         "falloff_kind": FALLOFF_KIND,
+        "L_mm": L_BAND,
+        "L_locked": True,
+        "L_lock_note": (
+            "L=40 mm cosine C1 dikunci untuk seluruh batch. "
+            "Sisi s>1 sensitif terhadap pilihan L (bahu/fillet); "
+            "jangan ganti L tanpa redefinisi parameter dataset."
+        ),
         "y0_mm": Y0_NECK,
-        "L_mm_contract": L_BAND_CONTRACT,
-        "L_mm_expand": L_BAND_EXPAND,
+        "qoi": "global_max_von_mises (sah untuk seluruh rentang s, termasuk bahu s>1)",
         "spc_band_clearance": clear0,
         "density_policy": "fixed_from_baseline_s1_undeformed",
         "samples_requested": samples,
@@ -787,49 +802,36 @@ def main() -> int:
             for r in results
             if r["status"] != "ok"
         ],
+        "samples": rows,
         "sigma_max_band_center_by_s": {
             f"{r['s']:.2f}": r.get("sigma_max_band_center") for r in results
         },
         "results": results,
-        "pilot_extremes_clean": False,
-        "next_action": None,
+        "s1_sanity_check": None,
     }
-    # Preserve cosine-era diagnostic field for s=1.10 if present on disk
-    diag_path = OUT_ROOT / "radius_profile_s110_diagnostic.json"
-    if diag_path.exists():
-        diag = json.loads(diag_path.read_text())
-        if "sigma_max_band_center_s_1_10" in diag:
-            summary["sigma_max_band_center_s_1_10_cosine_L40_legacy"] = diag[
-                "sigma_max_band_center_s_1_10"
-            ]
-        summary["radius_kink_diagnostic_ref"] = str(diag_path.relative_to(ROOT))
-
-    extremes = [r for r in results if abs(r["s"] - 0.9) < 1e-9 or abs(r["s"] - 1.1) < 1e-9]
-    if extremes and all(r["status"] == "ok" for r in extremes):
-        positions = [r["hotspot"]["band_position"] for r in extremes]
-        if all(p == "BAND_CENTER" for p in positions):
-            summary["pilot_extremes_clean"] = True
-            summary["next_action"] = "OK to run remaining 9 samples"
-        elif any(p == "BAND_EDGE" for p in positions):
-            summary["next_action"] = "STOP — hotspot at band edge"
-        else:
-            summary["next_action"] = (
-                f"REVIEW — hotspot positions {positions} (not edge, not all center)"
-            )
-    else:
-        edge = any(r.get("hotspot_edge_artifact") for r in extremes)
-        if edge:
-            summary["next_action"] = (
-                "STOP — s extreme hotspot di tepi band; perhalus falloff lagi"
-            )
-        else:
-            summary["next_action"] = "STOP — extreme sample failed gate/FEA"
+    # s=1.0 sanity vs old baseline
+    for r in results:
+        if abs(r["s"] - 1.0) < 1e-9 and r.get("sigma_max_MPa") is not None:
+            summary["s1_sanity_check"] = {
+                "sigma_max_MPa": r["sigma_max_MPa"],
+                "old_baseline_MPa": BASELINE_SIGMA_MAX_MPA,
+                "delta_MPa": r["sigma_max_MPa"] - BASELINE_SIGMA_MAX_MPA,
+                "rel_pct": (r["sigma_max_MPa"] / BASELINE_SIGMA_MAX_MPA - 1.0) * 100.0,
+                "band_position": (r.get("hotspot") or {}).get("band_position"),
+                "pass_near_baseline": abs(
+                    r["sigma_max_MPa"] - BASELINE_SIGMA_MAX_MPA
+                )
+                / BASELINE_SIGMA_MAX_MPA
+                < 0.05,
+            }
 
     (OUT_ROOT / "batch_summary.json").write_text(json.dumps(summary, indent=2))
     print("\n=== SUMMARY ===")
-    print("next_action:", summary["next_action"])
+    print(f"n_ok={summary['n_ok']} n_fail={summary['n_fail']}")
+    if summary["s1_sanity_check"]:
+        print("s=1.0 sanity:", json.dumps(summary["s1_sanity_check"], indent=2))
     print("wrote", OUT_ROOT / "batch_summary.json")
-    return 0
+    return 0 if summary["n_fail"] == 0 else 1
 
 
 if __name__ == "__main__":

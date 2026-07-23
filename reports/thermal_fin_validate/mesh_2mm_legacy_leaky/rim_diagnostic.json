@@ -1,0 +1,28 @@
+{
+  "n_film_faces": 1882,
+  "n_film_nodes": 957,
+  "film_x_min_mm": 0.0,
+  "film_x_max_mm": 100.0,
+  "nearest_to_tip": {
+    "node_id0": 0,
+    "xyz_mm": [
+      100.0,
+      1.2246467991473533e-15,
+      5.0
+    ],
+    "r_mm": 5.0,
+    "dist_to_xL_mm": 0.0
+  },
+  "n_film_nodes_exactly_on_tip_plane": 32,
+  "n_film_nodes_dist_lt_0.1mm": 32,
+  "n_film_nodes_dist_lt_1mm": 32,
+  "n_rim_geom_nodes": 16,
+  "n_rim_geom_in_film": 16,
+  "n_rim_geom_in_tip_physical": 0,
+  "n_film_faces_entirely_on_tip_plane": 32,
+  "n_film_faces_touching_tip_nodes": 32,
+  "n_overlap_tip_nodes_and_film": 16,
+  "film_nodes_strict_xmax_mm": 98.60055905535286,
+  "film_nodes_strict_dist_to_L_mm": 1.3994409446471394,
+  "interpretation": "KEBOCORAN BC: ada wajah *FILM* di bidang tip x=L (harusnya adiabatik)."
+}

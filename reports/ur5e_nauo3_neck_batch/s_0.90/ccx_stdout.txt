@@ -75,6 +75,6 @@ You are using an executable made on Fri Apr 24 17:53:55 UTC 2026
 
 ________________________________________
 
-Total CalculiX Time: 18.833401
+Total CalculiX Time: 13.899284
 ________________________________________
 

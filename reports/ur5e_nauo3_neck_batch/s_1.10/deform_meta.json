@@ -1,20 +1,20 @@
 {
   "s": 1.1,
   "y0_mm": 262.0,
-  "L_mm": 66.0,
-  "sigma_mm": 22.0,
-  "falloff_kind": "gaussian_cut",
+  "L_mm": 40.0,
+  "sigma_mm": null,
+  "falloff_kind": "cosine_C1",
   "band_y_mm": [
-    196.0,
-    328.0
+    222.0,
+    302.0
   ],
-  "w_at_cutoff": 0.011108996538242306,
-  "n_nodes_w_gt_0": 9247,
-  "n_nodes_w_gt_0_5": 2463,
+  "w_at_cutoff": 0.0,
+  "n_nodes_w_gt_0": 5592,
+  "n_nodes_w_gt_0_5": 1740,
   "n_frozen": 1257,
-  "w_max": 0.9999998964270027,
+  "w_max": 0.9999998453885428,
   "s_eff_min": 1.0,
-  "s_eff_max": 1.0999999896427004,
+  "s_eff_max": 1.0999999845388544,
   "axis_point_mm": [
     -0.11319510477358953,
     373.33987826861113,
@@ -35,8 +35,8 @@
     "pass": true,
     "fail_reasons": [],
     "V0_mm3": 4847396.4758005375,
-    "V_mm3": 4925525.392811694,
-    "dV_frac": 0.016117707185949515,
+    "V_mm3": 4900970.2605404565,
+    "dV_frac": 0.011052074037552583,
     "n_inverted_or_neg": 0,
     "n_tets": 192060,
     "n_nodes": 38811

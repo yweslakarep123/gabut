@@ -1,82 +1,397 @@
 {
   "approach": "a_mesh_deform_neck_radial",
-  "falloff_kind": "gaussian_cut",
+  "falloff_kind": "cosine_C1",
+  "L_mm": 40.0,
+  "L_locked": true,
+  "L_lock_note": "L=40 mm cosine C1 dikunci untuk seluruh batch. Sisi s>1 sensitif terhadap pilihan L (bahu/fillet); jangan ganti L tanpa redefinisi parameter dataset.",
   "y0_mm": 262.0,
-  "L_mm_contract": 40.0,
-  "L_mm_expand": 66.0,
+  "qoi": "global_max_von_mises (sah untuk seluruh rentang s, termasuk bahu s>1)",
   "spc_band_clearance": {
-    "contract_L": {
-      "n_prox": 634,
-      "n_dist": 623,
-      "prox_y_mm": {
-        "min": 151.4163970947266,
-        "max": 173.5870513916016,
-        "mean": 162.63681181898627
-      },
-      "dist_y_mm": {
-        "min": 576.5487060546875,
-        "max": 598.78759765625,
-        "mean": 587.378980902952
-      },
-      "band_y_mm": [
-        222.0,
-        302.0
-      ],
-      "y0_mm": 262.0,
-      "L_mm": 40.0,
-      "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
-      "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
-      "n_SPC_nodes_in_band": 0,
-      "safe_clearance": true
+    "n_prox": 634,
+    "n_dist": 623,
+    "prox_y_mm": {
+      "min": 151.4163970947266,
+      "max": 173.5870513916016,
+      "mean": 162.63681181898627
     },
-    "expand_L": {
-      "n_prox": 634,
-      "n_dist": 623,
-      "prox_y_mm": {
-        "min": 151.4163970947266,
-        "max": 173.5870513916016,
-        "mean": 162.63681181898627
-      },
-      "dist_y_mm": {
-        "min": 576.5487060546875,
-        "max": 598.78759765625,
-        "mean": 587.378980902952
-      },
-      "band_y_mm": [
-        196.0,
-        328.0
-      ],
-      "y0_mm": 262.0,
-      "L_mm": 66.0,
-      "gap_prox_max_y_to_band_lo_mm": 22.41294860839841,
-      "gap_band_hi_to_dist_min_y_mm": 248.5487060546875,
-      "n_SPC_nodes_in_band": 0,
-      "safe_clearance": true
+    "dist_y_mm": {
+      "min": 576.5487060546875,
+      "max": 598.78759765625,
+      "mean": 587.378980902952
     },
+    "band_y_mm": [
+      222.0,
+      302.0
+    ],
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+    "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+    "n_SPC_nodes_in_band": 0,
     "safe_clearance": true
   },
   "density_policy": "fixed_from_baseline_s1_undeformed",
   "samples_requested": [
     0.9,
+    0.92,
+    0.94,
+    0.96,
+    0.98,
+    1.0,
+    1.02,
+    1.04,
+    1.06,
+    1.08,
     1.1
   ],
-  "n_ok": 1,
-  "n_fail": 1,
-  "failures": [
+  "n_ok": 11,
+  "n_fail": 0,
+  "failures": [],
+  "samples": [
+    {
+      "s": 0.9,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 2.271612960162118,
+      "global_max_xyz_mm": [
+        -1.3859965487227603,
+        262.4509972029929,
+        176.16980254803735
+      ],
+      "global_max_y_mm": 262.4509972029929,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.39938518690698,
+      "reaction_err_vs_analytic_pct": 0.11238052154324023,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": 38.03028153990484
+    },
+    {
+      "s": 0.92,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 2.12542251698287,
+      "global_max_xyz_mm": [
+        -1.4170446859920633,
+        262.44946963739426,
+        176.94890661362518
+      ],
+      "global_max_y_mm": 262.44946963739426,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.41461068703435,
+      "reaction_err_vs_analytic_pct": 0.09808683967261196,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": 29.147294700001037
+    },
+    {
+      "s": 0.94,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.9908218770897863,
+      "global_max_xyz_mm": [
+        -1.4480928232613661,
+        262.4479420717957,
+        177.72801067921304
+      ],
+      "global_max_y_mm": 262.4479420717957,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.43009713812329,
+      "reaction_err_vs_analytic_pct": 0.08354817734175687,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": 20.968540420236835
+    },
+    {
+      "s": 0.96,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.8666720084845514,
+      "global_max_xyz_mm": [
+        -1.4791409605306691,
+        262.44641450619713,
+        178.5071147448009
+      ],
+      "global_max_y_mm": 262.44641450619713,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.44582847694838,
+      "reaction_err_vs_analytic_pct": 0.06877961468806257,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": 13.424807567304109
+    },
+    {
+      "s": 0.98,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.7519503636570073,
+      "global_max_xyz_mm": [
+        -1.510189097799972,
+        262.44488694059856,
+        179.28621881038873
+      ],
+      "global_max_y_mm": 262.44488694059856,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.46175799173085,
+      "reaction_err_vs_analytic_pct": 0.05382500467530012,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": 6.453962968347082
+    },
+    {
+      "s": 1.0,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.645735221879838,
+      "global_max_xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "global_max_y_mm": 262.443359375,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.47794913793904,
+      "reaction_err_vs_analytic_pct": 0.03862477538335149,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": 0.0
+    },
+    {
+      "s": 1.02,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.547238423735938,
+      "global_max_xyz_mm": [
+        -1.572285372338578,
+        262.44183180940144,
+        180.84442694156445
+      ],
+      "global_max_y_mm": 262.44183180940144,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.49437844866848,
+      "reaction_err_vs_analytic_pct": 0.023200957514913773,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": -5.9849723597330655
+    },
+    {
+      "s": 1.04,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.4557334563034334,
+      "global_max_xyz_mm": [
+        -1.6033335096078807,
+        262.4403042438028,
+        181.62353100715228
+      ],
+      "global_max_y_mm": 262.4403042438028,
+      "band_position": "BAND_CENTER",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.51102475132299,
+      "reaction_err_vs_analytic_pct": 0.007573427878762538,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": -11.545099299714535
+    },
+    {
+      "s": 1.06,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.4009879147188316,
+      "global_max_xyz_mm": [
+        -5.951381133112318,
+        296.1574142977248,
+        95.71083760240667
+      ],
+      "global_max_y_mm": 296.1574142977248,
+      "band_position": "BAND_EDGE",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.527911085719,
+      "reaction_err_vs_analytic_pct": 0.008279443278069449,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": -14.871608987103302
+    },
+    {
+      "s": 1.08,
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.4308999532836948,
+      "global_max_xyz_mm": [
+        10.612664135503485,
+        222.7000046126815,
+        81.02704456879854
+      ],
+      "global_max_y_mm": 222.7000046126815,
+      "band_position": "BAND_EDGE",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.545047340908,
+      "reaction_err_vs_analytic_pct": 0.024366939785665117,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": -13.054060321486471
+    },
     {
       "s": 1.1,
-      "status": "hotspot_band_edge_artifact",
-      "fail_reasons": [
-        "hotspot_at_band_edge y=314.93 dy/L=0.802"
-      ]
+      "status": "ok",
+      "fail_reasons": [],
+      "global_max_MPa": 1.4863671823810825,
+      "global_max_xyz_mm": [
+        10.612823615729452,
+        222.70000652879136,
+        81.02613816949426
+      ],
+      "global_max_y_mm": 222.70000652879136,
+      "band_position": "BAND_EDGE",
+      "reaction_pass": true,
+      "reaction_M_Nm": 106.56062764512222,
+      "reaction_err_vs_analytic_pct": 0.038993711321753284,
+      "mesh_gate_pass": true,
+      "vs_old_baseline_rel_pct": -9.683698652126903
     }
   ],
   "sigma_max_band_center_by_s": {
-    "1.10_cosine_L40": {
-      "s": 1.1,
+    "0.90": {
       "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
       "dy_over_L_threshold": 0.35,
-      "L_mm_used_for_definition": 40.0,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 2.271612960162118,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.3859965487227603,
+        262.4509972029929,
+        176.16980254803735
+      ],
+      "y_mm": 262.4509972029929,
+      "dy_over_L": 0.011274930074822009
+    },
+    "0.92": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 2.12542251698287,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.4170446859920633,
+        262.44946963739426,
+        176.94890661362518
+      ],
+      "y_mm": 262.44946963739426,
+      "dy_over_L": 0.01123674093485647
+    },
+    "0.94": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.9908218770897863,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.4480928232613661,
+        262.4479420717957,
+        177.72801067921304
+      ],
+      "y_mm": 262.4479420717957,
+      "dy_over_L": 0.011198551794892353
+    },
+    "0.96": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.8666720084845514,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.4791409605306691,
+        262.44641450619713,
+        178.5071147448009
+      ],
+      "y_mm": 262.44641450619713,
+      "dy_over_L": 0.011160362654928235
+    },
+    "0.98": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.7519503636570073,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.510189097799972,
+        262.44488694059856,
+        179.28621881038873
+      ],
+      "y_mm": 262.44488694059856,
+      "dy_over_L": 0.011122173514964117
+    },
+    "1.00": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.645735221879838,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "y_mm": 262.443359375,
+      "dy_over_L": 0.011083984375
+    },
+    "1.02": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.547238423735938,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.572285372338578,
+        262.44183180940144,
+        180.84442694156445
+      ],
+      "y_mm": 262.44183180940144,
+      "dy_over_L": 0.011045795235035882
+    },
+    "1.04": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.4557334563034334,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.6033335096078807,
+        262.4403042438028,
+        181.62353100715228
+      ],
+      "y_mm": 262.4403042438028,
+      "dy_over_L": 0.011007606095070344
+    },
+    "1.06": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.3705755020941932,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.6343816468771837,
+        262.43877667820425,
+        182.40263507274014
+      ],
+      "y_mm": 262.43877667820425,
+      "dy_over_L": 0.010969416955106226
+    },
+    "1.08": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
+      "sigma_max_MPa": 1.2911935289977128,
+      "node_0based": 3279,
+      "xyz_mm": [
+        -1.6654297841464867,
+        262.4372491126057,
+        183.18173913832797
+      ],
+      "y_mm": 262.4372491126057,
+      "dy_over_L": 0.010931227815142108
+    },
+    "1.10": {
+      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+      "dy_over_L_threshold": 0.35,
+      "L_mm": 40.0,
       "sigma_max_MPa": 1.217048344400942,
       "node_0based": 3279,
       "xyz_mm": [
@@ -86,34 +401,6 @@
       ],
       "y_mm": 262.4357215470071,
       "dy_over_L": 0.01089303867517799
-    },
-    "0.90_latest": {
-      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
-      "dy_over_L_threshold": 0.35,
-      "L_mm": 40.0,
-      "sigma_max_MPa": 2.281755081463788,
-      "node_0based": 3279,
-      "xyz_mm": [
-        -1.3860090875974014,
-        262.4509965860813,
-        176.17011719133222
-      ],
-      "y_mm": 262.4509965860813,
-      "dy_over_L": 0.01127491465203292
-    },
-    "1.10_latest": {
-      "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
-      "dy_over_L_threshold": 0.35,
-      "L_mm": 66.0,
-      "sigma_max_MPa": 1.2345208013842928,
-      "node_0based": 3279,
-      "xyz_mm": [
-        -1.6964934589180745,
-        262.4357207825634,
-        183.9612330930449
-      ],
-      "y_mm": 262.4357207825634,
-      "dy_over_L": 0.006601830038839511
     }
   },
   "results": [
@@ -125,18 +412,18 @@
         "s": 0.9,
         "y0_mm": 262.0,
         "L_mm": 40.0,
-        "sigma_mm": 16.0,
-        "falloff_kind": "gaussian_cut",
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
         "band_y_mm": [
           222.0,
           302.0
         ],
-        "w_at_cutoff": 0.04393693362340742,
+        "w_at_cutoff": 0.0,
         "n_nodes_w_gt_0": 5592,
-        "n_nodes_w_gt_0_5": 1615,
+        "n_nodes_w_gt_0_5": 1740,
         "n_frozen": 1257,
-        "w_max": 0.999999804182311,
-        "s_eff_min": 0.9000000195817689,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 0.9000000154611457,
         "s_eff_max": 1.0,
         "axis_point_mm": [
           -0.11319510477358953,
@@ -159,8 +446,8 @@
         "pass": true,
         "fail_reasons": [],
         "V0_mm3": 4847396.4758005375,
-        "V_mm3": 4797574.029740056,
-        "dV_frac": -0.010278186715117708,
+        "V_mm3": 4797509.738278481,
+        "dV_frac": -0.01029144980632467,
         "n_inverted_or_neg": 0,
         "n_tets": 192060,
         "n_nodes": 38811
@@ -193,50 +480,50 @@
       "ccx_returncode": 0,
       "ccx_reused": false,
       "reaction": {
-        "M_fe_Nm": 106.3997499873796,
+        "M_fe_Nm": 106.39938518690698,
         "RF_N": [
-          0.0004005589999594968,
-          -0.3401329999999836,
-          184.40241194399985
+          0.0003010650000215727,
+          -0.3409665499996393,
+          184.40138471699962
         ],
         "M_analytic_Nm": 106.519091897925,
-        "M_fea_pred_Nm": 106.3999279091203,
-        "err_vs_analytic_pct": 0.11203804728241963,
-        "err_vs_fea_pred_pct": 0.00016721979440859687,
+        "M_fea_pred_Nm": 106.39955673959551,
+        "err_vs_analytic_pct": 0.11238052154324023,
+        "err_vs_fea_pred_pct": 0.00016123440151881053,
         "pass": true,
         "n_prox_with_rf": 634,
-        "m_self_eff_kg": 7.975178371449581,
+        "m_self_eff_kg": 7.975071497460636,
         "L_mm": 424.7445947795238,
-        "x_com_from_prox_m": 0.2135316151876542
+        "x_com_from_prox_m": 0.21352973084307592
       },
       "hotspot": {
         "bc_classification": "IN_BODY_AWAY_FROM_BC",
         "band_position": "BAND_CENTER",
         "node_0based": 3279,
         "xyz_mm": [
-          -1.3860090875974014,
-          262.4509965860813,
-          176.17011719133222
+          -1.3859965487227603,
+          262.4509972029929,
+          176.16980254803735
         ],
-        "y_mm": 262.4509965860813,
-        "dy_from_y0_mm": 0.45099658608131676,
-        "dy_over_L": 0.01127491465203292,
-        "von_mises_MPa": 2.281755081463788,
-        "global_max_MPa": 2.281755081463788,
+        "y_mm": 262.4509972029929,
+        "dy_from_y0_mm": 0.4509972029928804,
+        "dy_over_L": 0.011274930074822009,
+        "von_mises_MPa": 2.271612960162118,
+        "global_max_MPa": 2.271612960162118,
         "global_max_node": 3279,
-        "dist_to_SPC_mm": 93.5789978774839,
-        "dist_to_distal_mm": 315.65877588987036,
+        "dist_to_SPC_mm": 93.57909174870171,
+        "dist_to_distal_mm": 315.6588029567894,
         "percentiles_all": {
-          "p50": 0.14067167752120502,
-          "p95": 0.9179281621893423,
-          "p99": 1.2695910814091351,
-          "p100": 2.281755081463788
+          "p50": 0.14055919027007804,
+          "p95": 0.9184942412645137,
+          "p99": 1.2702119069760038,
+          "p100": 2.271612960162118
         },
         "percentiles_exclude_2mm_BC": {
-          "p50": 0.14118783089768144,
-          "p95": 0.9280867168128111,
-          "p99": 1.273778069891639,
-          "p100": 2.281755081463788
+          "p50": 0.14110715119807526,
+          "p95": 0.9290092648163735,
+          "p99": 1.274915261292881,
+          "p100": 2.271612960162118
         },
         "thresholds": {
           "center_if_dy_over_L_le": 0.35,
@@ -245,49 +532,49 @@
           "y0_mm": 262.0
         }
       },
-      "sigma_max_MPa": 2.281755081463788,
+      "sigma_max_MPa": 2.271612960162118,
       "sigma_max_band_center": {
         "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
         "dy_over_L_threshold": 0.35,
         "L_mm": 40.0,
-        "sigma_max_MPa": 2.281755081463788,
+        "sigma_max_MPa": 2.271612960162118,
         "node_0based": 3279,
         "xyz_mm": [
-          -1.3860090875974014,
-          262.4509965860813,
-          176.17011719133222
+          -1.3859965487227603,
+          262.4509972029929,
+          176.16980254803735
         ],
-        "y_mm": 262.4509965860813,
-        "dy_over_L": 0.01127491465203292
+        "y_mm": 262.4509972029929,
+        "dy_over_L": 0.011274930074822009
       },
       "vs_old_baseline_MPa": {
         "old_baseline": 1.645735221879838,
-        "delta_MPa": 0.6360198595839501,
-        "rel_pct": 38.646548431858776
+        "delta_MPa": 0.62587773828228,
+        "rel_pct": 38.03028153990484
       },
-      "hotspot_edge_artifact": false
+      "band_position": "BAND_CENTER"
     },
     {
-      "s": 1.1,
-      "tag": "s_1.10",
-      "status": "hotspot_band_edge_artifact",
+      "s": 0.92,
+      "tag": "s_0.92",
+      "status": "ok",
       "deform": {
-        "s": 1.1,
+        "s": 0.92,
         "y0_mm": 262.0,
-        "L_mm": 66.0,
-        "sigma_mm": 22.0,
-        "falloff_kind": "gaussian_cut",
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
         "band_y_mm": [
-          196.0,
-          328.0
+          222.0,
+          302.0
         ],
-        "w_at_cutoff": 0.011108996538242306,
-        "n_nodes_w_gt_0": 9247,
-        "n_nodes_w_gt_0_5": 2463,
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
         "n_frozen": 1257,
-        "w_max": 0.9999998964270027,
-        "s_eff_min": 1.0,
-        "s_eff_max": 1.0999999896427004,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 0.9200000123689166,
+        "s_eff_max": 1.0,
         "axis_point_mm": [
           -0.11319510477358953,
           373.33987826861113,
@@ -309,15 +596,13 @@
         "pass": true,
         "fail_reasons": [],
         "V0_mm3": 4847396.4758005375,
-        "V_mm3": 4925525.392811694,
-        "dV_frac": 0.016117707185949515,
+        "V_mm3": 4807192.122005464,
+        "dV_frac": -0.008294009783557937,
         "n_inverted_or_neg": 0,
         "n_tets": 192060,
         "n_nodes": 38811
       },
-      "fail_reasons": [
-        "hotspot_at_band_edge y=314.93 dy/L=0.802"
-      ],
+      "fail_reasons": [],
       "spc_clearance": {
         "n_prox": 634,
         "n_dist": 623,
@@ -332,223 +617,1450 @@
           "mean": 587.378980902952
         },
         "band_y_mm": [
-          196.0,
-          328.0
+          222.0,
+          302.0
         ],
         "y0_mm": 262.0,
-        "L_mm": 66.0,
-        "gap_prox_max_y_to_band_lo_mm": 22.41294860839841,
-        "gap_band_hi_to_dist_min_y_mm": 248.5487060546875,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
         "n_SPC_nodes_in_band": 0,
         "safe_clearance": true
       },
       "ccx_returncode": 0,
       "ccx_reused": false,
       "reaction": {
-        "M_fe_Nm": 106.5980618128344,
+        "M_fe_Nm": 106.41461068703435,
         "RF_N": [
-          0.0004505720000184659,
-          -0.3686934400005519,
-          186.4882713000003
+          0.0004304779999909055,
+          -0.34369434000015975,
+          184.5592745400001
         ],
         "M_analytic_Nm": 106.519091897925,
-        "M_fea_pred_Nm": 106.59825424480925,
-        "err_vs_analytic_pct": 0.07413686457736876,
-        "err_vs_fea_pred_pct": 0.00018052075638180098,
+        "M_fea_pred_Nm": 106.4148018469717,
+        "err_vs_analytic_pct": 0.09808683967261196,
+        "err_vs_fea_pred_pct": 0.00017963660508357138,
         "pass": true,
         "n_prox_with_rf": 634,
-        "m_self_eff_kg": 8.18787648450438,
+        "m_self_eff_kg": 7.99116686916409,
         "L_mm": 424.7445947795238,
-        "x_com_from_prox_m": 0.2104546130272792
+        "x_com_from_prox_m": 0.21329418676015685
       },
       "hotspot": {
         "bc_classification": "IN_BODY_AWAY_FROM_BC",
-        "band_position": "BAND_EDGE",
-        "node_0based": 7345,
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
         "xyz_mm": [
-          -2.616231795554377,
-          314.9270736420356,
-          95.28024401573546
+          -1.4170446859920633,
+          262.44946963739426,
+          176.94890661362518
         ],
-        "y_mm": 314.9270736420356,
-        "dy_from_y0_mm": 52.92707364203562,
-        "dy_over_L": 0.801925358212661,
-        "von_mises_MPa": 1.3587587961081045,
-        "global_max_MPa": 1.3849394277960319,
-        "global_max_node": 7250,
-        "dist_to_SPC_mm": 143.4149938099851,
-        "dist_to_distal_mm": 263.4495766933344,
+        "y_mm": 262.44946963739426,
+        "dy_from_y0_mm": 0.4494696373942588,
+        "dy_over_L": 0.01123674093485647,
+        "von_mises_MPa": 2.12542251698287,
+        "global_max_MPa": 2.12542251698287,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 93.34961838639362,
+        "dist_to_distal_mm": 315.5927369161727,
         "percentiles_all": {
-          "p50": 0.1313833497039328,
-          "p95": 0.8521541507833229,
-          "p99": 1.1217879628807497,
-          "p100": 1.3849394277960319
+          "p50": 0.13981450399580786,
+          "p95": 0.9118992124352818,
+          "p99": 1.2571124442423522,
+          "p100": 2.12542251698287
         },
         "percentiles_exclude_2mm_BC": {
-          "p50": 0.13118362618847107,
-          "p95": 0.8608115919243245,
-          "p99": 1.125586006373317,
-          "p100": 1.3587587961081045
+          "p50": 0.1402901390400016,
+          "p95": 0.9216090490323045,
+          "p99": 1.260421476666617,
+          "p100": 2.12542251698287
         },
         "thresholds": {
           "center_if_dy_over_L_le": 0.35,
           "edge_if_dy_over_L_ge": 0.7,
-          "L_mm": 66.0,
+          "L_mm": 40.0,
           "y0_mm": 262.0
         }
       },
-      "sigma_max_MPa": 1.3587587961081045,
+      "sigma_max_MPa": 2.12542251698287,
       "sigma_max_band_center": {
         "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
         "dy_over_L_threshold": 0.35,
-        "L_mm": 66.0,
-        "sigma_max_MPa": 1.2345208013842928,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 2.12542251698287,
         "node_0based": 3279,
         "xyz_mm": [
-          -1.6964934589180745,
-          262.4357207825634,
-          183.9612330930449
+          -1.4170446859920633,
+          262.44946963739426,
+          176.94890661362518
         ],
-        "y_mm": 262.4357207825634,
-        "dy_over_L": 0.006601830038839511
+        "y_mm": 262.44946963739426,
+        "dy_over_L": 0.01123674093485647
       },
       "vs_old_baseline_MPa": {
         "old_baseline": 1.645735221879838,
-        "delta_MPa": -0.28697642577173355,
-        "rel_pct": -17.437581814888503
+        "delta_MPa": 0.4796872951030322,
+        "rel_pct": 29.147294700001037
       },
-      "hotspot_edge_artifact": true
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 0.94,
+      "tag": "s_0.94",
+      "status": "ok",
+      "deform": {
+        "s": 0.94,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 0.9400000092766874,
+        "s_eff_max": 1.0,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4817021.98762116,
+        "dV_frac": -0.006266144791542144,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.43009713812329,
+        "RF_N": [
+          0.00043589999999033274,
+          -0.3463380800001836,
+          184.71950236999996
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.430282019159,
+        "err_vs_analytic_pct": 0.08354817734175687,
+        "err_vs_fea_pred_pct": 0.00017371093282847954,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.007507405269752,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21305605983657538
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.4480928232613661,
+          262.4479420717957,
+          177.72801067921304
+        ],
+        "y_mm": 262.4479420717957,
+        "dy_from_y0_mm": 0.4479420717956941,
+        "dy_over_L": 0.011198551794892353,
+        "von_mises_MPa": 1.9908218770897863,
+        "global_max_MPa": 1.9908218770897863,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 93.12610821992568,
+        "dist_to_distal_mm": 315.52858387679964,
+        "percentiles_all": {
+          "p50": 0.1390779266502298,
+          "p95": 0.9043320669714626,
+          "p99": 1.2412950921598922,
+          "p100": 1.9908218770897863
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.1394670018190356,
+          "p95": 0.9143080820531716,
+          "p99": 1.2482148698679612,
+          "p100": 1.9908218770897863
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.9908218770897863,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.9908218770897863,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.4480928232613661,
+          262.4479420717957,
+          177.72801067921304
+        ],
+        "y_mm": 262.4479420717957,
+        "dy_over_L": 0.011198551794892353
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": 0.3450866552099483,
+        "rel_pct": 20.968540420236835
+      },
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 0.96,
+      "tag": "s_0.96",
+      "status": "ok",
+      "deform": {
+        "s": 0.96,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 0.9600000061844582,
+        "s_eff_max": 1.0,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4826999.335125571,
+        "dV_frac": -0.004207854830277287,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.44582847694838,
+        "RF_N": [
+          0.00040913000001569465,
+          -0.3494835500000143,
+          184.88208702000009
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.44599725454577,
+        "err_vs_analytic_pct": 0.06877961468806257,
+        "err_vs_fea_pred_pct": 0.00015855701646654168,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.024093105777625,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21281538765806074
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.4791409605306691,
+          262.44641450619713,
+          178.5071147448009
+        ],
+        "y_mm": 262.44641450619713,
+        "dy_from_y0_mm": 0.4464145061971294,
+        "dy_over_L": 0.011160362654928235,
+        "von_mises_MPa": 1.8666720084845514,
+        "global_max_MPa": 1.8666720084845514,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 92.90860428627643,
+        "dist_to_distal_mm": 315.4663450057505,
+        "percentiles_all": {
+          "p50": 0.13828242741241248,
+          "p95": 0.8982184344625765,
+          "p99": 1.228413356946242,
+          "p100": 1.8666720084845514
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13872140383922538,
+          "p95": 0.9071880334155092,
+          "p99": 1.2334336991359158,
+          "p100": 1.8666720084845514
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.8666720084845514,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.8666720084845514,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.4791409605306691,
+          262.44641450619713,
+          178.5071147448009
+        ],
+        "y_mm": 262.44641450619713,
+        "dy_over_L": 0.011160362654928235
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": 0.2209367866047134,
+        "rel_pct": 13.424807567304109
+      },
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 0.98,
+      "tag": "s_0.98",
+      "status": "ok",
+      "deform": {
+        "s": 0.98,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 0.9800000030922291,
+        "s_eff_max": 1.0,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4837124.164518698,
+        "dV_frac": -0.0021191398997629824,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.46175799173085,
+        "RF_N": [
+          0.00043274999998333275,
+          -0.35199410000040254,
+          185.04719415800005
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.46194755149918,
+        "err_vs_analytic_pct": 0.05382500467530012,
+        "err_vs_fea_pred_pct": 0.00017805401149404224,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.04092397068771,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21257220796788223
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.510189097799972,
+          262.44488694059856,
+          179.28621881038873
+        ],
+        "y_mm": 262.44488694059856,
+        "dy_from_y0_mm": 0.4448869405985647,
+        "dy_over_L": 0.011122173514964117,
+        "von_mises_MPa": 1.7519503636570073,
+        "global_max_MPa": 1.7519503636570073,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 92.69714886440197,
+        "dist_to_distal_mm": 315.40602143619003,
+        "percentiles_all": {
+          "p50": 0.13756829785903837,
+          "p95": 0.8941600241102086,
+          "p99": 1.2149239832172323,
+          "p100": 1.7519503636570073
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13780526576045465,
+          "p95": 0.9018990899740943,
+          "p99": 1.2197921992860992,
+          "p100": 1.7519503636570073
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.7519503636570073,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.7519503636570073,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.510189097799972,
+          262.44488694059856,
+          179.28621881038873
+        ],
+        "y_mm": 262.44488694059856,
+        "dy_over_L": 0.011122173514964117
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": 0.10621514177716929,
+        "rel_pct": 6.453962968347082
+      },
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 1.0,
+      "tag": "s_1.00",
+      "status": "ok",
+      "deform": {
+        "s": 1.0,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4847396.475800538,
+        "dV_frac": 1.9212840939768034e-16,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.47794913793904,
+        "RF_N": [
+          0.00043115800003390003,
+          -0.35487357999967595,
+          185.21464378300016
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.47813290836291,
+        "err_vs_analytic_pct": 0.03862477538335149,
+        "err_vs_fea_pred_pct": 0.00017258982558607478,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.058000000000002,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21232655865371514
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.541237235069275,
+          262.443359375,
+          180.0653228759766
+        ],
+        "y_mm": 262.443359375,
+        "dy_from_y0_mm": 0.443359375,
+        "dy_over_L": 0.011083984375,
+        "von_mises_MPa": 1.645735221879838,
+        "global_max_MPa": 1.645735221879838,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 92.49178343877304,
+        "dist_to_distal_mm": 315.34761426726567,
+        "percentiles_all": {
+          "p50": 0.1368320218781492,
+          "p95": 0.8881458720528679,
+          "p99": 1.202851143350525,
+          "p100": 1.645735221879838
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13695176212225024,
+          "p95": 0.8953108215293456,
+          "p99": 1.208207584610068,
+          "p100": 1.645735221879838
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.645735221879838,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.645735221879838,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.541237235069275,
+          262.443359375,
+          180.0653228759766
+        ],
+        "y_mm": 262.443359375,
+        "dy_over_L": 0.011083984375
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": 0.0,
+        "rel_pct": 0.0
+      },
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 1.02,
+      "tag": "s_1.02",
+      "status": "ok",
+      "deform": {
+        "s": 1.02,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0199999969077709,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4857816.268971093,
+        "dV_frac": 0.0021495648690124294,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.49437844866848,
+        "RF_N": [
+          0.00039892599998473006,
+          -0.35754079999978083,
+          185.38460237200002
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.49455332346015,
+        "err_vs_analytic_pct": 0.023200957514913773,
+        "err_vs_fea_pred_pct": 0.0001642100804317525,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.075321193714503,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21207847773466934
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.572285372338578,
+          262.44183180940144,
+          180.84442694156445
+        ],
+        "y_mm": 262.44183180940144,
+        "dy_from_y0_mm": 0.4418318094014353,
+        "dy_over_L": 0.011045795235035882,
+        "von_mises_MPa": 1.547238423735938,
+        "global_max_MPa": 1.547238423735938,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 92.29254866299492,
+        "dist_to_distal_mm": 315.2911245640076,
+        "percentiles_all": {
+          "p50": 0.13610930779718447,
+          "p95": 0.8827981773803804,
+          "p99": 1.1895547701353808,
+          "p100": 1.547238423735938
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13633493111170197,
+          "p95": 0.8903860653935843,
+          "p99": 1.1924047112653833,
+          "p100": 1.547238423735938
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.547238423735938,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.547238423735938,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.572285372338578,
+          262.44183180940144,
+          180.84442694156445
+        ],
+        "y_mm": 262.44183180940144,
+        "dy_over_L": 0.011045795235035882
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": -0.0984967981439,
+        "rel_pct": -5.9849723597330655
+      },
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 1.04,
+      "tag": "s_1.04",
+      "status": "ok",
+      "deform": {
+        "s": 1.04,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0399999938155418,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4868383.544030363,
+        "dV_frac": 0.004329554707273922,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.51102475132299,
+        "RF_N": [
+          0.0004170239999665643,
+          -0.3604424500004518,
+          185.55676322999997
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.51120879509122,
+        "err_vs_analytic_pct": 0.007573427878762538,
+        "err_vs_fea_pred_pct": 0.00017279286406660804,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.092887551831213,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.2118280033483576
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_CENTER",
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.6033335096078807,
+          262.4403042438028,
+          181.62353100715228
+        ],
+        "y_mm": 262.4403042438028,
+        "dy_from_y0_mm": 0.44030424380281374,
+        "dy_over_L": 0.011007606095070344,
+        "von_mises_MPa": 1.4557334563034334,
+        "global_max_MPa": 1.4557334563034334,
+        "global_max_node": 3279,
+        "dist_to_SPC_mm": 92.09948432357409,
+        "dist_to_distal_mm": 315.236553357233,
+        "percentiles_all": {
+          "p50": 0.13532020835239988,
+          "p95": 0.8770316097804925,
+          "p99": 1.1792165777609107,
+          "p100": 1.4557334563034334
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13542346244563735,
+          "p95": 0.8856239558913516,
+          "p99": 1.1834117650842555,
+          "p100": 1.4557334563034334
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.4557334563034334,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.4557334563034334,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.6033335096078807,
+          262.4403042438028,
+          181.62353100715228
+        ],
+        "y_mm": 262.4403042438028,
+        "dy_over_L": 0.011007606095070344
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": -0.19000176557640458,
+        "rel_pct": -11.545099299714535
+      },
+      "band_position": "BAND_CENTER"
+    },
+    {
+      "s": 1.06,
+      "tag": "s_1.06",
+      "status": "ok",
+      "deform": {
+        "s": 1.06,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0599999907233126,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4879098.300978346,
+        "dV_frac": 0.006539969514784284,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.527911085719,
+        "RF_N": [
+          0.00036769099995198184,
+          -0.36318808000031066,
+          185.73148876
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.52809932153568,
+        "err_vs_analytic_pct": 0.008279443278069449,
+        "err_vs_fea_pred_pct": 0.00017670062441594713,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.110699074350132,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21157517373812734
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_EDGE",
+        "node_0based": 9129,
+        "xyz_mm": [
+          -5.951381133112318,
+          296.1574142977248,
+          95.71083760240667
+        ],
+        "y_mm": 296.1574142977248,
+        "dy_from_y0_mm": 34.15741429772481,
+        "dy_over_L": 0.8539353574431203,
+        "von_mises_MPa": 1.4009879147188316,
+        "global_max_MPa": 1.4037064912292028,
+        "global_max_node": 7250,
+        "dist_to_SPC_mm": 124.88615069437732,
+        "dist_to_distal_mm": 282.4124027490583,
+        "percentiles_all": {
+          "p50": 0.13433853893539935,
+          "p95": 0.8707652364145871,
+          "p99": 1.1679251729362075,
+          "p100": 1.4037064912292028
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.1344166017360853,
+          "p95": 0.8795512430041447,
+          "p99": 1.1710319310027648,
+          "p100": 1.4009879147188316
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.4009879147188316,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.3705755020941932,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.6343816468771837,
+          262.43877667820425,
+          182.40263507274014
+        ],
+        "y_mm": 262.43877667820425,
+        "dy_over_L": 0.010969416955106226
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": -0.24474730716100646,
+        "rel_pct": -14.871608987103302
+      },
+      "band_position": "BAND_EDGE"
+    },
+    {
+      "s": 1.08,
+      "tag": "s_1.08",
+      "status": "ok",
+      "deform": {
+        "s": 1.08,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0799999876310835,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4889960.539815044,
+        "dV_frac": 0.008780809291543902,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 623,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.378980902952
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.545047340908,
+        "RF_N": [
+          0.00035838599999957806,
+          -0.36613842999992025,
+          185.90850749
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.54522490105026,
+        "err_vs_analytic_pct": 0.024366939785665117,
+        "err_vs_fea_pred_pct": 0.00016665236985245011,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.128755761271261,
+        "L_mm": 424.7445947795238,
+        "x_com_from_prox_m": 0.21132002724035848
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_EDGE",
+        "node_0based": 13229,
+        "xyz_mm": [
+          10.612664135503485,
+          222.7000046126815,
+          81.02704456879854
+        ],
+        "y_mm": 222.7000046126815,
+        "dy_from_y0_mm": 39.29999538731849,
+        "dy_over_L": 0.9824998846829622,
+        "von_mises_MPa": 1.4308999532836948,
+        "global_max_MPa": 1.4308999532836948,
+        "global_max_node": 13229,
+        "dist_to_SPC_mm": 50.710762111872754,
+        "dist_to_distal_mm": 354.11559522078704,
+        "percentiles_all": {
+          "p50": 0.13357129295553966,
+          "p95": 0.8648201438889432,
+          "p99": 1.1502122503668502,
+          "p100": 1.4308999532836948
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13360818313550193,
+          "p95": 0.8749650697851452,
+          "p99": 1.1540094863677068,
+          "p100": 1.4308999532836948
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.4308999532836948,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.2911935289977128,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.6654297841464867,
+          262.4372491126057,
+          183.18173913832797
+        ],
+        "y_mm": 262.4372491126057,
+        "dy_over_L": 0.010931227815142108
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": -0.21483526859614321,
+        "rel_pct": -13.054060321486471
+      },
+      "band_position": "BAND_EDGE"
+    },
+    {
+      "s": 1.1,
+      "tag": "s_1.10",
+      "status": "ok",
+      "deform": {
+        "s": 1.1,
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "sigma_mm": null,
+        "falloff_kind": "cosine_C1",
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "w_at_cutoff": 0.0,
+        "n_nodes_w_gt_0": 5592,
+        "n_nodes_w_gt_0_5": 1740,
+        "n_frozen": 1257,
+        "w_max": 0.9999998453885428,
+        "s_eff_min": 1.0,
+        "s_eff_max": 1.0999999845388544,
+        "axis_point_mm": [
+          -0.11319510477358953,
+          373.33987826861113,
+          141.31061544843166
+        ],
+        "axis_u": [
+          -0.0011264660859389756,
+          0.9999975304394124,
+          0.0019157737950791132
+        ],
+        "tet_flip_repair": {
+          "n_flipped": 0,
+          "n_still_nonpos": 0,
+          "min_vol_before": 1.1025192521839483e-05,
+          "min_vol_after": 1.1025192521839483e-05
+        }
+      },
+      "mesh_gate": {
+        "pass": true,
+        "fail_reasons": [],
+        "V0_mm3": 4847396.4758005375,
+        "V_mm3": 4900970.2605404565,
+        "dV_frac": 0.011052074037552583,
+        "n_inverted_or_neg": 0,
+        "n_tets": 192060,
+        "n_nodes": 38811
+      },
+      "fail_reasons": [],
+      "spc_clearance": {
+        "n_prox": 634,
+        "n_dist": 624,
+        "prox_y_mm": {
+          "min": 151.4163970947266,
+          "max": 173.5870513916016,
+          "mean": 162.63681181898627
+        },
+        "dist_y_mm": {
+          "min": 576.5487060546875,
+          "max": 598.78759765625,
+          "mean": 587.3619235112117
+        },
+        "band_y_mm": [
+          222.0,
+          302.0
+        ],
+        "y0_mm": 262.0,
+        "L_mm": 40.0,
+        "gap_prox_max_y_to_band_lo_mm": 48.41294860839841,
+        "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+        "n_SPC_nodes_in_band": 0,
+        "safe_clearance": true
+      },
+      "ccx_returncode": 0,
+      "ccx_reused": false,
+      "reaction": {
+        "M_fe_Nm": 106.56062764512222,
+        "RF_N": [
+          0.0003945449999724609,
+          -0.36897371000000334,
+          186.0879703699999
+        ],
+        "M_analytic_Nm": 106.519091897925,
+        "M_fea_pred_Nm": 106.5607950835956,
+        "err_vs_analytic_pct": 0.038993711321753284,
+        "err_vs_fea_pred_pct": 0.00015712952708134498,
+        "pass": true,
+        "n_prox_with_rf": 634,
+        "m_self_eff_kg": 8.147057612594597,
+        "L_mm": 424.7278155392506,
+        "x_com_from_prox_m": 0.21106260227192675
+      },
+      "hotspot": {
+        "bc_classification": "IN_BODY_AWAY_FROM_BC",
+        "band_position": "BAND_EDGE",
+        "node_0based": 13229,
+        "xyz_mm": [
+          10.612823615729452,
+          222.70000652879136,
+          81.02613816949426
+        ],
+        "y_mm": 222.70000652879136,
+        "dy_from_y0_mm": 39.29999347120864,
+        "dy_over_L": 0.9824998367802159,
+        "von_mises_MPa": 1.4863671823810825,
+        "global_max_MPa": 1.4863671823810825,
+        "global_max_node": 13229,
+        "dist_to_SPC_mm": 50.710671829473135,
+        "dist_to_distal_mm": 354.1155725472879,
+        "percentiles_all": {
+          "p50": 0.13291849220299673,
+          "p95": 0.8615562766736709,
+          "p99": 1.1403905727732164,
+          "p100": 1.4863671823810825
+        },
+        "percentiles_exclude_2mm_BC": {
+          "p50": 0.13291849220299673,
+          "p95": 0.8690776201182498,
+          "p99": 1.14444319986873,
+          "p100": 1.4863671823810825
+        },
+        "thresholds": {
+          "center_if_dy_over_L_le": 0.35,
+          "edge_if_dy_over_L_ge": 0.7,
+          "L_mm": 40.0,
+          "y0_mm": 262.0
+        }
+      },
+      "sigma_max_MPa": 1.4863671823810825,
+      "sigma_max_band_center": {
+        "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+        "dy_over_L_threshold": 0.35,
+        "L_mm": 40.0,
+        "sigma_max_MPa": 1.217048344400942,
+        "node_0based": 3279,
+        "xyz_mm": [
+          -1.6964779214157895,
+          262.4357215470071,
+          183.96084320391583
+        ],
+        "y_mm": 262.4357215470071,
+        "dy_over_L": 0.01089303867517799
+      },
+      "vs_old_baseline_MPa": {
+        "old_baseline": 1.645735221879838,
+        "delta_MPa": -0.15936803949875555,
+        "rel_pct": -9.683698652126903
+      },
+      "band_position": "BAND_EDGE"
     }
   ],
-  "pilot_extremes_clean": false,
-  "next_action": "STOP \u2014 jangan lanjut 9 sampel. Perlu morph lain untuk s>1 (mis. harmonic displacement / parameterisasi tanpa bulb shoulder), atau batasi batch pertama ke s<=1.0 dulu.",
-  "sigma_max_band_center_s_1_10_cosine_L40_legacy": {
-    "s": 1.1,
-    "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
-    "dy_over_L_threshold": 0.35,
-    "L_mm_used_for_definition": 40.0,
-    "sigma_max_MPa": 1.217048344400942,
-    "node_0based": 3279,
-    "xyz_mm": [
-      -1.6964779214157895,
-      262.4357215470071,
-      183.96084320391583
-    ],
-    "y_mm": 262.4357215470071,
-    "dy_over_L": 0.01089303867517799
-  },
-  "radius_kink_diagnostic_ref": "reports/ur5e_nauo3_neck_batch/radius_profile_s110_diagnostic.json",
-  "sigma_max_band_center_s_1_10": {
-    "s": 1.1,
-    "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
-    "dy_over_L_threshold": 0.35,
-    "L_mm_used_for_definition": 40.0,
-    "sigma_max_MPa": 1.217048344400942,
-    "node_0based": 3279,
-    "xyz_mm": [
-      -1.6964779214157895,
-      262.4357215470071,
-      183.96084320391583
-    ],
-    "y_mm": 262.4357215470071,
-    "dy_over_L": 0.01089303867517799
-  },
-  "sigma_max_band_center_s_1_10_note": "Nilai 1.217 MPa dari FEA cosine L=40 s=1.10 (folder _cosine_L40_legacy). Definisi: max von_mises pada node |y-262|/L<=0.35.",
-  "radius_kink_diagnostic": {
-    "confirmed": true,
-    "continuity_class_cosine": "C1_not_C2",
-    "conclusion": "CONFIRMED: cosine falloff is C1 but NOT C2 at band edges. Analytical d\u00b2w/dy\u00b2 jumps by 0.5*(\u03c0/L)^2 at y=y0\u00b1L while outside=0. Node-matched rho=r/r0 tracks s_eff exactly; mesh d\u00b2\u03c1/dy\u00b2 spikes at the same edges. This curvature kink (not merely stress location) is the mechanism.",
-    "theoretical_second_deriv_jump": {
-      "formula": "0.5*(pi/L)^2",
-      "L_mm": 40.0,
-      "jump_magnitude": 0.003084251375340424,
-      "proximal_edge": {
-        "d2_just_inside_max": 0.003084140395937313,
-        "d2_just_outside_max": 0.0003855309264719146,
-        "theoretical_d2_jump_at_edge": 0.003084251375340424,
-        "y_edge": 222.0
-      },
-      "distal_edge": {
-        "d2_just_inside_max": 0.003084140395939067,
-        "d2_just_outside_max": 0.0003855309264720242,
-        "theoretical_d2_jump_at_edge": 0.003084251375340424
-      }
-    },
-    "plot": "reports/ur5e_nauo3_neck_batch/radius_profile_s110_diagnostic.png",
-    "json": "reports/ur5e_nauo3_neck_batch/radius_profile_s110_diagnostic.json",
-    "key_numbers": {
-      "d2w_jump_at_edge": 0.003084251375340424,
-      "d2_just_inside_max": 0.003084140395937313,
-      "d2_just_outside_max": 0.0003855309264719146,
-      "rho_tracks_seff_max_abs_err": 1e-13
-    }
-  },
-  "falloff_softening_attempts": [
-    {
-      "kind": "cosine_C1",
-      "L_expand": 40,
-      "s110_band": "BAND_EDGE",
-      "y": 222.7,
-      "sigma_max": 1.486,
-      "sigma_center": 1.217,
-      "ratio_edge_center": 1.221035332785538
-    },
-    {
-      "kind": "smootherstep_C2",
-      "L_expand": 40,
-      "s110_band": "BAND_EDGE",
-      "y": 222.7,
-      "note": "C2 saja, L sama \u2014 hotspot tetap tepi proximal"
-    },
-    {
-      "kind": "smootherstep_C2",
-      "L_expand": 55,
-      "s110_band": "BAND_EDGE",
-      "y": 310.43,
-      "sigma_max": 1.394,
-      "sigma_center": 1.245,
-      "ratio_edge_center": 1.1196787148594376,
-      "note": "artefak pindah ke tepi distal (kejar tepi band)"
-    },
-    {
-      "kind": "bump_Cinf",
-      "L_expand": 65,
-      "s110_band": "BAND_EDGE",
-      "y": 322.66,
-      "sigma_max": 1.393,
-      "sigma_center": 1.26,
-      "ratio_edge_center": 1.1055555555555556
-    },
-    {
-      "kind": "gaussian_cut",
-      "sigma": 22,
-      "L": 66,
-      "s110_band": "BAND_EDGE",
-      "y": 314.93
-    },
-    {
-      "kind": "gaussian_nocut",
-      "sigma": 35,
-      "freeze_SPC_distal": true,
-      "s090_band": "BAND_CENTER",
-      "s110_band": "BAND_EDGE",
-      "y": 322.66,
-      "w_at_hotspot": 0.223,
-      "sigma_center_L40": 1.252,
-      "note": "Hotspot di w\u22480.22 (bukan cutoff) \u2192 bahu bulb struktural, bukan kink C2 sisa"
-    }
-  ],
-  "interpretation_s_gt_1": "Setelah menghilangkan diskontinuitas kurvatura (C2/C\u221e/gaussian), hotspot s=1.10 tetap di bahu transisi penebalan (~y=310\u2013323), dan bergeser ikut support falloff. Ini perilaku struktural bulb under bending, bukan artefak C1-cosine saja. s=0.90 (penipisan) konsisten BAND_CENTER.",
-  "gauss35_trial_ref": "reports/ur5e_nauo3_neck_batch/gauss35_trial.json",
-  "legacy_cosine_ref": "reports/ur5e_nauo3_neck_batch/_cosine_L40_legacy/",
-  "structural_vs_artifact_analysis_ref": "reports/ur5e_nauo3_neck_batch/structural_vs_artifact_analysis.json",
-  "s110_hotspot_sigma_comparison_ref": "reports/ur5e_nauo3_neck_batch/s110_hotspot_sigma_comparison.json",
-  "s103_cosine_scaling_verdict": {
-    "prox_edge_delta_ratio_03_over_10": 0.2995885072842614,
-    "center_delta_ratio_03_over_10": 0.33842471800874435,
-    "expected_if_linear_in_ds": 0.3,
-    "s103_hotspot_band": "BAND_CENTER",
-    "s110_hotspot_band": "BAND_EDGE",
-    "conclusion": "\u0394\u03c3 at prox-edge and at center both scale \u22480.30 when |s-1| shrinks 0.10\u21920.03. s>1 shoulder is structural (taper/fillet response), not mesh artifact. Prefer keep as legitimate global max; not opsi2-avoid and not opsi3-ignore-shoulder."
+  "s1_sanity_check": {
+    "sigma_max_MPa": 1.645735221879838,
+    "old_baseline_MPa": 1.645735221879838,
+    "delta_MPa": 0.0,
+    "rel_pct": 0.0,
+    "band_position": "BAND_CENTER",
+    "pass_near_baseline": true
   }
 }

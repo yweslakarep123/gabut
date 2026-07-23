@@ -1,0 +1,17 @@
+{
+  "n_nodes": 1353,
+  "n_tets": 5010,
+  "n_base_nodes": 25,
+  "n_tip_nodes": 25,
+  "n_side_nodes": 844,
+  "mesh_size_mm": 2.0,
+  "bbox_mm": {
+    "xmin": 0.0,
+    "xmax": 100.0,
+    "ymin": -5.0,
+    "ymax": 5.0,
+    "zmin": -5.0,
+    "zmax": 5.0
+  },
+  "msh": "/home/daffa/Documents/jazari/reports/thermal_fin_validate/al_fin.msh"
+}
