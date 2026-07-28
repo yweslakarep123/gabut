@@ -1,0 +1,12 @@
+{
+  "y0_source": "reports/ur5e_nauo3_neck_batch/s_1.10/stress_hotspot.json",
+  "y0_mm": 222.70000652879136,
+  "hotspot_band_position": "BAND_EDGE",
+  "hotspot_von_mises_MPa": 1.4863671823810825,
+  "L_from_geometry_mm": 39.29999347120864,
+  "L_geometry_note": "|Y0_NECK - y_hotspot_s1.10|; locked neck band edge is at Y0_NECK-L_BAND=222.0",
+  "prox_y_max_mm": 173.5870513916016,
+  "L_spc_cap_mm": 28.612955137189772,
+  "L_mm": 28.612955137189772,
+  "L_choice_note": "min(L_from_geometry, y0_bahu - prox_ymax - MIN_SPC_GAP_MM - 0.5) so shoulder band clears the existing SPC gate (strict >)"
+}

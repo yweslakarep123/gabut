@@ -1,0 +1,102 @@
+{
+  "verdict": "no_feasible_thinning_within_tested_range",
+  "message": "Checked 6 measured batch points [0.90, 0.92, 0.94, 0.96, 0.98, 1.00] \u2014 signs of g computed from real cached sample_result.json values, not assumed from the two endpoints. g(0.90)=+6.258777e-01, g(0.92)=+4.796873e-01, g(0.94)=+3.450867e-01, g(0.96)=+2.209368e-01, g(0.98)=+1.062151e-01, g(1.00)=+0.000000e+00. Every s < 1.00 has g(s) > 0 (over budget); g(1.00)\u22480 by construction. No feasible thinning below s=1.0 within this one-parameter family on the tested grid. Not forcing brentq on a bracket with no sign change.",
+  "s_star": null,
+  "feasible_thinning": false,
+  "sigma_allow_MPa": 1.645735221879838,
+  "baseline_sigma_max_MPa": 1.645735221879838,
+  "preflight_points": [
+    {
+      "s": 0.9,
+      "sigma_max_MPa": 2.271612960162118,
+      "g": 0.62587773828228,
+      "sign": 1,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    },
+    {
+      "s": 0.92,
+      "sigma_max_MPa": 2.12542251698287,
+      "g": 0.4796872951030322,
+      "sign": 1,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    },
+    {
+      "s": 0.94,
+      "sigma_max_MPa": 1.9908218770897863,
+      "g": 0.3450866552099483,
+      "sign": 1,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    },
+    {
+      "s": 0.96,
+      "sigma_max_MPa": 1.8666720084845514,
+      "g": 0.2209367866047134,
+      "sign": 1,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    },
+    {
+      "s": 0.98,
+      "sigma_max_MPa": 1.7519503636570073,
+      "g": 0.10621514177716929,
+      "sign": 1,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    },
+    {
+      "s": 1.0,
+      "sigma_max_MPa": 1.645735221879838,
+      "g": 0.0,
+      "sign": 0,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    }
+  ],
+  "n_preflight_points_checked": 6,
+  "endpoints": {
+    "s_low": {
+      "s": 0.9,
+      "sigma_max_MPa": 2.271612960162118,
+      "g": 0.62587773828228,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    },
+    "s_high": {
+      "s": 1.0,
+      "sigma_max_MPa": 1.645735221879838,
+      "g": 0.0,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true
+    }
+  },
+  "n_fea_evaluations_spent": 0,
+  "n_evaluations_total": 6,
+  "n_grid_compare": 11,
+  "headline": "0 FEA evaluations spent vs 11 on the original fixed grid",
+  "counters": {
+    "n_eval": 6,
+    "n_cache_json": 6,
+    "n_fea_reused": 0,
+    "n_fea_new": 0,
+    "n_gate_fail_before_fea": 0
+  },
+  "gates": {
+    "MAX_ABS_DV_FRAC": 0.05,
+    "MAX_INVERTED": 0,
+    "REACTION_ERR_PCT": 10.0,
+    "MIN_SPC_GAP_MM": 20.0,
+    "Y0_NECK": 262.0,
+    "L_BAND": 40.0
+  }
+}

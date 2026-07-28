@@ -1,0 +1,1251 @@
+{
+  "manifest": "ur5e_nauo3_dataset_inventory",
+  "purpose": "Honest inventory of independent FEA design points from the Phase1\u2192pilot2d\u2192falloff thread, before choosing Phase 2 expansion vs Phase 3 dataset prep. No new FEA.",
+  "dedup_rule": {
+    "keys": [
+      "s_center",
+      "y0_center_mm",
+      "L_center_mm",
+      "s_shoulder",
+      "y0_shoulder_mm",
+      "L_shoulder_mm",
+      "falloff_kind"
+    ],
+    "noop_shoulder": "If s_shoulder == 1.0, shoulder location (y0_shoulder, L_shoulder) is ignored (no-op). This equates Phase-1 one-parameter samples with pilot2d sanity checks sc1.00_ss1.00 and sc0.90_ss1.00.",
+    "canonical_priority": [
+      "phase1_batch",
+      "phase2_pilot2d",
+      "falloff_probe"
+    ]
+  },
+  "counts": {
+    "raw_sample_result_files_scanned": 29,
+    "unique_design_points": 27,
+    "duplicates_not_double_counted": 2,
+    "unique_with_frd_present": 27,
+    "unique_missing_frd": 0,
+    "by_source_raw_before_dedup": {
+      "falloff_probe": 1,
+      "falloff_s_grid_batch": 13,
+      "phase1_batch": 11,
+      "phase2_pilot2d": 2
+    },
+    "by_direction_unique": {
+      "falloff_shape_open": 10,
+      "uniform_scale_below_1_closed_negative": 7,
+      "shoulder_compose_closed_negative": 2,
+      "baseline_identity": 1,
+      "uniform_scale_above_1_thickens": 7
+    },
+    "closed_negative_directions": {
+      "uniform_scale_s_lt_1": 7,
+      "shoulder_compose_nonzero": 2,
+      "note": "Uniform scale below 1.0 raises sigma_max above baseline (no free thinning). Pilot2d shoulder thickening at fixed center thinness did not create slack (slack_2d_found=false)."
+    },
+    "open_or_boundary_directions": {
+      "falloff_shape": 10,
+      "uniform_scale_s_gt_1_thickens": 7,
+      "baseline": 1,
+      "note": "After falloff_s_grid batch: bump_Cinf and smootherstep_C2 sampled at s\u2208{0.90,0.94,0.98,1.00,1.10}; cosine extended to 0.86/0.88/1.12/1.14. See purpose_b deltas in falloff_s_grid/batch_summary.json."
+    }
+  },
+  "baseline_reference": {
+    "tag": "s_1.00",
+    "sigma_max_MPa": 1.645735221879838,
+    "path": "reports/ur5e_nauo3_neck_batch/s_1.00/sample_result.json"
+  },
+  "unique_points": [
+    {
+      "id": "u01_bump_cinf_s090",
+      "tag": "bump_cinf_s090",
+      "source": "falloff_probe",
+      "direction": "falloff_shape_open",
+      "parameters": {
+        "s_center": 0.9,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "bump_Cinf"
+      },
+      "sigma_max_MPa": 2.237299717811183,
+      "sigma_vs_baseline_rel_pct": 35.94530201860975,
+      "dV_frac": -0.012689729975266134,
+      "V_mm3": 4785884.323439572,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.3859685598193199,
+        262.4509985800444,
+        176.16910021062262
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u02_bump_cinf_s094",
+      "tag": "bump_cinf_s094",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 0.94,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "bump_Cinf"
+      },
+      "sigma_max_MPa": 1.9718553090353512,
+      "sigma_vs_baseline_rel_pct": 19.81607264764031,
+      "dV_frac": -0.007737955879180624,
+      "V_mm3": 4809887.535741897,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.4480760299193018,
+        262.44794289802667,
+        177.7275892767642
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s094/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s094/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u03_bump_cinf_s098",
+      "tag": "bump_cinf_s098",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 0.98,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "bump_Cinf"
+      },
+      "sigma_max_MPa": 1.7461180078395817,
+      "sigma_vs_baseline_rel_pct": 6.099570855941313,
+      "dV_frac": -0.0026206912577337533,
+      "V_mm3": 4834692.946233638,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.5101835000192838,
+        262.44488721600885,
+        179.2860783429058
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s098/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s098/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u04_bump_cinf_s100",
+      "tag": "bump_cinf_s100",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 1.0,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "bump_Cinf"
+      },
+      "sigma_max_MPa": 1.645735221879838,
+      "sigma_vs_baseline_rel_pct": 0.0,
+      "dV_frac": 1.9212840939768034e-16,
+      "V_mm3": 4847396.475800538,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s100/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s100/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u05_bump_cinf_s110",
+      "tag": "bump_cinf_s110",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 1.1,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "bump_Cinf"
+      },
+      "sigma_max_MPa": 1.5578076434328318,
+      "sigma_vs_baseline_rel_pct": -5.342753638496663,
+      "dV_frac": 0.013724045758775597,
+      "V_mm3": 4913922.366845352,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        10.61202621460048,
+        222.6999969482422,
+        81.0306701660107
+      ],
+      "hotspot_node_0based": 13229,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s110/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s110/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_13229"
+    },
+    {
+      "id": "u06_cosine_c1_s086",
+      "tag": "cosine_c1_s086",
+      "source": "falloff_s_grid_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "purpose": "a_corpus_s_extension",
+      "parameters": {
+        "s_center": 0.86,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 2.6041718280761486,
+      "sigma_vs_baseline_rel_pct": 58.237594568920876,
+      "dV_frac": -0.014195054944110752,
+      "V_mm3": 4778587.41649066,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.3239002741841543,
+        262.45405233419,
+        174.61159441686164
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s086/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s086/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u07_cosine_c1_s088",
+      "tag": "cosine_c1_s088",
+      "source": "falloff_s_grid_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "purpose": "a_corpus_s_extension",
+      "parameters": {
+        "s_center": 0.88,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 2.4307080134965675,
+      "sigma_vs_baseline_rel_pct": 47.69739270209553,
+      "dV_frac": -0.012258464859842146,
+      "V_mm3": 4787974.836440214,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.3549484114534573,
+        262.45252476859145,
+        175.3906984824495
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s088/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s088/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u08_s_0.90",
+      "tag": "s_0.90",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "parameters": {
+        "s_center": 0.9,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 2.271612960162118,
+      "sigma_vs_baseline_rel_pct": 38.03028153990484,
+      "dV_frac": -0.01029144980632467,
+      "V_mm3": 4797509.738278481,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.3859965487227603,
+        262.4509972029929,
+        176.16980254803735
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_0.90/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_0.90/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [
+        {
+          "tag": "sc0.90_ss1.00",
+          "source": "phase2_pilot2d",
+          "sample_result_path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.00/sample_result.json",
+          "sigma_max_MPa": 2.271612960162118,
+          "sigma_matches_canonical": true
+        }
+      ],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u09_sc0.90_ss1.10",
+      "tag": "sc0.90_ss1.10",
+      "source": "phase2_pilot2d",
+      "direction": "shoulder_compose_closed_negative",
+      "parameters": {
+        "s_center": 0.9,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.1,
+        "y0_shoulder_mm": 222.70000652879136,
+        "L_shoulder_mm": 28.612955137189772,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 2.2716402346963367,
+      "sigma_vs_baseline_rel_pct": 38.03193882558823,
+      "dV_frac": 0.0029783821375596277,
+      "V_mm3": 4861833.874877731,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.3859965487227603,
+        262.4509972029929,
+        176.16980254803735
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.10/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.10/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u10_s_0.92",
+      "tag": "s_0.92",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "parameters": {
+        "s_center": 0.92,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 2.12542251698287,
+      "sigma_vs_baseline_rel_pct": 29.14729470000103,
+      "dV_frac": -0.008294009783557937,
+      "V_mm3": 4807192.122005464,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.4170446859920633,
+        262.44946963739426,
+        176.94890661362518
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_0.92/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_0.92/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u11_s_0.94",
+      "tag": "s_0.94",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "parameters": {
+        "s_center": 0.94,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.9908218770897863,
+      "sigma_vs_baseline_rel_pct": 20.96854042023684,
+      "dV_frac": -0.006266144791542144,
+      "V_mm3": 4817021.98762116,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.4480928232613661,
+        262.4479420717957,
+        177.72801067921304
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_0.94/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_0.94/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u12_sc0.95_ss1.05",
+      "tag": "sc0.95_ss1.05",
+      "source": "phase2_pilot2d",
+      "direction": "shoulder_compose_closed_negative",
+      "parameters": {
+        "s_center": 0.95,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.05,
+        "y0_shoulder_mm": 222.70000652879136,
+        "L_shoulder_mm": 28.612955137189772,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.9281203179309376,
+      "sigma_vs_baseline_rel_pct": 17.158598315016054,
+      "dV_frac": 0.0013229300666444768,
+      "V_mm3": 4853809.2423433205,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.4636168918960175,
+        262.4471782889965,
+        178.11756271200696
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_pilot2d/sc0.95_ss1.05/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_pilot2d/sc0.95_ss1.05/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u13_s_0.96",
+      "tag": "s_0.96",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "parameters": {
+        "s_center": 0.96,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.8666720084845514,
+      "sigma_vs_baseline_rel_pct": 13.4248075673041,
+      "dV_frac": -0.004207854830277287,
+      "V_mm3": 4826999.335125571,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.4791409605306691,
+        262.44641450619713,
+        178.5071147448009
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_0.96/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_0.96/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u14_s_0.98",
+      "tag": "s_0.98",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_below_1_closed_negative",
+      "parameters": {
+        "s_center": 0.98,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.7519503636570073,
+      "sigma_vs_baseline_rel_pct": 6.453962968347073,
+      "dV_frac": -0.0021191398997629824,
+      "V_mm3": 4837124.164518698,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.510189097799972,
+        262.44488694059856,
+        179.28621881038873
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_0.98/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_0.98/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u15_s_1.00",
+      "tag": "s_1.00",
+      "source": "phase1_batch",
+      "direction": "baseline_identity",
+      "parameters": {
+        "s_center": 1.0,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.645735221879838,
+      "sigma_vs_baseline_rel_pct": 0.0,
+      "dV_frac": 1.9212840939768034e-16,
+      "V_mm3": 4847396.475800538,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.00/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_1.00/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [
+        {
+          "tag": "sc1.00_ss1.00",
+          "source": "phase2_pilot2d",
+          "sample_result_path": "reports/ur5e_nauo3_neck_pilot2d/sc1.00_ss1.00/sample_result.json",
+          "sigma_max_MPa": 1.645735221879838,
+          "sigma_matches_canonical": true
+        }
+      ],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u16_s_1.02",
+      "tag": "s_1.02",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "parameters": {
+        "s_center": 1.02,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.547238423735938,
+      "sigma_vs_baseline_rel_pct": -5.98497235973307,
+      "dV_frac": 0.0021495648690124294,
+      "V_mm3": 4857816.268971093,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.572285372338578,
+        262.44183180940144,
+        180.84442694156445
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.02/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_1.02/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u17_s_1.04",
+      "tag": "s_1.04",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "parameters": {
+        "s_center": 1.04,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.4557334563034334,
+      "sigma_vs_baseline_rel_pct": -11.545099299714533,
+      "dV_frac": 0.004329554707273922,
+      "V_mm3": 4868383.544030363,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.6033335096078807,
+        262.4403042438028,
+        181.62353100715228
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.04/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_1.04/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u18_s_1.06",
+      "tag": "s_1.06",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "parameters": {
+        "s_center": 1.06,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.4009879147188316,
+      "sigma_vs_baseline_rel_pct": -14.8716089871033,
+      "dV_frac": 0.006539969514784284,
+      "V_mm3": 4879098.300978346,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        -5.951381133112318,
+        296.1574142977248,
+        95.71083760240667
+      ],
+      "hotspot_node_0based": 9129,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.06/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_1.06/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_9129"
+    },
+    {
+      "id": "u19_s_1.08",
+      "tag": "s_1.08",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "parameters": {
+        "s_center": 1.08,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.4308999532836948,
+      "sigma_vs_baseline_rel_pct": -13.054060321486467,
+      "dV_frac": 0.008780809291543902,
+      "V_mm3": 4889960.539815044,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        10.612664135503485,
+        222.7000046126815,
+        81.02704456879854
+      ],
+      "hotspot_node_0based": 13229,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.08/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_1.08/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_13229"
+    },
+    {
+      "id": "u20_s_1.10",
+      "tag": "s_1.10",
+      "source": "phase1_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "parameters": {
+        "s_center": 1.1,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.4863671823810825,
+      "sigma_vs_baseline_rel_pct": -9.683698652126902,
+      "dV_frac": 0.011052074037552583,
+      "V_mm3": 4900970.2605404565,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        10.612823615729452,
+        222.70000652879136,
+        81.02613816949426
+      ],
+      "hotspot_node_0based": 13229,
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.10/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_neck_batch/s_1.10/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_13229"
+    },
+    {
+      "id": "u21_cosine_c1_s112",
+      "tag": "cosine_c1_s112",
+      "source": "falloff_s_grid_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "purpose": "a_corpus_s_extension",
+      "parameters": {
+        "s_center": 1.12,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.5413568449518453,
+      "sigma_vs_baseline_rel_pct": -6.342355412966532,
+      "dV_frac": 0.013353763752810518,
+      "V_mm3": 4912127.463154584,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        10.612983095955421,
+        222.7000084449012,
+        81.02523177019
+      ],
+      "hotspot_node_0based": 13229,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s112/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s112/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_13229"
+    },
+    {
+      "id": "u22_cosine_c1_s114",
+      "tag": "cosine_c1_s114",
+      "source": "falloff_s_grid_batch",
+      "direction": "uniform_scale_above_1_thickens",
+      "purpose": "a_corpus_s_extension",
+      "parameters": {
+        "s_center": 1.14,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "cosine_C1"
+      },
+      "sigma_max_MPa": 1.5956362744044832,
+      "sigma_vs_baseline_rel_pct": -3.0441681510668155,
+      "dV_frac": 0.015685878535305696,
+      "V_mm3": 4923432.148132414,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        10.613142576181387,
+        222.700010361011,
+        81.02432537088573
+      ],
+      "hotspot_node_0based": 13229,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s114/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s114/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_13229"
+    },
+    {
+      "id": "u23_smootherstep_c2_s090",
+      "tag": "smootherstep_c2_s090",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 0.9,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "smootherstep_C2"
+      },
+      "sigma_max_MPa": 2.262328471196088,
+      "sigma_vs_baseline_rel_pct": 37.466127060946505,
+      "dV_frac": -0.01020514454585549,
+      "V_mm3": 4797928.0940939225,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.3859515603981765,
+        262.45099941641445,
+        176.1686736369441
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s090/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s090/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u24_smootherstep_c2_s094",
+      "tag": "smootherstep_c2_s094",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 0.94,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "smootherstep_C2"
+      },
+      "sigma_max_MPa": 1.9859540367078565,
+      "sigma_vs_baseline_rel_pct": 20.672755271009162,
+      "dV_frac": -0.0062180928856866114,
+      "V_mm3": 4817254.91426026,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.4480658302666158,
+        262.44794339984867,
+        177.7273333325571
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s094/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s094/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u25_smootherstep_c2_s098",
+      "tag": "smootherstep_c2_s098",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 0.98,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "smootherstep_C2"
+      },
+      "sigma_max_MPa": 1.7505415740764856,
+      "sigma_vs_baseline_rel_pct": 6.3683605238109156,
+      "dV_frac": -0.002104366347953079,
+      "V_mm3": 4837195.7777816765,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.5101801001350552,
+        262.4448873832829,
+        179.28599302817008
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s098/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s098/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u26_smootherstep_c2_s100",
+      "tag": "smootherstep_c2_s100",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 1.0,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "smootherstep_C2"
+      },
+      "sigma_max_MPa": 1.645735221879838,
+      "sigma_vs_baseline_rel_pct": 0.0,
+      "dV_frac": 1.9212840939768034e-16,
+      "V_mm3": 4847396.475800538,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "hotspot_node_0based": 3279,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s100/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s100/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "baseline_center_node_3279"
+    },
+    {
+      "id": "u27_smootherstep_c2_s110",
+      "tag": "smootherstep_c2_s110",
+      "source": "falloff_s_grid_batch",
+      "direction": "falloff_shape_open",
+      "purpose": "b_falloff_consistency",
+      "parameters": {
+        "s_center": 1.1,
+        "y0_center_mm": 262.0,
+        "L_center_mm": 40.0,
+        "s_shoulder": 1.0,
+        "y0_shoulder_mm": null,
+        "L_shoulder_mm": null,
+        "falloff_kind": "smootherstep_C2"
+      },
+      "sigma_max_MPa": 1.4743018097681035,
+      "sigma_vs_baseline_rel_pct": -10.41682828638224,
+      "dV_frac": 0.010996862530633712,
+      "V_mm3": 4900702.628476394,
+      "status": "ok",
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_xyz_mm": [
+        10.612081309589307,
+        222.69999761019292,
+        81.03035703590795
+      ],
+      "hotspot_node_0based": 13229,
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s110/sample_result.json",
+      "frd_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s110/nauo3_cantilever.frd",
+      "frd_present": true,
+      "n_nodes": 38811,
+      "n_tets": 192060,
+      "duplicates": [],
+      "feature_regime": "other_node_13229"
+    }
+  ],
+  "duplicates": [
+    {
+      "tag": "sc0.90_ss1.00",
+      "source": "phase2_pilot2d",
+      "sample_result_path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.00/sample_result.json",
+      "duplicate_of": "s_0.90",
+      "duplicate_of_path": "reports/ur5e_nauo3_neck_batch/s_0.90/sample_result.json",
+      "param_key": [
+        0.9,
+        262.0,
+        40.0,
+        1.0,
+        null,
+        null,
+        "cosine_C1"
+      ],
+      "note": "Identical geometry parameters (shoulder s=1.0 treated as no-op). Data retained on disk; not counted as independent design point."
+    },
+    {
+      "tag": "sc1.00_ss1.00",
+      "source": "phase2_pilot2d",
+      "sample_result_path": "reports/ur5e_nauo3_neck_pilot2d/sc1.00_ss1.00/sample_result.json",
+      "duplicate_of": "s_1.00",
+      "duplicate_of_path": "reports/ur5e_nauo3_neck_batch/s_1.00/sample_result.json",
+      "param_key": [
+        1.0,
+        262.0,
+        40.0,
+        1.0,
+        null,
+        null,
+        "cosine_C1"
+      ],
+      "note": "Identical geometry parameters (shoulder s=1.0 treated as no-op). Data retained on disk; not counted as independent design point."
+    }
+  ],
+  "excluded_from_inventory": [
+    {
+      "sample_result_path": null,
+      "present": false,
+      "excluded_reason": "gauss falloff diagnostic; not in Phase-1 cosine grid",
+      "also_excluded": "reports/ur5e_nauo3_remesh_noise_floor/** (methodology diagnostics, not independent design points)"
+    },
+    {
+      "sample_result_path": null,
+      "present": false,
+      "excluded_reason": "gauss falloff diagnostic; not in Phase-1 cosine grid",
+      "also_excluded": "reports/ur5e_nauo3_remesh_noise_floor/** (methodology diagnostics, not independent design points)"
+    },
+    {
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/s_1.03_cosine_L40/sample_result.json",
+      "present": true,
+      "excluded_reason": "shoulder-excess diagnostic between s=1.00 and s=1.10; not part of the 11-point Phase-1 grid",
+      "also_excluded": "reports/ur5e_nauo3_remesh_noise_floor/** (methodology diagnostics, not independent design points)"
+    },
+    {
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/_cosine_L40_legacy/s_0.90/sample_result.json",
+      "present": true,
+      "excluded_reason": "legacy cosine path; superseded",
+      "also_excluded": "reports/ur5e_nauo3_remesh_noise_floor/** (methodology diagnostics, not independent design points)"
+    },
+    {
+      "sample_result_path": "reports/ur5e_nauo3_neck_batch/_cosine_L40_legacy/s_1.10/sample_result.json",
+      "present": true,
+      "excluded_reason": "legacy cosine path; superseded",
+      "also_excluded": "reports/ur5e_nauo3_remesh_noise_floor/** (methodology diagnostics, not independent design points)"
+    },
+    {
+      "sample_result_path": "reports/ur5e_nauo3_remesh_noise_floor/",
+      "present": true,
+      "excluded_reason": "Methodology diagnostics (determinism, remesh, optimize, locality). Not independent design points. In-place topology class elsewhere is structurally immune to remesh lobe-switch."
+    }
+  ],
+  "methodology_note": {
+    "in_place_topology": "Phase 1, pilot2d, and falloff all deform a fixed geometry.npz (38811 nodes). Same material node can win across falloff kinds (node 3279 at both cosine and bump_Cinf). Remesh lobe-switch (~1.13%) is a different comparison class and is excluded from this design-point inventory.",
+    "sigma_max_label": "At this station sigma_max is a near-degenerate double-lobe argmax (~75 mm apart in z, within ~6%). Soft-max / p-norm over top-k is recommended once gradient-based optimization through a surrogate begins \u2014 not required for this inventory."
+  },
+  "batch_append": {
+    "batch": "ur5e_nauo3_falloff_s_grid",
+    "summary_path": "reports/ur5e_nauo3_falloff_s_grid/batch_summary.json",
+    "n_new_unique": 13,
+    "purpose_b_deltas_vs_cosine": [
+      {
+        "s": 0.9,
+        "cosine_C1_sigma_MPa": 2.271612960162118,
+        "vs_cosine": {
+          "bump_Cinf": {
+            "sigma_MPa": 2.237299717811183,
+            "delta_rel_pct": -1.5105232692670534,
+            "path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/sample_result.json"
+          },
+          "smootherstep_C2": {
+            "sigma_MPa": 2.262328471196088,
+            "delta_rel_pct": -0.4087179078854768,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s090/sample_result.json"
+          }
+        }
+      },
+      {
+        "s": 0.94,
+        "cosine_C1_sigma_MPa": 1.9908218770897863,
+        "vs_cosine": {
+          "bump_Cinf": {
+            "sigma_MPa": 1.9718553090353512,
+            "delta_rel_pct": -0.95270040342136,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s094/sample_result.json"
+          },
+          "smootherstep_C2": {
+            "sigma_MPa": 1.9859540367078565,
+            "delta_rel_pct": -0.24451410937103327,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s094/sample_result.json"
+          }
+        }
+      },
+      {
+        "s": 0.98,
+        "cosine_C1_sigma_MPa": 1.7519503636570073,
+        "vs_cosine": {
+          "bump_Cinf": {
+            "sigma_MPa": 1.7461180078395817,
+            "delta_rel_pct": -0.33290645319717677,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s098/sample_result.json"
+          },
+          "smootherstep_C2": {
+            "sigma_MPa": 1.7505415740764856,
+            "delta_rel_pct": -0.08041264237538165,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s098/sample_result.json"
+          }
+        }
+      },
+      {
+        "s": 1.0,
+        "cosine_C1_sigma_MPa": 1.645735221879838,
+        "vs_cosine": {
+          "bump_Cinf": {
+            "sigma_MPa": 1.645735221879838,
+            "delta_rel_pct": 0.0,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s100/sample_result.json"
+          },
+          "smootherstep_C2": {
+            "sigma_MPa": 1.645735221879838,
+            "delta_rel_pct": 0.0,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s100/sample_result.json"
+          }
+        }
+      },
+      {
+        "s": 1.1,
+        "cosine_C1_sigma_MPa": 1.4863671823810825,
+        "vs_cosine": {
+          "bump_Cinf": {
+            "sigma_MPa": 1.5578076434328318,
+            "delta_rel_pct": 4.806380408460412,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s110/sample_result.json"
+          },
+          "smootherstep_C2": {
+            "sigma_MPa": 1.4743018097681035,
+            "delta_rel_pct": -0.8117356704317713,
+            "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s110/sample_result.json"
+          }
+        }
+      }
+    ],
+    "gauss35_corpus_note": {
+      "compatible_locked_topology": true,
+      "n_points": 2,
+      "falloff_kind": "gaussian_nocut",
+      "sigma_mm": 35.0,
+      "paths": [
+        "reports/ur5e_nauo3_neck_batch/s_0.90_gauss35/",
+        "reports/ur5e_nauo3_neck_batch/s_1.10_gauss35/"
+      ],
+      "included_in_unique_count": false,
+      "reason": "Valid FEA on locked topology (same lobe node 3279 at s=0.90) but gaussian_nocut is not in current neck_weight API; no sample_result.json. Corpus seed only \u2014 not counted in unique_design_points until packaged.",
+      "would_raise_unique_to": 29
+    }
+  },
+  "hotspot_annotation": {
+    "baseline_center_node_0based": 3279,
+    "n_unique": 27,
+    "by_band_position": {
+      "BAND_CENTER": 20,
+      "BAND_EDGE": 7
+    },
+    "by_hotspot_node_0based": {
+      "3279": 20,
+      "13229": 6,
+      "9129": 1
+    },
+    "note": "band_position and hotspot_node_0based read from each sample_result.json. Comparisons across falloff_kind or s must check same-feature (same hotspot_node) before interpreting as a single trend."
+  }
+}

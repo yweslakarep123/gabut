@@ -1,0 +1,1738 @@
+{
+  "test": "hotspot_locality_probe",
+  "purpose": "Last diagnostic on the ~1.13% in-place vs remesh gap before closing: local (not global) element quality near each run's own hotspot, and whether sigma_max sits on a broad plateau. Zero new FEA.",
+  "config": {
+    "local_radius_mm": 10.0,
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "tet_selection": "all four corners inside spatial ball around hotspot xyz",
+    "helpers_unmodified": [
+      "simjeb.mesh_ur_volume._tet_quality",
+      "batch_nauo3_neck_scale.parse_frd_nodal_von_mises"
+    ]
+  },
+  "check1_local_element_quality": {
+    "runs": {
+      "inplace_ref": {
+        "path": "reports/ur5e_nauo3_neck_batch/s_0.90",
+        "hotspot": {
+          "node_0based": 3279,
+          "xyz_mm": [
+            -1.3859965487227603,
+            262.4509972029929,
+            176.16980254803735
+          ],
+          "y_mm": 262.4509972029929,
+          "dy_over_L": 0.011274930074822009,
+          "von_mises_MPa": 2.271612960162118
+        },
+        "selection": {
+          "radius_mm": 10.0,
+          "method": "spatial_ball_all_four_corners_in_set",
+          "n_nodes_total": 38811,
+          "n_tets_total": 192060,
+          "n_nodes_in_ball": 22,
+          "n_tets_all_corners_in_ball": 31,
+          "n_tets_any_corner_in_ball": 177,
+          "node_dist_to_hotspot_mm": {
+            "min": 0.0,
+            "p50": 7.613954223320805,
+            "max": 9.77954278127485
+          }
+        },
+        "local_quality": {
+          "n_tets_local": 31,
+          "n_inverted_or_neg_volume": 0,
+          "n_radius_ratio_gt_10": 0,
+          "n_min_dihedral_lt_5deg": 0,
+          "n_min_dihedral_lt_1deg": 0,
+          "rho_p50": 1.2395033412400116,
+          "rho_p95": 1.980019431008527,
+          "rho_p99": 2.36041109490922,
+          "rho_p100": 2.516960998935459,
+          "min_dihedral_p0": 20.63681010056999,
+          "min_dihedral_p50": 47.97149253171005,
+          "min_dihedral_p5": 28.539576474744393,
+          "radius_ratio_full": {
+            "p0": 1.0387814914885554,
+            "p1": 1.0502117875725094,
+            "p5": 1.0784056382355438,
+            "p50": 1.2395033412400116,
+            "p95": 1.980019431008527,
+            "p99": 2.36041109490922,
+            "p100": 2.516960998935459
+          },
+          "min_dihedral_deg_full": {
+            "p0": 20.63681010056999,
+            "p1": 22.76651841195276,
+            "p5": 28.539576474744393,
+            "p50": 47.97149253171005,
+            "p95": 59.63237370138414,
+            "p99": 60.35311533142031,
+            "p100": 60.613070712716656
+          }
+        }
+      },
+      "remesh_pre_optimize": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun",
+        "hotspot": {
+          "node_0based": 424,
+          "xyz_mm": [
+            8.880133628845215,
+            264.3125,
+            101.07909393310547
+          ],
+          "y_mm": 264.3125,
+          "dy_over_L": 0.0578125,
+          "von_mises_MPa": 2.297287025705049
+        },
+        "selection": {
+          "radius_mm": 10.0,
+          "method": "spatial_ball_all_four_corners_in_set",
+          "n_nodes_total": 36582,
+          "n_tets_total": 177992,
+          "n_nodes_in_ball": 22,
+          "n_tets_all_corners_in_ball": 29,
+          "n_tets_any_corner_in_ball": 163,
+          "node_dist_to_hotspot_mm": {
+            "min": 0.0,
+            "p50": 7.518825519989166,
+            "max": 9.910445238567918
+          }
+        },
+        "local_quality": {
+          "n_tets_local": 29,
+          "n_inverted_or_neg_volume": 0,
+          "n_radius_ratio_gt_10": 0,
+          "n_min_dihedral_lt_5deg": 0,
+          "n_min_dihedral_lt_1deg": 0,
+          "rho_p50": 1.3127954369419867,
+          "rho_p95": 1.9340134663132957,
+          "rho_p99": 2.627752815850789,
+          "rho_p100": 2.897071331530961,
+          "min_dihedral_p0": 15.479321851845846,
+          "min_dihedral_p50": 46.08226496660742,
+          "min_dihedral_p5": 23.112523166078002,
+          "radius_ratio_full": {
+            "p0": 1.0611793062252592,
+            "p1": 1.0623079755389409,
+            "p5": 1.0663403981377864,
+            "p50": 1.3127954369419867,
+            "p95": 1.9340134663132957,
+            "p99": 2.627752815850789,
+            "p100": 2.897071331530961
+          },
+          "min_dihedral_deg_full": {
+            "p0": 15.479321851845846,
+            "p1": 17.26152555419847,
+            "p5": 23.112523166078002,
+            "p50": 46.08226496660742,
+            "p95": 61.59976139867108,
+            "p99": 62.3209084924135,
+            "p100": 62.46848488495379
+          }
+        }
+      },
+      "remesh_post_optimize": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_remesh_optimize_probe/fea_after_optimize",
+        "hotspot": {
+          "node_0based": 424,
+          "xyz_mm": [
+            8.880133628845215,
+            264.3125,
+            101.0790939331055
+          ],
+          "y_mm": 264.3125,
+          "dy_over_L": 0.0578125,
+          "von_mises_MPa": 2.297409263949199
+        },
+        "selection": {
+          "radius_mm": 10.0,
+          "method": "spatial_ball_all_four_corners_in_set",
+          "n_nodes_total": 36582,
+          "n_tets_total": 177660,
+          "n_nodes_in_ball": 22,
+          "n_tets_all_corners_in_ball": 29,
+          "n_tets_any_corner_in_ball": 163,
+          "node_dist_to_hotspot_mm": {
+            "min": 0.0,
+            "p50": 7.518825519989189,
+            "max": 9.910445238567847
+          }
+        },
+        "local_quality": {
+          "n_tets_local": 29,
+          "n_inverted_or_neg_volume": 0,
+          "n_radius_ratio_gt_10": 0,
+          "n_min_dihedral_lt_5deg": 0,
+          "n_min_dihedral_lt_1deg": 0,
+          "rho_p50": 1.3127954369419892,
+          "rho_p95": 1.9340134663132884,
+          "rho_p99": 2.6277528158508208,
+          "rho_p100": 2.897071331531015,
+          "min_dihedral_p0": 15.479321851845585,
+          "min_dihedral_p50": 46.08226496660814,
+          "min_dihedral_p5": 23.112523166078066,
+          "radius_ratio_full": {
+            "p0": 1.0611793062252604,
+            "p1": 1.0623079755389429,
+            "p5": 1.066340398137792,
+            "p50": 1.3127954369419892,
+            "p95": 1.9340134663132884,
+            "p99": 2.6277528158508208,
+            "p100": 2.897071331531015
+          },
+          "min_dihedral_deg_full": {
+            "p0": 15.479321851845585,
+            "p1": 17.261525554198254,
+            "p5": 23.112523166078066,
+            "p50": 46.08226496660814,
+            "p95": 61.59976139867056,
+            "p99": 62.320908492413444,
+            "p100": 62.46848488495386
+          }
+        }
+      }
+    },
+    "comparison": {
+      "rho_p50": {
+        "inplace_ref": 1.2395033412400116,
+        "remesh_pre_optimize": 1.3127954369419867,
+        "remesh_post_optimize": 1.3127954369419892
+      },
+      "rho_p95": {
+        "inplace_ref": 1.980019431008527,
+        "remesh_pre_optimize": 1.9340134663132957,
+        "remesh_post_optimize": 1.9340134663132884
+      },
+      "min_dihedral_p0": {
+        "inplace_ref": 20.63681010056999,
+        "remesh_pre_optimize": 15.479321851845846,
+        "remesh_post_optimize": 15.479321851845585
+      },
+      "deltas": {
+        "remesh_pre_vs_inplace_rho_p95_rel_pct": -2.3235107683664546,
+        "remesh_post_vs_inplace_rho_p95_rel_pct": -2.3235107683668246,
+        "remesh_post_vs_pre_rho_p95_rel_pct": -3.788738853248004e-13,
+        "remesh_pre_vs_inplace_rho_p50_rel_pct": 5.913021229023312,
+        "remesh_post_vs_inplace_rho_p50_rel_pct": 5.913021229023508
+      }
+    }
+  },
+  "check2_stress_peak_plateau": {
+    "runs": {
+      "inplace_ref": {
+        "path": "reports/ur5e_nauo3_neck_batch/s_0.90",
+        "hotspot": {
+          "node_0based": 3279,
+          "xyz_mm": [
+            -1.3859965487227603,
+            262.4509972029929,
+            176.16980254803735
+          ],
+          "y_mm": 262.4509972029929,
+          "dy_from_y0_mm": 0.4509972029928804,
+          "dy_over_L": 0.011274930074822009,
+          "von_mises_MPa_json": 2.271612960162118
+        },
+        "frd": {
+          "path": "reports/ur5e_nauo3_neck_batch/s_0.90/nauo3_cantilever.frd",
+          "n_nodes": 38811,
+          "n_finite": 38811,
+          "sigma_max_MPa": 2.271612960162118,
+          "sigma_max_matches_hotspot_json": true,
+          "abs_diff_frd_vs_json_MPa": 0.0
+        },
+        "bands": {
+          "within_1pct_of_max": {
+            "threshold_MPa": 2.2488968305604966,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.5765891113344154e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859965487227603,
+                262.4509972029929,
+                176.16980254803735
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859965487227603,
+                262.4509972029929,
+                176.16980254803735
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_2pct_of_max": {
+            "threshold_MPa": 2.2261807009588757,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.5765891113344154e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859965487227603,
+                262.4509972029929,
+                176.16980254803735
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859965487227603,
+                262.4509972029929,
+                176.16980254803735
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_5pct_of_max": {
+            "threshold_MPa": 2.158032312154012,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.5765891113344154e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859965487227603,
+                262.4509972029929,
+                176.16980254803735
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859965487227603,
+                262.4509972029929,
+                176.16980254803735
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_10pct_of_max": {
+            "threshold_MPa": 2.0444516641459063,
+            "n_nodes": 6,
+            "fraction_of_nodes": 0.00015459534668006494,
+            "spatial": {
+              "n": 6,
+              "centroid_xyz_mm": [
+                0.6060559731553887,
+                263.8127619134714,
+                150.96310451887615
+              ],
+              "span_xyz_mm": [
+                20.480232610333744,
+                11.848826739380229,
+                77.02072071501307
+              ],
+              "span_xz_mm": [
+                20.480232610333744,
+                77.02072071501307
+              ],
+              "rms_dist_from_centroid_mm": 36.21803589534087,
+              "max_dist_from_centroid_mm": 51.718051592735826,
+              "max_pairwise_dist_mm": 77.92682638203685
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 5,
+              "centroid_xyz_mm": [
+                0.8281473506572194,
+                262.5490570086382,
+                161.2268270285456
+              ],
+              "span_xyz_mm": [
+                20.480232610333744,
+                8.066828026651365,
+                74.80103933219075
+              ],
+              "span_xz_mm": [
+                20.480232610333744,
+                74.80103933219075
+              ],
+              "rms_dist_from_centroid_mm": 30.53119228604915,
+              "max_dist_from_centroid_mm": 60.57199899905758,
+              "max_pairwise_dist_mm": 76.32006128946858
+            },
+            "cluster_vs_spread": "spread_across_cross_section"
+          }
+        },
+        "rank_gaps": [
+          {
+            "rank": 1,
+            "node_0based": 3279,
+            "von_mises_MPa": 2.271612960162118,
+            "rel_to_max": 1.0,
+            "deficit_pct": 0.0,
+            "xyz_mm": [
+              -1.3859965487227603,
+              262.4509972029929,
+              176.16980254803735
+            ],
+            "dist_to_hotspot_mm": 0.0
+          },
+          {
+            "rank": 2,
+            "node_0based": 1403,
+            "von_mises_MPa": 2.115475486776126,
+            "rel_to_max": 0.9312658115074106,
+            "deficit_pct": 6.873418849258939,
+            "xyz_mm": [
+              12.256211836119318,
+              266.34928772490855,
+              101.86417335335125
+            ],
+            "dist_to_hotspot_mm": 75.64808688015118
+          },
+          {
+            "rank": 3,
+            "node_0based": 3942,
+            "von_mises_MPa": 2.105410766774153,
+            "rel_to_max": 0.9268351623702201,
+            "deficit_pct": 7.316483762977988,
+            "xyz_mm": [
+              -0.504400914353764,
+              270.1312864376374,
+              99.64449197052893
+            ],
+            "dist_to_hotspot_mm": 76.91480489850089
+          },
+          {
+            "rank": 5,
+            "node_0based": 6666,
+            "von_mises_MPa": 2.063432140659755,
+            "rel_to_max": 0.9083555063502078,
+            "deficit_pct": 9.164449364979221,
+            "xyz_mm": [
+              -8.224020774214424,
+              263.5928079041763,
+              175.29723327340966
+            ],
+            "dist_to_hotspot_mm": 6.987394659296994
+          },
+          {
+            "rank": 10,
+            "node_0based": 1404,
+            "von_mises_MPa": 2.0264475915745983,
+            "rel_to_max": 0.892074322128351,
+            "deficit_pct": 10.792567787164897,
+            "xyz_mm": [
+              8.369415328522921,
+              268.9988530705781,
+              100.67898237905841
+            ],
+            "dist_to_hotspot_mm": 76.39964926059866
+          },
+          {
+            "rank": 20,
+            "node_0based": 5051,
+            "von_mises_MPa": 1.9640327503476924,
+            "rel_to_max": 0.8645983205728521,
+            "deficit_pct": 13.540167942714787,
+            "xyz_mm": [
+              12.691503100170564,
+              270.6143965803236,
+              174.4274762411265
+            ],
+            "dist_to_hotspot_mm": 16.366208684913836
+          }
+        ],
+        "top20_spatial": {
+          "n": 20,
+          "centroid_xyz_mm": [
+            0.5543609007507662,
+            264.3285785138841,
+            134.4220149820366
+          ],
+          "span_xyz_mm": [
+            25.00966252157463,
+            12.654614746597872,
+            77.02072071501307
+          ],
+          "span_xz_mm": [
+            25.00966252157463,
+            77.02072071501307
+          ],
+          "rms_dist_from_centroid_mm": 38.302909471594184,
+          "max_dist_from_centroid_mm": 42.688463756060486,
+          "max_pairwise_dist_mm": 78.14551849597713,
+          "cluster_vs_spread": "spread_across_cross_section",
+          "competing_z_lobes": {
+            "z_split_mm": 101.95704679531808,
+            "lobe_z_high": {
+              "n_in_top20": 10,
+              "best_MPa": 2.271612960162118,
+              "deficit_vs_global_max_pct": 0.0,
+              "centroid_xyz_mm": [
+                -1.726375596461977,
+                263.05006722832843,
+                168.4518036728862
+              ]
+            },
+            "lobe_z_low": {
+              "n_in_top20": 10,
+              "best_MPa": 2.115475486776126,
+              "deficit_vs_global_max_pct": 6.873418849258939,
+              "centroid_xyz_mm": [
+                2.8350973979635086,
+                265.6070897994398,
+                100.39222629118693
+              ]
+            },
+            "centroid_separation_mm": 68.2601748729342,
+            "winner_lobe": "z_high"
+          }
+        },
+        "within_5pct_dist_to_reported_hotspot_mm": {
+          "n": 1,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "remesh_pre_optimize": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun",
+        "hotspot": {
+          "node_0based": 424,
+          "xyz_mm": [
+            8.880133628845215,
+            264.3125,
+            101.07909393310547
+          ],
+          "y_mm": 264.3125,
+          "dy_from_y0_mm": 2.3125,
+          "dy_over_L": 0.0578125,
+          "von_mises_MPa_json": 2.297287025705049
+        },
+        "frd": {
+          "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun/nauo3_cantilever.frd",
+          "n_nodes": 36582,
+          "n_finite": 36582,
+          "sigma_max_MPa": 2.297287025705049,
+          "sigma_max_matches_hotspot_json": true,
+          "abs_diff_frd_vs_json_MPa": 0.0
+        },
+        "bands": {
+          "within_1pct_of_max": {
+            "threshold_MPa": 2.2743141554479984,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.733584823137062e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.07909393310547
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.07909393310547
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_2pct_of_max": {
+            "threshold_MPa": 2.2513412851909482,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.733584823137062e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.07909393310547
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.07909393310547
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_5pct_of_max": {
+            "threshold_MPa": 2.1824226744197963,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.733584823137062e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.07909393310547
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.07909393310547
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_10pct_of_max": {
+            "threshold_MPa": 2.067558323134544,
+            "n_nodes": 5,
+            "fraction_of_nodes": 0.0001366792411568531,
+            "spatial": {
+              "n": 5,
+              "centroid_xyz_mm": [
+                -2.122463417053223,
+                262.1564239501953,
+                130.9013687133789
+              ],
+              "span_xyz_mm": [
+                20.40217399597168,
+                11.732803344726562,
+                76.61675262451172
+              ],
+              "span_xz_mm": [
+                20.40217399597168,
+                76.61675262451172
+              ],
+              "rms_dist_from_centroid_mm": 37.880223050436264,
+              "max_dist_from_centroid_mm": 45.42967797339556,
+              "max_pairwise_dist_mm": 77.6428108333008
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 4,
+              "centroid_xyz_mm": [
+                -0.49112439155578613,
+                263.91851806640625,
+                138.7384490966797
+              ],
+              "span_xyz_mm": [
+                20.40217399597168,
+                4.7711181640625,
+                75.09070587158203
+              ],
+              "span_xz_mm": [
+                20.40217399597168,
+                75.09070587158203
+              ],
+              "rms_dist_from_centroid_mm": 38.17995239408286,
+              "max_dist_from_centroid_mm": 38.88346029377377,
+              "max_pairwise_dist_mm": 75.94794364041879
+            },
+            "cluster_vs_spread": "spread_across_cross_section"
+          }
+        },
+        "rank_gaps": [
+          {
+            "rank": 1,
+            "node_0based": 424,
+            "von_mises_MPa": 2.297287025705049,
+            "rel_to_max": 1.0,
+            "deficit_pct": 0.0,
+            "xyz_mm": [
+              8.880133628845215,
+              264.3125,
+              101.07909393310547
+            ],
+            "dist_to_hotspot_mm": 0.0
+          },
+          {
+            "rank": 2,
+            "node_0based": 330,
+            "von_mises_MPa": 2.153242917370337,
+            "rel_to_max": 0.9372981666100239,
+            "deficit_pct": 6.270183338997615,
+            "xyz_mm": [
+              2.063405752182007,
+              262.0697326660156,
+              176.13771057128906
+            ],
+            "dist_to_hotspot_mm": 75.40088670497633
+          },
+          {
+            "rank": 3,
+            "node_0based": 687,
+            "von_mises_MPa": 2.119938647376794,
+            "rel_to_max": 0.922800948969872,
+            "deficit_pct": 7.7199051030128025,
+            "xyz_mm": [
+              -8.647819519042969,
+              255.10804748535156,
+              99.55304718017578
+            ],
+            "dist_to_hotspot_mm": 19.856482728346137
+          },
+          {
+            "rank": 5,
+            "node_0based": 8818,
+            "von_mises_MPa": 2.0745789691908767,
+            "rel_to_max": 0.9030560595945463,
+            "deficit_pct": 9.694394040545372,
+            "xyz_mm": [
+              -11.522040367126465,
+              266.8408508300781,
+              101.56719207763672
+            ],
+            "dist_to_hotspot_mm": 20.564034173297674
+          },
+          {
+            "rank": 10,
+            "node_0based": 6645,
+            "von_mises_MPa": 2.0183136797355856,
+            "rel_to_max": 0.878564000558944,
+            "deficit_pct": 12.143599944105599,
+            "xyz_mm": [
+              4.830385684967041,
+              257.21820068359375,
+              99.73804473876953
+            ],
+            "dist_to_hotspot_mm": 8.278161277804193
+          },
+          {
+            "rank": 20,
+            "node_0based": 6611,
+            "von_mises_MPa": 1.9508904325133902,
+            "rel_to_max": 0.8492149264259445,
+            "deficit_pct": 15.078507357405545,
+            "xyz_mm": [
+              -4.432734489440918,
+              260.57275390625,
+              176.10153198242188
+            ],
+            "dist_to_hotspot_mm": 76.28620038541779
+          }
+        ],
+        "top20_spatial": {
+          "n": 20,
+          "centroid_xyz_mm": [
+            -1.327998011186719,
+            263.37865982055666,
+            134.47497329711913
+          ],
+          "span_xyz_mm": [
+            27.25865936279297,
+            15.829025268554688,
+            76.96552276611328
+          ],
+          "span_xz_mm": [
+            27.25865936279297,
+            76.96552276611328
+          ],
+          "rms_dist_from_centroid_mm": 38.30641899005634,
+          "max_dist_from_centroid_mm": 42.756074338676484,
+          "max_pairwise_dist_mm": 78.04841294065073,
+          "cluster_vs_spread": "spread_across_cross_section",
+          "competing_z_lobes": {
+            "z_split_mm": 102.54121017456055,
+            "lobe_z_high": {
+              "n_in_top20": 10,
+              "best_MPa": 2.153242917370337,
+              "deficit_vs_global_max_pct": 6.270183338997615,
+              "centroid_xyz_mm": [
+                -2.860673949867487,
+                263.1472137451172,
+                168.4693733215332
+              ]
+            },
+            "lobe_z_low": {
+              "n_in_top20": 10,
+              "best_MPa": 2.297287025705049,
+              "deficit_vs_global_max_pct": 0.0,
+              "centroid_xyz_mm": [
+                0.20467792749404906,
+                263.61010589599607,
+                100.48057327270507
+              ]
+            },
+            "centroid_separation_mm": 68.05944154454194,
+            "winner_lobe": "z_low"
+          }
+        },
+        "within_5pct_dist_to_reported_hotspot_mm": {
+          "n": 1,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "remesh_post_optimize": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_remesh_optimize_probe/fea_after_optimize",
+        "hotspot": {
+          "node_0based": 424,
+          "xyz_mm": [
+            8.880133628845215,
+            264.3125,
+            101.0790939331055
+          ],
+          "y_mm": 264.3125,
+          "dy_from_y0_mm": 2.3125,
+          "dy_over_L": 0.0578125,
+          "von_mises_MPa_json": 2.297409263949199
+        },
+        "frd": {
+          "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_remesh_optimize_probe/fea_after_optimize/nauo3_cantilever.frd",
+          "n_nodes": 36582,
+          "n_finite": 36582,
+          "sigma_max_MPa": 2.297409263949199,
+          "sigma_max_matches_hotspot_json": true,
+          "abs_diff_frd_vs_json_MPa": 0.0
+        },
+        "bands": {
+          "within_1pct_of_max": {
+            "threshold_MPa": 2.274435171309707,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.733584823137062e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.0790939331055
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.0790939331055
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_2pct_of_max": {
+            "threshold_MPa": 2.251461078670215,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.733584823137062e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.0790939331055
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.0790939331055
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_5pct_of_max": {
+            "threshold_MPa": 2.182538800751739,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.733584823137062e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.0790939331055
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                8.880133628845215,
+                264.3125,
+                101.0790939331055
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_10pct_of_max": {
+            "threshold_MPa": 2.067668337554279,
+            "n_nodes": 5,
+            "fraction_of_nodes": 0.0001366792411568531,
+            "spatial": {
+              "n": 5,
+              "centroid_xyz_mm": [
+                -2.1224634170532215,
+                262.1564239501953,
+                130.9013687133789
+              ],
+              "span_xyz_mm": [
+                20.402173995971673,
+                11.732803344726534,
+                76.61675262451172
+              ],
+              "span_xz_mm": [
+                20.402173995971673,
+                76.61675262451172
+              ],
+              "rms_dist_from_centroid_mm": 37.88022305043627,
+              "max_dist_from_centroid_mm": 45.42967797339559,
+              "max_pairwise_dist_mm": 77.64281083330083
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 4,
+              "centroid_xyz_mm": [
+                -0.4911243915557848,
+                263.91851806640625,
+                138.7384490966797
+              ],
+              "span_xyz_mm": [
+                20.402173995971673,
+                4.7711181640625,
+                75.090705871582
+              ],
+              "span_xz_mm": [
+                20.402173995971673,
+                75.090705871582
+              ],
+              "rms_dist_from_centroid_mm": 38.17995239408286,
+              "max_dist_from_centroid_mm": 38.88346029377379,
+              "max_pairwise_dist_mm": 75.94794364041881
+            },
+            "cluster_vs_spread": "spread_across_cross_section"
+          }
+        },
+        "rank_gaps": [
+          {
+            "rank": 1,
+            "node_0based": 424,
+            "von_mises_MPa": 2.297409263949199,
+            "rel_to_max": 1.0,
+            "deficit_pct": 0.0,
+            "xyz_mm": [
+              8.880133628845215,
+              264.3125,
+              101.0790939331055
+            ],
+            "dist_to_hotspot_mm": 0.0
+          },
+          {
+            "rank": 2,
+            "node_0based": 330,
+            "von_mises_MPa": 2.1530022379769465,
+            "rel_to_max": 0.937143534572495,
+            "deficit_pct": 6.2856465427505,
+            "xyz_mm": [
+              2.063405752182007,
+              262.0697326660156,
+              176.1377105712891
+            ],
+            "dist_to_hotspot_mm": 75.40088670497633
+          },
+          {
+            "rank": 3,
+            "node_0based": 687,
+            "von_mises_MPa": 2.1208236660425874,
+            "rel_to_max": 0.9231370741480059,
+            "deficit_pct": 7.686292585199405,
+            "xyz_mm": [
+              -8.647819519042969,
+              255.1080474853516,
+              99.55304718017578
+            ],
+            "dist_to_hotspot_mm": 19.856482728346126
+          },
+          {
+            "rank": 5,
+            "node_0based": 8818,
+            "von_mises_MPa": 2.074673678463828,
+            "rel_to_max": 0.9030492350751241,
+            "deficit_pct": 9.695076492487587,
+            "xyz_mm": [
+              -11.52204036712646,
+              266.8408508300781,
+              101.5671920776367
+            ],
+            "dist_to_hotspot_mm": 20.564034173297667
+          },
+          {
+            "rank": 10,
+            "node_0based": 1371,
+            "von_mises_MPa": 2.0185739366114857,
+            "rel_to_max": 0.8786305375741363,
+            "deficit_pct": 12.136946242586365,
+            "xyz_mm": [
+              3.762422561645508,
+              270.9370727539062,
+              99.67285919189453
+            ],
+            "dist_to_hotspot_mm": 8.488428999910603
+          },
+          {
+            "rank": 20,
+            "node_0based": 5684,
+            "von_mises_MPa": 1.9510958222848283,
+            "rel_to_max": 0.8492591428533438,
+            "deficit_pct": 15.07408571466562,
+            "xyz_mm": [
+              2.550815343856812,
+              261.8719787597656,
+              100.0888214111328
+            ],
+            "dist_to_hotspot_mm": 6.855439704679624
+          }
+        ],
+        "top20_spatial": {
+          "n": 20,
+          "centroid_xyz_mm": [
+            -0.9788205195218319,
+            263.4436210632324,
+            130.6743377685547
+          ],
+          "span_xyz_mm": [
+            27.25865936279296,
+            15.829025268554602,
+            76.96552276611331
+          ],
+          "span_xz_mm": [
+            27.25865936279296,
+            76.96552276611331
+          ],
+          "rms_dist_from_centroid_mm": 37.75291713798324,
+          "max_dist_from_centroid_mm": 46.46864221567555,
+          "max_pairwise_dist_mm": 78.0484129406507,
+          "cluster_vs_spread": "spread_across_cross_section",
+          "competing_z_lobes": {
+            "z_split_mm": 101.73871994018555,
+            "lobe_z_high": {
+              "n_in_top20": 10,
+              "best_MPa": 2.1530022379769465,
+              "deficit_vs_global_max_pct": 6.2856465427505,
+              "centroid_xyz_mm": [
+                -1.218218753486871,
+                263.30568542480466,
+                161.05024490356445
+              ]
+            },
+            "lobe_z_low": {
+              "n_in_top20": 10,
+              "best_MPa": 2.297409263949199,
+              "deficit_vs_global_max_pct": 0.0,
+              "centroid_xyz_mm": [
+                -0.7394222855567927,
+                263.58155670166013,
+                100.29843063354492
+              ]
+            },
+            "centroid_separation_mm": 60.7543273201016,
+            "winner_lobe": "z_low"
+          }
+        },
+        "within_5pct_dist_to_reported_hotspot_mm": {
+          "n": 1,
+          "min": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "bump_cinf_probe": {
+        "path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090",
+        "hotspot": {
+          "node_0based": 3279,
+          "xyz_mm": [
+            -1.3859685598193199,
+            262.4509985800444,
+            176.16910021062262
+          ],
+          "y_mm": 262.4509985800444,
+          "dy_from_y0_mm": 0.45099858004442694,
+          "dy_over_L": 0.011274964501110674,
+          "von_mises_MPa_json": 2.237299717811183
+        },
+        "frd": {
+          "path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/nauo3_cantilever.frd",
+          "n_nodes": 38811,
+          "n_finite": 38811,
+          "sigma_max_MPa": 2.237299717811183,
+          "sigma_max_matches_hotspot_json": true,
+          "abs_diff_frd_vs_json_MPa": 0.0
+        },
+        "bands": {
+          "within_1pct_of_max": {
+            "threshold_MPa": 2.214926720633071,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.5765891113344154e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859685598193199,
+                262.4509985800444,
+                176.16910021062262
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859685598193199,
+                262.4509985800444,
+                176.16910021062262
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_2pct_of_max": {
+            "threshold_MPa": 2.1925537234549592,
+            "n_nodes": 1,
+            "fraction_of_nodes": 2.5765891113344154e-05,
+            "spatial": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859685598193199,
+                262.4509985800444,
+                176.16910021062262
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859685598193199,
+                262.4509985800444,
+                176.16910021062262
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "clustered_near_point"
+          },
+          "within_5pct_of_max": {
+            "threshold_MPa": 2.125434731920624,
+            "n_nodes": 2,
+            "fraction_of_nodes": 5.153178222668831e-05,
+            "spatial": {
+              "n": 2,
+              "centroid_xyz_mm": [
+                -0.9436101333280367,
+                266.29089782149134,
+                138.03544409884262
+              ],
+              "span_xyz_mm": [
+                0.8847168529825664,
+                7.67979848289383,
+                76.26731222355997
+              ],
+              "span_xz_mm": [
+                0.8847168529825664,
+                76.26731222355997
+              ],
+              "rms_dist_from_centroid_mm": 38.32905210950888,
+              "max_dist_from_centroid_mm": 38.3290521095089,
+              "max_pairwise_dist_mm": 76.65810421901776
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 1,
+              "centroid_xyz_mm": [
+                -1.3859685598193199,
+                262.4509985800444,
+                176.16910021062262
+              ],
+              "span_xyz_mm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "span_xz_mm": [
+                0.0,
+                0.0
+              ],
+              "rms_dist_from_centroid_mm": 0.0,
+              "max_dist_from_centroid_mm": 0.0,
+              "max_pairwise_dist_mm": 0.0
+            },
+            "cluster_vs_spread": "spread_across_cross_section"
+          },
+          "within_10pct_of_max": {
+            "threshold_MPa": 2.0135697460300648,
+            "n_nodes": 11,
+            "fraction_of_nodes": 0.0002834248022467857,
+            "spatial": {
+              "n": 11,
+              "centroid_xyz_mm": [
+                0.9333174603458642,
+                264.83063004651586,
+                141.7238853257488
+              ],
+              "span_xyz_mm": [
+                20.454976280278075,
+                12.141941377579258,
+                76.71399019662411
+              ],
+              "span_xz_mm": [
+                20.454976280278075,
+                76.71399019662411
+              ],
+              "rms_dist_from_centroid_mm": 38.17042603576773,
+              "max_dist_from_centroid_mm": 42.18100976629106,
+              "max_pairwise_dist_mm": 77.6235891101105
+            },
+            "spatial_y_slab_pm5mm": {
+              "n": 8,
+              "centroid_xyz_mm": [
+                0.6688594133632433,
+                262.94789903008734,
+                147.74776626545906
+              ],
+              "span_xyz_mm": [
+                20.454976280278075,
+                8.453162787601684,
+                76.51552815824249
+              ],
+              "span_xz_mm": [
+                20.454976280278075,
+                76.51552815824249
+              ],
+              "rms_dist_from_centroid_mm": 36.999644988669814,
+              "max_dist_from_centroid_mm": 47.98760067001611,
+              "max_pairwise_dist_mm": 77.04051892202648
+            },
+            "cluster_vs_spread": "spread_across_cross_section"
+          }
+        },
+        "rank_gaps": [
+          {
+            "rank": 1,
+            "node_0based": 3279,
+            "von_mises_MPa": 2.237299717811183,
+            "rel_to_max": 1.0,
+            "deficit_pct": 0.0,
+            "xyz_mm": [
+              -1.3859685598193199,
+              262.4509985800444,
+              176.16910021062262
+            ],
+            "dist_to_hotspot_mm": 0.0
+          },
+          {
+            "rank": 2,
+            "node_0based": 3942,
+            "von_mises_MPa": 2.132460616823821,
+            "rel_to_max": 0.9531403413888911,
+            "deficit_pct": 4.685965861110885,
+            "xyz_mm": [
+              -0.5012517068367535,
+              270.13079706293826,
+              99.90178798706265
+            ],
+            "dist_to_hotspot_mm": 76.65810421901776
+          },
+          {
+            "rank": 3,
+            "node_0based": 1403,
+            "von_mises_MPa": 2.0893378282797235,
+            "rel_to_max": 0.9338658614429116,
+            "deficit_pct": 6.613413855708838,
+            "xyz_mm": [
+              12.233055688848216,
+              266.3491195180076,
+              101.93835845357222
+            ],
+            "dist_to_hotspot_mm": 75.57033935437029
+          },
+          {
+            "rank": 5,
+            "node_0based": 6664,
+            "von_mises_MPa": 2.068793929180527,
+            "rel_to_max": 0.9246834086246118,
+            "deficit_pct": 7.531659137538815,
+            "xyz_mm": [
+              -0.568050245208556,
+              258.2825553198442,
+              176.61577818368676
+            ],
+            "dist_to_hotspot_mm": 4.2713499967229245
+          },
+          {
+            "rank": 10,
+            "node_0based": 2236,
+            "von_mises_MPa": 2.0171311967207535,
+            "rel_to_max": 0.9015918522951287,
+            "deficit_pct": 9.840814770487128,
+            "xyz_mm": [
+              -3.5945243202050867,
+              266.7357181074459,
+              100.10025002544427
+            ],
+            "dist_to_hotspot_mm": 76.22143076897952
+          },
+          {
+            "rank": 20,
+            "node_0based": 3277,
+            "von_mises_MPa": 1.9773394887348226,
+            "rel_to_max": 0.8838062567090084,
+            "deficit_pct": 11.619374329099163,
+            "xyz_mm": [
+              8.789037238322097,
+              271.73681352943885,
+              175.3197919841099
+            ],
+            "dist_to_hotspot_mm": 13.801392202608783
+          }
+        ],
+        "top20_spatial": {
+          "n": 20,
+          "centroid_xyz_mm": [
+            0.45660993693834884,
+            264.5191774719375,
+            138.06107523041217
+          ],
+          "span_xyz_mm": [
+            24.922412250491455,
+            18.259382395306204,
+            78.53110572462836
+          ],
+          "span_xz_mm": [
+            24.922412250491455,
+            78.53110572462836
+          ],
+          "rms_dist_from_centroid_mm": 38.590038242707855,
+          "max_dist_from_centroid_mm": 41.479543846911355,
+          "max_pairwise_dist_mm": 80.04659665312637,
+          "cluster_vs_spread": "spread_across_cross_section",
+          "competing_z_lobes": {
+            "z_split_mm": 138.12432097264943,
+            "lobe_z_high": {
+              "n_in_top20": 10,
+              "best_MPa": 2.237299717811183,
+              "deficit_vs_global_max_pct": 0.0,
+              "centroid_xyz_mm": [
+                0.37913390768903865,
+                264.0038662061578,
+                175.72130009288213
+              ]
+            },
+            "lobe_z_low": {
+              "n_in_top20": 10,
+              "best_MPa": 2.132460616823821,
+              "deficit_vs_global_max_pct": 4.685965861110885,
+              "centroid_xyz_mm": [
+                0.5340859661876596,
+                265.03448873771697,
+                100.40085036794224
+              ]
+            },
+            "centroid_separation_mm": 75.32765985818348,
+            "winner_lobe": "z_high"
+          }
+        },
+        "within_5pct_dist_to_reported_hotspot_mm": {
+          "n": 2,
+          "min": 0.0,
+          "p50": 38.32905210950888,
+          "p95": 72.82519900806686,
+          "max": 76.65810421901776
+        }
+      }
+    },
+    "comparison": {
+      "per_run": {
+        "inplace_ref": {
+          "xyz_mm": [
+            -1.3859965487227603,
+            262.4509972029929,
+            176.16980254803735
+          ],
+          "dy_over_L": 0.011274930074822009,
+          "sigma_max_MPa": 2.271612960162118,
+          "n_within_1pct": 1,
+          "n_within_2pct": 1,
+          "n_within_5pct": 1,
+          "n_within_10pct": 6,
+          "label_1pct": "clustered_near_point",
+          "label_5pct": "clustered_near_point",
+          "label_10pct": "spread_across_cross_section",
+          "rank2_deficit_pct": 6.873418849258939,
+          "rank2_dist_to_hotspot_mm": 75.64808688015118,
+          "rank2_xyz_mm": [
+            12.256211836119318,
+            266.34928772490855,
+            101.86417335335125
+          ],
+          "top20_max_pairwise_mm": 78.14551849597713,
+          "top20_label": "spread_across_cross_section",
+          "competing_lobes_centroid_separation_mm": 68.2601748729342,
+          "winner_lobe": "z_high",
+          "other_lobe_best_deficit_pct": 6.873418849258939
+        },
+        "remesh_pre_optimize": {
+          "xyz_mm": [
+            8.880133628845215,
+            264.3125,
+            101.07909393310547
+          ],
+          "dy_over_L": 0.0578125,
+          "sigma_max_MPa": 2.297287025705049,
+          "n_within_1pct": 1,
+          "n_within_2pct": 1,
+          "n_within_5pct": 1,
+          "n_within_10pct": 5,
+          "label_1pct": "clustered_near_point",
+          "label_5pct": "clustered_near_point",
+          "label_10pct": "spread_across_cross_section",
+          "rank2_deficit_pct": 6.270183338997615,
+          "rank2_dist_to_hotspot_mm": 75.40088670497633,
+          "rank2_xyz_mm": [
+            2.063405752182007,
+            262.0697326660156,
+            176.13771057128906
+          ],
+          "top20_max_pairwise_mm": 78.04841294065073,
+          "top20_label": "spread_across_cross_section",
+          "competing_lobes_centroid_separation_mm": 68.05944154454194,
+          "winner_lobe": "z_low",
+          "other_lobe_best_deficit_pct": 6.270183338997615
+        },
+        "remesh_post_optimize": {
+          "xyz_mm": [
+            8.880133628845215,
+            264.3125,
+            101.0790939331055
+          ],
+          "dy_over_L": 0.0578125,
+          "sigma_max_MPa": 2.297409263949199,
+          "n_within_1pct": 1,
+          "n_within_2pct": 1,
+          "n_within_5pct": 1,
+          "n_within_10pct": 5,
+          "label_1pct": "clustered_near_point",
+          "label_5pct": "clustered_near_point",
+          "label_10pct": "spread_across_cross_section",
+          "rank2_deficit_pct": 6.2856465427505,
+          "rank2_dist_to_hotspot_mm": 75.40088670497633,
+          "rank2_xyz_mm": [
+            2.063405752182007,
+            262.0697326660156,
+            176.1377105712891
+          ],
+          "top20_max_pairwise_mm": 78.0484129406507,
+          "top20_label": "spread_across_cross_section",
+          "competing_lobes_centroid_separation_mm": 60.7543273201016,
+          "winner_lobe": "z_low",
+          "other_lobe_best_deficit_pct": 6.2856465427505
+        },
+        "bump_cinf_probe": {
+          "xyz_mm": [
+            -1.3859685598193199,
+            262.4509985800444,
+            176.16910021062262
+          ],
+          "dy_over_L": 0.011274964501110674,
+          "sigma_max_MPa": 2.237299717811183,
+          "n_within_1pct": 1,
+          "n_within_2pct": 1,
+          "n_within_5pct": 2,
+          "n_within_10pct": 11,
+          "label_1pct": "clustered_near_point",
+          "label_5pct": "spread_across_cross_section",
+          "label_10pct": "spread_across_cross_section",
+          "rank2_deficit_pct": 4.685965861110885,
+          "rank2_dist_to_hotspot_mm": 76.65810421901776,
+          "rank2_xyz_mm": [
+            -0.5012517068367535,
+            270.13079706293826,
+            99.90178798706265
+          ],
+          "top20_max_pairwise_mm": 80.04659665312637,
+          "top20_label": "spread_across_cross_section",
+          "competing_lobes_centroid_separation_mm": 75.32765985818348,
+          "winner_lobe": "z_high",
+          "other_lobe_best_deficit_pct": 4.685965861110885
+        }
+      },
+      "hotspot_shift_inplace_vs_remesh": {
+        "inplace_to_remesh_delta_xyz_mm": [
+          10.266130177567975,
+          1.8615027970071196,
+          -75.09070861493188
+        ],
+        "inplace_to_remesh_dist_mm": 75.81209099991005,
+        "opposite_wall_consistent_with_z_lobes": true
+      }
+    }
+  },
+  "context": {
+    "inplace_ref_sigma_MPa": 2.271612960162118,
+    "remesh_pre_sigma_MPa": 2.297287025705049,
+    "remesh_post_sigma_MPa": 2.297409263949199,
+    "gap_remesh_pre_vs_inplace_rel_pct": 1.1302130245417679,
+    "note_branch_b_caveat": "Branch (b) tested Gmsh default light optimize only: global rho_p95 improved ~2.7% (22.92\u219222.30) but remesh remains ~28% worse than baseline 17.41. That falsifies 'default optimize explains the gap', not 'element quality in general'."
+  },
+  "interpretation_notes": {
+    "do_not_force_conclusion": true,
+    "if_local_quality_differs": "Mechanistic candidate: local element quality near the hotspot, invisible to global percentiles.",
+    "if_peak_is_plateau": "Mechanistic candidate: sigma_max is a fragile single-node order statistic on a broad, relatively flat stress region \u2014 consistent with hotspot xyz shifting across mesh realizations.",
+    "if_neither_notable": "~1% is not explainable at the resolution of these checks; treat as documented discretization uncertainty for Phase 3 sigma_max labels.",
+    "close_investigation": "Lock in ~1% as documented discretization uncertainty and move on; do not open a third branch on this specific gap."
+  },
+  "observed_summary_not_forced": {
+    "check1": "Local rho_p95 near each run's own hotspot is similar and actually slightly better on remesh (\u22481.93) than inplace (\u22481.98); local rho_p50 is mildly worse on remesh (1.31 vs 1.24); min_dihedral_p0 worse on remesh (15.5\u00b0 vs 20.6\u00b0). Zero local inverted / rho>10. Default optimize leaves the local neighborhood unchanged. Local quality does not explain remesh sigma being higher.",
+    "check2": "At the requested 1/2/5% bands, sigma_max is isolated (n=1 within 5% for inplace and remesh; rank2 sits ~6\u20137% below max). So this is not a broad single-peak plateau. However top-20 nodes form two competing lobes on opposite walls (~75 mm apart in z): inplace wins on the z\u2248176 wall; remesh wins on the z\u2248101 wall \u2014 the same wall that is only ~6% below max on the other mesh. Hotspot location shift is therefore a winner-takes-all between two near-equal cross-section peaks, not a wobble around one peak.",
+    "phase3_implication": "sigma_max as a single-node label carries at least ~1% mesh-dependent uncertainty on this geometry, driven in part by which of two competing wall peaks wins. Surrogate training should tolerate that floor rather than treat 1% as eliminable protocol noise. Design-relevant signal (38%) remains two orders larger."
+  }
+}

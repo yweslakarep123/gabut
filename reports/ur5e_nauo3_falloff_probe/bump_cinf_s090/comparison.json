@@ -1,0 +1,32 @@
+{
+  "probe": {
+    "s": 0.9,
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "falloff_kind": "bump_Cinf",
+    "status": "ok",
+    "fail_reasons": [],
+    "sigma_max_MPa": 2.237299717811183,
+    "dV_frac": -0.012689729975266134,
+    "V_mm3": 4785884.323439572,
+    "V0_mm3": 4847396.4758005375,
+    "mesh_gate_pass": true,
+    "reaction_pass": true,
+    "band_position": "BAND_CENTER",
+    "wall_time_s": 25.18867491900005
+  },
+  "reference_cosine_C1": {
+    "source": "pilot2d sc0.90_ss1.00 / Phase-1 s=0.90",
+    "path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.00/sample_result.json",
+    "sigma_max_MPa": 2.271612960162118,
+    "dV_frac": -0.01029144980632467,
+    "on_disk_sigma_max_MPa": 2.271612960162118,
+    "on_disk_status": "ok"
+  },
+  "delta": {
+    "sigma_max_MPa": -0.034313242350934914,
+    "sigma_rel": -0.0151052326926705,
+    "dV_frac": -0.002398280168941464
+  },
+  "baseline_sigma_max_MPa": 1.645735221879838
+}

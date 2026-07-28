@@ -1,0 +1,19 @@
+{
+  "source": "discrete_stl",
+  "mesh_size_mm": 5.0,
+  "mesh_size_min_mm": 2.5,
+  "n_nodes": 36582,
+  "n_tets": 177992,
+  "elapsed_s": 13.708,
+  "gmsh_version": "4.15.2",
+  "wall_s": 13.838817832000132,
+  "source_stl": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun/deformed_surface.stl",
+  "baseline_mesh": "reports/ur5e_nauo3_volume/geometry.npz",
+  "baseline_n_nodes": 38811,
+  "baseline_n_tets": 192060,
+  "pre_remesh_n_nodes": 38811,
+  "pre_remesh_n_tets": 192060,
+  "remeshed_n_surf_vertices": 15681,
+  "remeshed_n_surf_faces": 31358,
+  "same_surface_as_heal_iso_clean": false
+}

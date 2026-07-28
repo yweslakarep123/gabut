@@ -1,0 +1,19 @@
+{
+  "step0_verdict": "b_extracted_boundary_faces_as_is",
+  "code_path": [
+    "probe: surf_v, surf_f, _ = _surface_from_tets(points_def, tets_def)",
+    "probe: trimesh.Trimesh(...).export(deformed_surface.stl)  # no remesh/iso/targetlen",
+    "probe: mesh_discrete_stl_to_tets(..., MeshOnlyEmpty=1)  # fill volume only"
+  ],
+  "evidence": {
+    "baseline_surf_faces_in_npz": 31358,
+    "baseline_extracted_boundary_faces": 31358,
+    "deformed_extracted_boundary_faces": 31358,
+    "rerun1_stl_faces": 31358,
+    "tets_connectivity_unchanged_by_deform": true,
+    "face_index_layout_identical_pre_post_deform": true,
+    "stl_n_faces_equals_baseline_boundary": true,
+    "controllable_target_edge_length_in_extract": false
+  },
+  "interpretation": "31358 facets are boundary faces of the deformed volume tet mesh extracted as-is. Connectivity/layout matches baseline geometry.npz surface; only coordinates change via radial deform. There is no re-triangulation and no controllable target length at the extract step. MeshOnlyEmpty then preserves those facets."
+}

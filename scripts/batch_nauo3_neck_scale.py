@@ -494,8 +494,21 @@ def spc_band_clearance_report(
     }
 
 
+def _normalize_deform_stages(
+    s: float | list[tuple[float, float, float]] | tuple[tuple[float, float, float], ...],
+) -> list[tuple[float, float, float]]:
+    """Scalar s → single neck stage; or explicit [(s, y0, L), ...] compose list."""
+    if isinstance(s, (int, float)):
+        sf = float(s)
+        return [(sf, Y0_NECK, L_for_s(sf))]
+    stages = [(float(a), float(b), float(c)) for a, b, c in s]
+    if not stages:
+        raise ValueError("deform stages list is empty")
+    return stages
+
+
 def run_one_sample(
-    s: float,
+    s: float | list[tuple[float, float, float]] | tuple[tuple[float, float, float], ...],
     points0: np.ndarray,
     tets: np.ndarray,
     node_surf: np.ndarray,
@@ -505,12 +518,32 @@ def run_one_sample(
     axis_u: np.ndarray,
     ends0_prox_y: dict,
     reuse_fea: bool = False,
+    tag: str | None = None,
+    out_root: Path | None = None,
+    falloff_kind: str = FALLOFF_KIND,
 ) -> dict:
-    tag = f"s_{s:.2f}"
-    out = OUT_ROOT / tag
+    """Run deform → mesh-gate → FEA → reaction-check for one sample.
+
+    ``s`` may be a scalar (legacy 1-parameter neck scale) or a list of
+    ``(s_i, y0_i, L_i)`` stages applied sequentially via ``deform_neck_radial``
+    (compose). Post-deform gates/thresholds are unchanged.
+    ``falloff_kind`` selects an existing ``neck_weight`` kernel (default:
+    locked batch ``cosine_C1``).
+    """
+    stages = _normalize_deform_stages(s)
+    if tag is None:
+        if len(stages) == 1 and abs(stages[0][1] - Y0_NECK) < 1e-9:
+            tag = f"s_{stages[0][0]:.2f}"
+        else:
+            tag = "comp_" + "_".join(
+                f"s{si:.2f}_y{y0:.1f}_L{Li:.1f}" for si, y0, Li in stages
+            )
+    root = out_root if out_root is not None else OUT_ROOT
+    out = root / tag
     out.mkdir(parents=True, exist_ok=True)
 
-    L = L_for_s(s)
+    # Hotspot / band-center metadata still keyed to the locked neck band.
+    L = L_BAND
     # Freeze SPC/distal nodes dari seleksi di mesh undeformed
     tet_ids0, face_ids0, face_nodes0 = _boundary_faces(tets)
     ends_undeformed = select_end_faces(
@@ -519,9 +552,29 @@ def run_one_sample(
     freeze = np.zeros(len(points0), dtype=bool)
     freeze[ends_undeformed["prox_nodes"]] = True
     freeze[ends_undeformed["dist_nodes"]] = True
-    points, dmeta = deform_neck_radial(
-        points0, s, axis_point, axis_u, L=L, freeze_mask=freeze
-    )
+
+    points = points0
+    stage_metas: list[dict] = []
+    for si, y0_i, L_i in stages:
+        points, dmeta_i = deform_neck_radial(
+            points,
+            si,
+            axis_point,
+            axis_u,
+            y0=y0_i,
+            L=L_i,
+            falloff_kind=falloff_kind,
+            freeze_mask=freeze,
+        )
+        stage_metas.append(dmeta_i)
+    dmeta: dict = {
+        "compose_stages": stage_metas,
+        "n_stages": len(stage_metas),
+        # Backward-compatible primary fields = first stage (neck).
+        **stage_metas[0],
+        "s": stages[0][0] if len(stages) == 1 else [st[0] for st in stages],
+    }
+
     tets_s, flip_meta = flip_negative_tets(points, tets)
     dmeta["tet_flip_repair"] = flip_meta
     gate = mesh_gates(points0, points, tets_s, surf_faces)
@@ -538,7 +591,8 @@ def run_one_sample(
     (out / "deform_meta.json").write_text(json.dumps({**dmeta, "mesh_gate": gate}, indent=2))
 
     sample: dict = {
-        "s": s,
+        "s": stages[0][0] if len(stages) == 1 else [st[0] for st in stages],
+        "stages": [{"s": a, "y0_mm": b, "L_mm": c} for a, b, c in stages],
         "tag": tag,
         "status": "mesh_gate_fail" if not gate["pass"] else "pending_fea",
         "deform": dmeta,
@@ -552,10 +606,15 @@ def run_one_sample(
     # FEA setup on deformed mesh (SPC reselected — should not include deformed neck)
     tet_ids, face_ids, face_nodes = _boundary_faces(tets_s)
     ends = select_end_faces(points, node_surf, tet_ids, face_ids, face_nodes)
-    # safety: SPC must still clear band
-    clear = spc_band_clearance_report(points, ends, L=L)
+    # safety: SPC must still clear every deform band used in the compose
+    clear_by_stage = [
+        spc_band_clearance_report(points, ends, L=L_i, y0=y0_i)
+        for _si, y0_i, L_i in stages
+    ]
+    clear = clear_by_stage[0]
     sample["spc_clearance"] = clear
-    if not clear["safe_clearance"]:
+    sample["spc_clearance_by_stage"] = clear_by_stage
+    if not all(c["safe_clearance"] for c in clear_by_stage):
         sample["status"] = "spc_band_overlap"
         sample["fail_reasons"].append("spc_band_overlap_after_deform")
         (out / "sample_result.json").write_text(json.dumps(sample, indent=2))

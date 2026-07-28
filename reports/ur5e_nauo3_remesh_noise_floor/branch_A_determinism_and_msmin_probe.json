@@ -1,0 +1,84 @@
+{
+  "determinism_test": {
+    "test": "remesh_determinism_rerun_vs_rerun2",
+    "config": {
+      "s": 0.9,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "falloff_kind": "cosine_C1",
+      "mesh_size_mm": 5.0,
+      "mesh_size_min_mm": 2.5
+    },
+    "rerun1": {
+      "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun",
+      "sigma_max_MPa": 2.297287025705049,
+      "n_nodes": 36582,
+      "n_tets": 177992
+    },
+    "rerun2": {
+      "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun2",
+      "sigma_max_MPa": 2.297287025705049,
+      "n_nodes": 36582,
+      "n_tets": 177992
+    },
+    "delta": {
+      "sigma_max_MPa": 0.0,
+      "sigma_rel": 0.0,
+      "sigma_rel_pct": 0.0,
+      "n_nodes_equal": true,
+      "n_tets_equal": true,
+      "geometry_points_identical": true,
+      "geometry_tets_identical": true,
+      "remesh_info_n_nodes_equal": true,
+      "remesh_info_n_tets_equal": true
+    },
+    "branch": "A_deterministic",
+    "decision": {
+      "collect_noise_distribution": false,
+      "note": "Identical remesh+FEA \u2192 deterministic methodology gap (deform in-place vs deform-then-remesh), not stochastic noise. Do not collect more identical-config remesh runs for a noise distribution. Next: refine mesh_size_min near hotspot and test convergence toward in-place ref 2.271613."
+    }
+  },
+  "branch_A_mesh_size_min_probe": {
+    "question": "Does lowering mesh_size_min (2.5\u21921.0) under MeshOnlyEmpty move remesh sigma toward in-place ref 2.271613?",
+    "in_place_ref_sigma_max_MPa": 2.271612960162118,
+    "runs": {
+      "rerun1_msmin2.5": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun",
+        "sigma_max_MPa": 2.297287025705049,
+        "n_nodes": 36582,
+        "n_tets": 177992,
+        "mesh_size_mm": 5.0,
+        "mesh_size_min_mm": 2.5,
+        "remesh_info_mesh_size_min_mm": 2.5
+      },
+      "rerun2_msmin2.5": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun2",
+        "sigma_max_MPa": 2.297287025705049,
+        "n_nodes": 36582,
+        "n_tets": 177992,
+        "mesh_size_mm": 5.0,
+        "mesh_size_min_mm": 2.5,
+        "remesh_info_mesh_size_min_mm": 2.5
+      },
+      "msmin1.0": {
+        "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_remesh_msmin1.0",
+        "sigma_max_MPa": 2.297287025705049,
+        "n_nodes": 36582,
+        "n_tets": 177992,
+        "mesh_size_mm": 5.0,
+        "mesh_size_min_mm": 1.0,
+        "remesh_info_mesh_size_min_mm": 1.0
+      }
+    },
+    "msmin1_vs_rerun1": {
+      "sigma_identical": true,
+      "n_nodes_identical": true,
+      "n_tets_identical": true,
+      "geometry_points_identical": true,
+      "geometry_tets_identical": true,
+      "delta_sigma_vs_inplace_pct": 1.1302130245417707
+    },
+    "finding": "mesh_size_min=1.0 produced a bit-identical volume mesh and identical sigma_max to mesh_size_min=2.5. Under Gmsh MeshOnlyEmpty the surface triangulation is frozen (31358 faces from the deformed extract); lowering MeshSizeMin alone did not insert additional nodes for this input. Therefore this particular refinement knob cannot test hotspot-resolution convergence. A real convergence test would need surface remeshing / local size field near y=262, not MeshSizeMin alone."
+  },
+  "do_not_conclude_yet": "Do not treat remesh \u0394=1.13% or bump_Cinf \u0394=1.51% as a final noise-vs-signal verdict. Fork result: remesh is DETERMINISTIC (Branch A). The 1.13% is a reproducible methodology gap."
+}

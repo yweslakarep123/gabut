@@ -77,6 +77,14 @@ reports/**/*.log
 # Opsional: kalau mau commit ringkasan JSON/CSV hasil eksperimen,
 # file di reports/*.json dan reports/*.csv TIDAK di-ignore.
 
+# --- Website (Next.js in website/) ---
+website/node_modules/
+website/.next/
+website/out/
+website/.env
+website/.env.*
+website/.vercel/
+
 # --- OS junk ---
 .DS_Store
 Thumbs.db

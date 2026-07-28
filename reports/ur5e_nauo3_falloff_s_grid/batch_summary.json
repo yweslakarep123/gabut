@@ -1,0 +1,470 @@
+{
+  "plan": "reports/ur5e_nauo3_sampling_plan_proposal.md",
+  "n_jobs_planned": 13,
+  "n_jobs_run_or_reused": 13,
+  "n_ok": 13,
+  "n_failed": 0,
+  "wall_time_batch_s": 314.27787481000007,
+  "methodology": "in_place_deform_locked_geometry_npz",
+  "no_reproducibility_reruns": true,
+  "jobs": [
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "bump_cinf_s094",
+      "falloff_kind": "bump_Cinf",
+      "s": 0.94,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.9718553090353512,
+      "dV_frac": -0.007737955879180624,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.4480760299193018,
+        262.44794289802667,
+        177.7275892767642
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s094/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.44418603500003
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "bump_cinf_s098",
+      "falloff_kind": "bump_Cinf",
+      "s": 0.98,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.7461180078395817,
+      "dV_frac": -0.0026206912577337533,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.5101835000192838,
+        262.44488721600885,
+        179.2860783429058
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s098/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.143190987000025
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "bump_cinf_s100",
+      "falloff_kind": "bump_Cinf",
+      "s": 1.0,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.645735221879838,
+      "dV_frac": 1.9212840939768034e-16,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s100/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 23.969014259000005
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "bump_cinf_s110",
+      "falloff_kind": "bump_Cinf",
+      "s": 1.1,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.5578076434328318,
+      "dV_frac": 0.013724045758775597,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_node_0based": 13229,
+      "hotspot_xyz_mm": [
+        10.61202621460048,
+        222.6999969482422,
+        81.0306701660107
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s110/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.247820297999965
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "smootherstep_c2_s090",
+      "falloff_kind": "smootherstep_C2",
+      "s": 0.9,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 2.262328471196088,
+      "dV_frac": -0.01020514454585549,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.3859515603981765,
+        262.45099941641445,
+        176.1686736369441
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s090/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.231017277999968
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "smootherstep_c2_s094",
+      "falloff_kind": "smootherstep_C2",
+      "s": 0.94,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.9859540367078565,
+      "dV_frac": -0.0062180928856866114,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.4480658302666158,
+        262.44794339984867,
+        177.7273333325571
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s094/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.222287682
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "smootherstep_c2_s098",
+      "falloff_kind": "smootherstep_C2",
+      "s": 0.98,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.7505415740764856,
+      "dV_frac": -0.002104366347953079,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.5101801001350552,
+        262.4448873832829,
+        179.28599302817008
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s098/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.62307642799999
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "smootherstep_c2_s100",
+      "falloff_kind": "smootherstep_C2",
+      "s": 1.0,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.645735221879838,
+      "dV_frac": 1.9212840939768034e-16,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.541237235069275,
+        262.443359375,
+        180.0653228759766
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s100/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 23.878300250000052
+    },
+    {
+      "purpose": "b_falloff_consistency",
+      "tag": "smootherstep_c2_s110",
+      "falloff_kind": "smootherstep_C2",
+      "s": 1.1,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.4743018097681035,
+      "dV_frac": 0.010996862530633712,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_node_0based": 13229,
+      "hotspot_xyz_mm": [
+        10.612081309589307,
+        222.69999761019292,
+        81.03035703590795
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s110/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.564736220999976
+    },
+    {
+      "purpose": "a_corpus_s_extension",
+      "tag": "cosine_c1_s086",
+      "falloff_kind": "cosine_C1",
+      "s": 0.86,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 2.6041718280761486,
+      "dV_frac": -0.014195054944110752,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.3239002741841543,
+        262.45405233419,
+        174.61159441686164
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s086/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 23.85708350999994
+    },
+    {
+      "purpose": "a_corpus_s_extension",
+      "tag": "cosine_c1_s088",
+      "falloff_kind": "cosine_C1",
+      "s": 0.88,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 2.4307080134965675,
+      "dV_frac": -0.012258464859842146,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_CENTER",
+      "hotspot_node_0based": 3279,
+      "hotspot_xyz_mm": [
+        -1.3549484114534573,
+        262.45252476859145,
+        175.3906984824495
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s088/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.125841907999984
+    },
+    {
+      "purpose": "a_corpus_s_extension",
+      "tag": "cosine_c1_s112",
+      "falloff_kind": "cosine_C1",
+      "s": 1.12,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.5413568449518453,
+      "dV_frac": 0.013353763752810518,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_node_0based": 13229,
+      "hotspot_xyz_mm": [
+        10.612983095955421,
+        222.7000084449012,
+        81.02523177019
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s112/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 24.091996693000056
+    },
+    {
+      "purpose": "a_corpus_s_extension",
+      "tag": "cosine_c1_s114",
+      "falloff_kind": "cosine_C1",
+      "s": 1.14,
+      "y0_mm": 262.0,
+      "L_mm": 40.0,
+      "status": "ok",
+      "sigma_max_MPa": 1.5956362744044832,
+      "dV_frac": 0.015685878535305696,
+      "mesh_gate_pass": true,
+      "reaction_pass": true,
+      "band_position": "BAND_EDGE",
+      "hotspot_node_0based": 13229,
+      "hotspot_xyz_mm": [
+        10.613142576181387,
+        222.700010361011,
+        81.02432537088573
+      ],
+      "sample_result_path": "reports/ur5e_nauo3_falloff_s_grid/cosine_c1_s114/sample_result.json",
+      "frd_present": true,
+      "reused_existing_in_out_root": false,
+      "wall_time_s": 23.874183079999966
+    }
+  ],
+  "purpose_b_falloff_delta_vs_cosine": [
+    {
+      "s": 0.9,
+      "cosine_C1_sigma_MPa": 2.271612960162118,
+      "vs_cosine": {
+        "bump_Cinf": {
+          "sigma_MPa": 2.237299717811183,
+          "delta_rel_pct": -1.5105232692670534,
+          "path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        },
+        "smootherstep_C2": {
+          "sigma_MPa": 2.262328471196088,
+          "delta_rel_pct": -0.4087179078854768,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s090/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        }
+      },
+      "cosine_hotspot_node_0based": 3279,
+      "cosine_band_position": "BAND_CENTER",
+      "same_feature_as_baseline_center": true
+    },
+    {
+      "s": 0.94,
+      "cosine_C1_sigma_MPa": 1.9908218770897863,
+      "vs_cosine": {
+        "bump_Cinf": {
+          "sigma_MPa": 1.9718553090353512,
+          "delta_rel_pct": -0.95270040342136,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s094/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        },
+        "smootherstep_C2": {
+          "sigma_MPa": 1.9859540367078565,
+          "delta_rel_pct": -0.24451410937103327,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s094/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        }
+      },
+      "cosine_hotspot_node_0based": 3279,
+      "cosine_band_position": "BAND_CENTER",
+      "same_feature_as_baseline_center": true
+    },
+    {
+      "s": 0.98,
+      "cosine_C1_sigma_MPa": 1.7519503636570073,
+      "vs_cosine": {
+        "bump_Cinf": {
+          "sigma_MPa": 1.7461180078395817,
+          "delta_rel_pct": -0.33290645319717677,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s098/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        },
+        "smootherstep_C2": {
+          "sigma_MPa": 1.7505415740764856,
+          "delta_rel_pct": -0.08041264237538165,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s098/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        }
+      },
+      "cosine_hotspot_node_0based": 3279,
+      "cosine_band_position": "BAND_CENTER",
+      "same_feature_as_baseline_center": true
+    },
+    {
+      "s": 1.0,
+      "cosine_C1_sigma_MPa": 1.645735221879838,
+      "vs_cosine": {
+        "bump_Cinf": {
+          "sigma_MPa": 1.645735221879838,
+          "delta_rel_pct": 0.0,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s100/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        },
+        "smootherstep_C2": {
+          "sigma_MPa": 1.645735221879838,
+          "delta_rel_pct": 0.0,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s100/sample_result.json",
+          "hotspot_node_0based": 3279,
+          "band_position": "BAND_CENTER",
+          "same_feature_as_baseline_center": true,
+          "same_feature_as_cosine_at_this_s": true
+        }
+      },
+      "cosine_hotspot_node_0based": 3279,
+      "cosine_band_position": "BAND_CENTER",
+      "same_feature_as_baseline_center": true
+    },
+    {
+      "s": 1.1,
+      "cosine_C1_sigma_MPa": 1.4863671823810825,
+      "vs_cosine": {
+        "bump_Cinf": {
+          "sigma_MPa": 1.5578076434328318,
+          "delta_rel_pct": 4.806380408460412,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/bump_cinf_s110/sample_result.json",
+          "hotspot_node_0based": 13229,
+          "band_position": "BAND_EDGE",
+          "same_feature_as_baseline_center": false,
+          "same_feature_as_cosine_at_this_s": true
+        },
+        "smootherstep_C2": {
+          "sigma_MPa": 1.4743018097681035,
+          "delta_rel_pct": -0.8117356704317713,
+          "path": "reports/ur5e_nauo3_falloff_s_grid/smootherstep_c2_s110/sample_result.json",
+          "hotspot_node_0based": 13229,
+          "band_position": "BAND_EDGE",
+          "same_feature_as_baseline_center": false,
+          "same_feature_as_cosine_at_this_s": true
+        }
+      },
+      "cosine_hotspot_node_0based": 13229,
+      "cosine_band_position": "BAND_EDGE",
+      "same_feature_as_baseline_center": false
+    }
+  ],
+  "reuse_not_in_this_batch": {
+    "cosine_C1_phase1_s090_to_s110": 11,
+    "bump_Cinf_s090": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/sample_result.json",
+    "gaussian_nocut_gauss35_corpus_only": [
+      "reports/ur5e_nauo3_neck_batch/s_0.90_gauss35/",
+      "reports/ur5e_nauo3_neck_batch/s_1.10_gauss35/"
+    ]
+  },
+  "purpose_b_comparison_note": "Delta falloff entries with same_feature_as_baseline_center=true (s=0.90/0.94/0.98/1.00, node 3279, BAND_CENTER) are clean shape-effect measurements on the neck-center hotspot. The s=1.10 deltas are NOT the same comparison: cosine, bump_Cinf, and smootherstep_C2 all sit on a different governing feature (hotspot_node_0based=13229, BAND_EDGE \u2014 the shoulder). Do not average or fit s=1.10 together with the center-node points as one falloff-shape trend. The +4.806% bump_Cinf figure at s=1.10 is a cross-feature structural response, not evidence that falloff shape reverses under thickening."
+}

@@ -1,0 +1,45 @@
+{
+  "baseline": {
+    "n_tets": 177992,
+    "n_inverted": 0,
+    "n_min_dihedral_lt_5deg": 7301,
+    "n_min_dihedral_lt_1deg": 1317,
+    "n_radius_ratio_gt_10": 11442,
+    "vol": 4797509.737145051,
+    "rho_p50": 1.2571107224489424,
+    "rho_p95": 22.915258822671696,
+    "n_nodes": 36582
+  },
+  "baseline_rho": {
+    "p0": 1.0001794212833919,
+    "p1": 1.0260671428451216,
+    "p5": 1.0585069448730107,
+    "p50": 1.2571107224489424,
+    "p95": 22.915258822671696,
+    "p99": 452.98453018355065,
+    "p100": 2300346.159896063
+  },
+  "default_optimize": {
+    "n_tets": 177660,
+    "n_inverted": 0,
+    "n_min_dihedral_lt_5deg": 7185,
+    "n_min_dihedral_lt_1deg": 1256,
+    "n_radius_ratio_gt_10": 11252,
+    "vol": 4797509.737145051,
+    "rho_p50": 1.2568154878005253,
+    "rho_p95": 22.300290812984016,
+    "n_nodes": 36582
+  },
+  "default_rho": {
+    "p0": 1.0001794212833919,
+    "p1": 1.0261672129185737,
+    "p5": 1.0584980594210078,
+    "p50": 1.2568154878005253,
+    "p95": 22.300290812984016,
+    "p99": 431.94388724732585,
+    "p100": 2300346.159893653
+  },
+  "volume_change_pct": 0.0,
+  "decision": "use_default_optimize",
+  "reason": "default optimize: |dV|~0%, 0 inverted, dihedral tidak memburuk, radius_ratio p50 dan/atau p95 lebih baik \u2014 perbaikan gratis."
+}

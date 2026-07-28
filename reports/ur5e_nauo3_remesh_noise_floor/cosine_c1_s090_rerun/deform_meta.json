@@ -1,0 +1,39 @@
+{
+  "s": 0.9,
+  "y0_mm": 262.0,
+  "L_mm": 40.0,
+  "sigma_mm": null,
+  "falloff_kind": "cosine_C1",
+  "band_y_mm": [
+    222.0,
+    302.0
+  ],
+  "w_at_cutoff": 0.0,
+  "n_nodes_w_gt_0": 5592,
+  "n_nodes_w_gt_0_5": 1740,
+  "n_frozen": 1257,
+  "w_max": 0.9999998453885428,
+  "s_eff_min": 0.9000000154611457,
+  "s_eff_max": 1.0,
+  "axis_point_mm": [
+    -0.11319510477358953,
+    373.33987826861113,
+    141.31061544843166
+  ],
+  "axis_u": [
+    -0.0011264660859389756,
+    0.9999975304394124,
+    0.0019157737950791132
+  ],
+  "tet_flip_repair": {
+    "n_flipped": 0,
+    "n_still_nonpos": 0,
+    "min_vol_before": 1.1025192521839483e-05,
+    "min_vol_after": 1.1025192521839483e-05
+  },
+  "note": "Weight stats from pre-remesh deform on locked baseline mesh",
+  "remesh_info": {
+    "n_nodes": 36582,
+    "n_tets": 177992
+  }
+}

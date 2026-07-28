@@ -1,0 +1,22 @@
+{
+  "status": "ok",
+  "fail_reasons": [],
+  "sigma_max_MPa_after_optimize": 2.297409263949199,
+  "sigma_max_MPa_remesh_pre_optimize": 2.297287025705049,
+  "sigma_max_MPa_inplace_ref": 2.271612960162118,
+  "delta_vs_inplace_MPa": 0.025796303787080976,
+  "delta_vs_inplace_rel_pct": 1.135594145634733,
+  "delta_vs_preopt_remesh_MPa": 0.00012223824414991924,
+  "delta_vs_preopt_remesh_rel_pct": 0.005320982653977957,
+  "abs_err_to_inplace_before_MPa": 0.025674065542931057,
+  "abs_err_to_inplace_after_MPa": 0.025796303787080976,
+  "moved_toward_inplace_ref": false,
+  "reaction_pass": true,
+  "band_position": "BAND_CENTER",
+  "mesh_stats": {
+    "n_nodes": 36582,
+    "n_tets": 177660,
+    "V_mm3": 4797509.737145051
+  },
+  "wall_time_s": 20.79715382100005
+}

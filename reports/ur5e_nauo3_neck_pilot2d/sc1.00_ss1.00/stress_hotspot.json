@@ -1,0 +1,36 @@
+{
+  "bc_classification": "IN_BODY_AWAY_FROM_BC",
+  "band_position": "BAND_CENTER",
+  "node_0based": 3279,
+  "xyz_mm": [
+    -1.541237235069275,
+    262.443359375,
+    180.0653228759766
+  ],
+  "y_mm": 262.443359375,
+  "dy_from_y0_mm": 0.443359375,
+  "dy_over_L": 0.011083984375,
+  "von_mises_MPa": 1.645735221879838,
+  "global_max_MPa": 1.645735221879838,
+  "global_max_node": 3279,
+  "dist_to_SPC_mm": 92.49178343877304,
+  "dist_to_distal_mm": 315.34761426726567,
+  "percentiles_all": {
+    "p50": 0.1368320218781492,
+    "p95": 0.8881458720528679,
+    "p99": 1.202851143350525,
+    "p100": 1.645735221879838
+  },
+  "percentiles_exclude_2mm_BC": {
+    "p50": 0.13695176212225024,
+    "p95": 0.8953108215293456,
+    "p99": 1.208207584610068,
+    "p100": 1.645735221879838
+  },
+  "thresholds": {
+    "center_if_dy_over_L_le": 0.35,
+    "edge_if_dy_over_L_ge": 0.7,
+    "L_mm": 40.0,
+    "y0_mm": 262.0
+  }
+}

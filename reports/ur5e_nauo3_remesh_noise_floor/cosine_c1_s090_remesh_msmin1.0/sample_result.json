@@ -1,0 +1,113 @@
+{
+  "s": 0.9,
+  "tag": "cosine_c1_s090_remesh_msmin1.0",
+  "status": "ok",
+  "fail_reasons": [],
+  "spc_clearance": {
+    "n_prox": 634,
+    "n_dist": 623,
+    "prox_y_mm": {
+      "min": 151.41639709472656,
+      "max": 173.58705139160156,
+      "mean": 162.63681181898627
+    },
+    "dist_y_mm": {
+      "min": 576.5487060546875,
+      "max": 598.78759765625,
+      "mean": 587.378980902952
+    },
+    "band_y_mm": [
+      222.0,
+      302.0
+    ],
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "gap_prox_max_y_to_band_lo_mm": 48.41294860839844,
+    "gap_band_hi_to_dist_min_y_mm": 274.5487060546875,
+    "n_SPC_nodes_in_band": 0,
+    "safe_clearance": true
+  },
+  "tet_flip_repair": {
+    "n_flipped": 0,
+    "n_still_nonpos": 0,
+    "min_vol_before": 1.1025192521903667e-05,
+    "min_vol_after": 1.1025192521903667e-05
+  },
+  "end_labels_swapped_for_y": true,
+  "mesh_stats": {
+    "n_nodes": 36582,
+    "n_tets": 177992,
+    "V_mm3": 4797509.737145051
+  },
+  "ccx_returncode": 0,
+  "ccx_reused": false,
+  "reaction": {
+    "M_fe_Nm": 106.39934568720548,
+    "RF_N": [
+      0.0003630070000071456,
+      -0.34076447200003057,
+      184.39537517199997
+    ],
+    "M_analytic_Nm": 106.519091897925,
+    "M_fea_pred_Nm": 106.3995567371785,
+    "err_vs_analytic_pct": 0.11241760381722223,
+    "err_vs_fea_pred_pct": 0.00019835606415093398,
+    "pass": true,
+    "n_prox_with_rf": 634,
+    "m_self_eff_kg": 7.975071495576494,
+    "L_mm": 424.7445947795238,
+    "x_com_from_prox_m": 0.21352973086261848
+  },
+  "hotspot": {
+    "bc_classification": "IN_BODY_AWAY_FROM_BC",
+    "band_position": "BAND_CENTER",
+    "node_0based": 424,
+    "xyz_mm": [
+      8.880133628845215,
+      264.3125,
+      101.07909393310547
+    ],
+    "y_mm": 264.3125,
+    "dy_from_y0_mm": 2.3125,
+    "dy_over_L": 0.0578125,
+    "von_mises_MPa": 2.297287025705049,
+    "global_max_MPa": 2.297287025705049,
+    "global_max_node": 424,
+    "dist_to_SPC_mm": 95.24206821980827,
+    "dist_to_distal_mm": 313.6427482083915,
+    "percentiles_all": {
+      "p50": 0.1420161130933178,
+      "p95": 0.928772989604253,
+      "p99": 1.2745951347744915,
+      "p100": 2.297287025705049
+    },
+    "percentiles_exclude_2mm_BC": {
+      "p50": 0.14284751811826235,
+      "p95": 0.9391644133916283,
+      "p99": 1.2785322812873725,
+      "p100": 2.297287025705049
+    },
+    "thresholds": {
+      "center_if_dy_over_L_le": 0.35,
+      "edge_if_dy_over_L_ge": 0.7,
+      "L_mm": 40.0,
+      "y0_mm": 262.0
+    }
+  },
+  "sigma_max_MPa": 2.297287025705049,
+  "sigma_max_band_center": {
+    "definition": "max von_mises among nodes with |y-y0|/L <= 0.35",
+    "dy_over_L_threshold": 0.35,
+    "L_mm": 40.0,
+    "sigma_max_MPa": 2.297287025705049,
+    "node_0based": 424,
+    "xyz_mm": [
+      8.880133628845215,
+      264.3125,
+      101.07909393310547
+    ],
+    "y_mm": 264.3125,
+    "dy_over_L": 0.0578125
+  },
+  "band_position": "BAND_CENTER"
+}

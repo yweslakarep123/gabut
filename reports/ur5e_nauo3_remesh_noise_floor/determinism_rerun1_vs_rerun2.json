@@ -1,0 +1,39 @@
+{
+  "test": "remesh_determinism_rerun_vs_rerun2",
+  "config": {
+    "s": 0.9,
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "falloff_kind": "cosine_C1",
+    "mesh_size_mm": 5.0,
+    "mesh_size_min_mm": 2.5
+  },
+  "rerun1": {
+    "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun",
+    "sigma_max_MPa": 2.297287025705049,
+    "n_nodes": 36582,
+    "n_tets": 177992
+  },
+  "rerun2": {
+    "path": "reports/ur5e_nauo3_remesh_noise_floor/cosine_c1_s090_rerun2",
+    "sigma_max_MPa": 2.297287025705049,
+    "n_nodes": 36582,
+    "n_tets": 177992
+  },
+  "delta": {
+    "sigma_max_MPa": 0.0,
+    "sigma_rel": 0.0,
+    "sigma_rel_pct": 0.0,
+    "n_nodes_equal": true,
+    "n_tets_equal": true,
+    "geometry_points_identical": true,
+    "geometry_tets_identical": true,
+    "remesh_info_n_nodes_equal": true,
+    "remesh_info_n_tets_equal": true
+  },
+  "branch": "A_deterministic",
+  "decision": {
+    "collect_noise_distribution": false,
+    "note": "Identical remesh+FEA \u2192 deterministic methodology gap (deform in-place vs deform-then-remesh), not stochastic noise. Do not collect more identical-config remesh runs for a noise distribution. Next: refine mesh_size_min near hotspot and test convergence toward in-place ref 2.271613."
+  }
+}

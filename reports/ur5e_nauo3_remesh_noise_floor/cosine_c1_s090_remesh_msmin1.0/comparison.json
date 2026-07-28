@@ -1,0 +1,79 @@
+{
+  "probe": {
+    "s": 0.9,
+    "y0_mm": 262.0,
+    "L_mm": 40.0,
+    "falloff_kind": "cosine_C1",
+    "method": "deform_locked_baseline \u2192 extract_surface \u2192 gmsh_MeshOnlyEmpty remesh \u2192 FEA (reuse_fea=False)",
+    "status": "ok",
+    "fail_reasons": [],
+    "sigma_max_MPa": 2.297287025705049,
+    "dV_frac_vs_baseline_V0": -0.010291450040147056,
+    "dV_frac_pre_remesh": -0.01029144980632467,
+    "V0_mm3": 4847396.4758005375,
+    "V_remeshed_mm3": 4797509.737145051,
+    "mesh_gate_note": "mesh_gates on deformed-then-remeshed solid use baseline V0 for dV_frac reporting only; FEA uses dens0 from baseline mass/volume.",
+    "reaction_pass": true,
+    "band_position": "BAND_CENTER",
+    "remesh": {
+      "n_nodes": 36582,
+      "n_tets": 177992,
+      "mesh_size_mm": 5.0,
+      "mesh_size_min_mm": 1.0,
+      "baseline_n_nodes": 38811,
+      "baseline_n_tets": 192060,
+      "nodes_changed": true,
+      "tets_changed": true
+    },
+    "wall_time_s": 35.86019142500004
+  },
+  "reference_cosine_C1": {
+    "source": "pilot2d sc0.90_ss1.00 / Phase-1 s=0.90",
+    "path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.00/sample_result.json",
+    "sigma_max_MPa": 2.271612960162118,
+    "dV_frac": -0.01029144980632467,
+    "note": "Reference used deform on optimized geometry.npz without per-sample remesh. This probe remeshes the deformed solid."
+  },
+  "remesh_noise_floor": {
+    "delta_sigma_max_MPa": 0.025674065542931057,
+    "delta_sigma_rel": 0.011302130245417707,
+    "delta_sigma_rel_pct": 1.1302130245417707,
+    "abs_delta_sigma_rel_pct": 1.1302130245417707
+  },
+  "vs_bump_Cinf_probe_delta": {
+    "bump_delta_sigma_rel": -0.0151052326926705,
+    "bump_delta_sigma_rel_pct": -1.51052326926705,
+    "remesh_abs_rel_pct_over_bump_abs_rel_pct": 0.7482261594620672
+  },
+  "interpretation": {
+    "band": "noise_smaller_but_comparable_order",
+    "thresholds_pct": {
+      "much_smaller_than": 0.3,
+      "below_half_percent": 0.5,
+      "bump_Cinf_abs_delta_pct": 1.51052326926705
+    },
+    "text": "Remesh noise |\u0394\u03c3|/\u03c3_ref = 1.130% is numerically smaller than bump_Cinf |\u0394|=1.51% (ratio\u22480.75), but NOT in the << 0.3\u20130.5% example band. Gray zone vs the brief's two poles: not clearly 'genuine falloff', not clearly 'indistinguishable from remesh'. Human judgment needed; n=1 remains fragile either way. Caveat: bump_Cinf vs cosine_C1 compared two deforms on the *same* locked mesh (no remesh between them) \u2014 this floor bounds independent-remesh label noise, not the mesh difference inside that specific A/B.",
+    "decision_note": "Reported for human judgment \u2014 script does not unilaterally stop or continue falloff exploration."
+  },
+  "weight_stats_optional": {
+    "cosine_C1_ref_pilot2d": {
+      "path": "reports/ur5e_nauo3_neck_pilot2d/sc0.90_ss1.00/deform_meta.json",
+      "n_nodes_w_gt_0_5": 1740,
+      "n_nodes_w_gt_0": 5592
+    },
+    "cosine_C1_this_pre_remesh": {
+      "n_nodes_w_gt_0_5": 1740,
+      "n_nodes_w_gt_0": 5592,
+      "matches_ref": true
+    },
+    "bump_Cinf_probe": {
+      "path": "reports/ur5e_nauo3_falloff_probe/bump_cinf_s090/deform_meta.json",
+      "n_nodes_w_gt_0_5": 2310,
+      "n_nodes_w_gt_0": 5589
+    },
+    "delta_bump_minus_cosine_n_w_gt_0_5": 570,
+    "ratio_bump_over_cosine_n_w_gt_0_5": 1.3275862068965518,
+    "interpretation_note": "bump_Cinf holds more nodes near full scale (w>0.5) than cosine_C1 at the same (s,y0,L) if ratio > 1 \u2014 consistent with a flatter plateau then sharper edge falloff."
+  },
+  "baseline_sigma_max_MPa": 1.645735221879838
+}
